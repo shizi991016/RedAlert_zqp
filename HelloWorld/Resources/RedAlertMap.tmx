@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="43">
+ <tileset firstgid="1" name="soil" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="picture/ç±»ä¼¼çº¢è²è­¦æçæäºå³æ¶ç­ç¥æ¸¸ææºç -10_ç±ç»ç½_aigei_com.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="MiningYard" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="picture/5a87cfda6cef494da22274ce8b270b8a.png" width="128" height="128"/>
+ </tileset>
+ <layer name="BackGround" width="100" height="100" locked="1">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup name="MiningYard" locked="1">
+  <object id="7" name="_MiningYard" x="514.074" y="3013.08" width="124.224" height="116.294"/>
+  <object id="9" name="_MiningYard" x="1058.54" y="2784.46" width="124.224" height="125.545"/>
+  <object id="10" name="_MiningYard" x="1539.58" y="2466.63" width="124.224" height="125.545"/>
+  <object id="11" name="_MiningYard" x="1155.01" y="2148.14" width="124.224" height="125.545"/>
+  <object id="12" name="_MiningYard" x="611.867" y="2404.52" width="124.224" height="125.545"/>
+  <object id="13" name="_MiningYard" x="642.262" y="1891.77" width="124.224" height="125.545"/>
+  <object id="14" name="_MiningYard" x="323.774" y="1445.09" width="124.224" height="125.545"/>
+  <object id="15" name="_MiningYard" x="133.474" y="1861.37" width="124.224" height="125.545"/>
+  <object id="16" name="_MiningYard" x="225.981" y="1060.53" width="124.224" height="125.545"/>
+  <object id="17" name="_MiningYard" x="707.017" y="899.3" width="124.224" height="125.545"/>
+  <object id="18" name="_MiningYard" x="1026" y="1157" width="124.224" height="125.545"/>
+  <object id="19" name="_MiningYard" x="1219.77" y="710.321" width="124.224" height="125.545"/>
+  <object id="20" name="_MiningYard" x="803.489" y="356.152" width="124.224" height="125.545"/>
+  <object id="21" name="_MiningYard" x="1059.87" y="131.492" width="124.224" height="125.545"/>
+  <object id="22" name="_MiningYard" x="1826.35" y="262.323" width="124.224" height="125.545"/>
+  <object id="23" name="_MiningYard" x="2179.2" y="262.323" width="124.224" height="125.545"/>
+  <object id="24" name="_MiningYard" x="2340.43" y="68.0587" width="124.224" height="125.545"/>
+  <object id="25" name="_MiningYard" x="2563.76" y="674.64" width="124.224" height="125.545"/>
+  <object id="26" name="_MiningYard" x="1859.39" y="804.15" width="124.224" height="125.545"/>
+  <object id="27" name="_MiningYard" x="2180.52" y="1187.39" width="124.224" height="125.545"/>
+  <object id="28" name="_MiningYard" x="2405.18" y="1700.15" width="124.224" height="125.545"/>
+  <object id="29" name="_MiningYard" x="1605.17" y="1282.11" width="124.224" height="125.545"/>
+  <object id="30" name="_MiningYard" x="1476.21" y="1731.63" width="124.224" height="125.545"/>
+  <object id="31" name="_MiningYard" x="1861.25" y="2020.87" width="124.224" height="125.545"/>
+  <object id="32" name="_MiningYard" x="2211.29" y="2503.55" width="124.224" height="125.545"/>
+  <object id="33" name="_MiningYard" x="2756.61" y="2310.11" width="124.224" height="125.545"/>
+  <object id="34" name="_MiningYard" x="1988.58" y="2920.05" width="124.224" height="125.545"/>
+  <object id="35" name="_MiningYard" x="2338.39" y="3014.31" width="124.224" height="125.545"/>
+  <object id="36" name="_MiningYard" x="2979.36" y="2920.05" width="124.224" height="125.545"/>
+  <object id="37" name="_MiningYard" x="2950.04" y="196.968" width="124.224" height="125.545"/>
+  <object id="38" name="_MiningYard" x="2945.85" y="548.874" width="124.224" height="125.545"/>
+  <object id="39" name="_MiningYard" x="2883.47" y="1348.11" width="124.224" height="125.545"/>
+  <object id="40" name="_MiningYard" x="258.233" y="579.054" width="124.224" height="125.545"/>
+  <object id="41" name="_MiningYard" x="258" y="291" width="128" height="128"/>
+  <object id="42" name="_MiningYard" x="194" y="2563" width="128" height="128"/>
+ </objectgroup>
+ <layer name="MiningYard" width="100" height="100" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzt11lSxDAMhOFcgX1nuP8pMU9QkzKQ8aKW+/+q/DxxRmop2wYAl7sq57qcm3Jug58F23ZXzn05D+U8Bj/LDOr191TOczkv5bwGP8sM6vX3Vs57OadyPmIfZQqn+lPPgi9O9aeeBTMcqcnR9duaBRn66y9HanJ0/bZmwQr9daQm1WdZj+eL7rEjNak+y3o83wo9thL1DHCjngEAgL3WXTN6V11N667JrtpX667JrtpX667Jrvo7lzzPck+XPM9yT5c8z3JPlzzvfc8s+eciS/65yJJ/o6jlg0vO15APWtzzQY17PmB9ajPZHTNZCzNZy4yZTCZqUctE9/pQy0S1+phN7TtFrT6y6pUzavWRlXvOqFHPGbc9QT1n6F8tvfvXrd96692/9JsW9XnpRn1eAgAA/AffYHUR74ZvsLqId8M3WF3Eu+EbrM7l3TCztLTmMv9nX625zA7SV2sus4NocZmzaMNc08Jc08Jc08Jcuww5r4Wc10LOayHngfWxl2hhL9GisJfQo98U9hJ6VEtEj9KTdRE9OqIn+Y8vN6InFXM3S42M6EmF3eicYo3MorAbnVOsEWeKNQIAwE9ZdmsXzru1InZrLezWiJxZzMu9yJnFvNyLnFkjfztr7x2ZWb3vOHJeOvRepjs67KqZ7uiwqzrcEcjgE/IRNZk=
+  </data>
+ </layer>
+</map>

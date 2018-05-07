@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextobjectid="5">
+ <tileset firstgid="1" name="chartlet" tilewidth="64" tileheight="64" tilecount="225" columns="15">
+  <image source="chartlet.png" width="960" height="960"/>
+ </tileset>
+ <tileset firstgid="226" name="chartlet" tilewidth="32" tileheight="32" tilecount="900" columns="30">
+  <image source="chartlet.png" width="960" height="960"/>
+ </tileset>
+ <layer name="Background" width="30" height="30" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHj+4dekCm4aqqqqr57jz8HCQ==
+  </data>
+ </layer>
+ <layer name="FirstLayer" width="30" height="30" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzt0zds1HcYBuCzTV2CKQYy0NsSeskAGOOSSKGXDOBCS6TQS4aEDokUGwwGhgC2MUUK2BSbIbhhQwZ6G0I3JgO9LaGXDORBueGGcKdIKJOHR99P9/71vtM1CwQCzerUqfNBxP7Lb3Fhvh8WFQgMZwQjGcVoxjCWcYzny6j3dwyWxTOEBIaSSBLJpPAZn4d0TPeewUxmMZs5zGUe81nAt2F2U2VppJPBJCYzhalM4yu+DunI9M5iFavJZg1ryWEd69kQZnehbBGLWcJSlrGcFazkB34M6djpvYtCitjNHvayj2JK2B9md5NsM7nkkc8WCtjKNrazI6TjiPdRjnGcE5zkFKc5w1nOhdktlZVRTgWVHKSKag5xmN9COm543+QWt7nDXe5xnwc85FGY3Quyi1ziMle4Sg3XqOU6f4R0vPUORAcCUUQTQz3q04CGNKJx9Pt3H+t4wlOe8ZwXvOQVr3nDXyG7bfS1pR3t6UBHOtGZLnSlW5jdJrJYmr77hua0II6WtKI1H4d0DPQexGDiGUICQ0kkiWRSwux2l/WgJ73oTR/60o/+DODTkI4J3hNJJY10MpjEZKYwlWlhdkNl+i6LVawmmzWsJYd1rGdDsG+ju4nN5JJHPlsoYCvb2B5hf6d8F4UUsZs97GUfxZSwP9hzwC2ljHIqqOQgVVRziMMRdo/Ij3KM45zgJKc4zRnOci7Yc969wEUucZkrXKWGa9RyPcLuDflNbnGbO9zlHvd5wEMeBXv+dB/zhKc84zkveMkrXvMmwu5beSDG/5JoYqhHfRrQkEY0jvnn+4/cJsTS9N1vNKcFcbSkFa1jwu+2kbelHe3pQEc60ZkudKVbsOcTtzs96EkvetOHvvSjPwMi7A6UD2Iw8QwhgaEkkkQyKcGeL9xhDGcEIxnFaMYwlnGMj7A7QT6RVNJIJ4NJTGYKU5kW7PnGnc4MZjKL2cxhLvOYz4IIu9/Jv2chi1jMEpayjOWsYGWw5yc3kyxWsZps1rCWHNaxPsLuz/KNbGIzueSRzxYK2Mq2YM8v7k52UUgRu9nDXvZRTEmE3V/lByiljHIqqOQgVVRzKELPf/W7vvNc4CKXuMwVrlLDNWo/8O7/5W+eyAdi
+  </data>
+ </layer>
+ <objectgroup name="Objects" locked="1">
+  <object id="2" x="-188.437" y="77.0878"/>
+  <object id="4" name="player" x="15.163" y="943.897"/>
+ </objectgroup>
+</map>
