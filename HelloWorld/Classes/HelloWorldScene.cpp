@@ -106,7 +106,7 @@ bool HelloWorld::init()
     _player->setPosition(x,y);
     _tileMap->addChild(_player);
     
-    camera = Sprite::create("player.png");
+    camera = Sprite::create("camera.png");
     camera->setPosition(Vec2(_screenWidth/2,_screenHeight/2));
     this->addChild(camera);
     /*
@@ -148,9 +148,9 @@ bool HelloWorld::init()
     botton->setPosition(Vec2(_screenWidth/2, _screenHeight/2));
     botton->addTouchEventListener(CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
     this->addChild(botton);
-    _camera = Camera::createOrthographic(visibleSize.width,visibleSize.height, 1, 1000);
-    _camera->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2));
-    this->addChild(_camera);
+    //_camera = Camera::createOrthographic(visibleSize.width,visibleSize.height, 1, 1000);
+    //_camera->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2));
+    //this->addChild(_camera);
     
     
     
@@ -189,8 +189,8 @@ void HelloWorld::setViewpointCenter(Vec2 position)
     Point centerofView = Vec2(_screenWidth/2,_screenHeight/2);
     Point viewPoint = centerofView - actualPosition;
     this->setPosition(viewPoint);
-    _camera->lookAt(Vec3(_camera->getPositionX(), _camera->getPositionY(), 100));
-    _camera->apply();
+    //_camera->lookAt(Vec3(_camera->getPositionX(), _camera->getPositionY(), 100));
+    //_camera->apply();
 }
 
 
@@ -226,7 +226,7 @@ void HelloWorld::update(float delta)
         keyPressedDuration(downArrow);
     }
     //RightMenuLayer->runAction(Follow::create(camera));
-    //this->setViewpointCenter(camera->getPosition());
+    this->setViewpointCenter(camera->getPosition());
 }
 
 bool HelloWorld::isKeyPressed(EventKeyboard::KeyCode keyCode)
@@ -286,7 +286,8 @@ void HelloWorld::keyPressedDuration(EventKeyboard::KeyCode code)
             break;
     }
     // 0.3s代表着动作从开始到结束所用的时间，从而显得不会那么机械。
-    
     auto CameraMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
-    _camera->runAction(CameraMoveBy);
+    camera->runAction(CameraMoveBy);
+    //auto CameraMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
+    //_camera->runAction(CameraMoveBy);
 }
