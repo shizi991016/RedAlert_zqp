@@ -32,7 +32,40 @@ THE SOFTWARE.
 #include <stdio.h>
 #include <jni.h>
 
+
+
+
 NS_CC_BEGIN
+
+
+void MessageBox(const char * msg, const char * title)
+{
+    showDialogJNI(msg, title, 0); // 回调地址为0 则不回调
+}
+
+void MessageBox(const char * msg, const char * title, const MessageBox_Callback & callback)
+{
+    MessageBox_Callback * Callback = new MessageBox_Callback(); // 待回调后 delete
+    *Callback = callback;                                       // 备份对象
+    
+    showDialogJNI(msg, title, (long long)Callback); // 将地址作为64位整型传给Java(防止日后将c++代码编译为64位版本)
+}
+
+extern "C"
+{
+    // 供Java回调
+    JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxHandler_onDialogButtonClicked(JNIEnv* env, jobject thiz, jlong callback)
+    {
+        if (0 != callback)
+        {
+            MessageBox_Callback * Callback = (MessageBox_Callback *)callback;
+            (*Callback)(); // 回调之
+            
+            delete Callback; // 删除对象
+        }
+    }
+}  
+
 
 #define MAX_LEN         (cocos2d::kMaxLogLen + 1)
 

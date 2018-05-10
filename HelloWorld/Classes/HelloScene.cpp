@@ -64,9 +64,7 @@ void HelloScene::menuExitCallback(cocos2d::Ref* pSender)
     MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
     return;
 #endif
-    
     Director::getInstance()->end();
-    
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
@@ -80,4 +78,9 @@ void HelloScene::menuStartCallback(cocos2d::Ref* pSender)
 void HelloScene::menuSettingCallback(cocos2d::Ref* pSender)
 {
     Director::getInstance()->pushScene(TransitionFade::create(0.4f, SettingScene::createScene()));
+}
+
+void HelloScene::Exit()
+{
+    Director::getInstance()->end();
 }

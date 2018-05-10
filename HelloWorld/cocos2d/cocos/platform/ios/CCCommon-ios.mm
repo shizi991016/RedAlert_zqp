@@ -37,6 +37,53 @@
 
 NS_CC_BEGIN
 
+
+
+
+@interface MessageBox_Delegate : NSObject <UIAlertViewDelegate>
+{
+    MessageBox_Callback mCallback;
+}
+- (id)initWithCallback:(const MessageBox_Callback &)callback;
+@end
+
+@implementation MessageBox_Delegate
+- (id)initWithCallback:(const MessageBox_Callback &)callback;
+{
+    if (self = [super init])
+    {
+        mCallback = callback; // 备份对象
+    }
+    
+    return(self);
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [alertView setDelegate: nil nil];
+    [self autorelease];
+    
+    mCallback(); // 回调
+}
+@end
+
+void MessageBox(const charchar * msg, const charchar * title, const MessageBox_Callback & callback)
+{
+    MessageBox_Delegate * modalDelegate = [[MessageBox_Delegate alloc] initWithCallback: callback];
+    
+    NSString * tmpTitle = (title) ? [NSString stringWithUTF8String : title] : nil;
+    NSString * tmpMsg = (msg) ? [NSString stringWithUTF8String : msg] : nil;
+    UIAlertView * messageBox = [[UIAlertView alloc] initWithTitle: tmpTitle
+                                                          message: tmpMsg
+                                                         delegate: modalDelegate
+                                                cancelButtonTitle: @"OK"
+                                                otherButtonTitles: nil nil];
+    [messageBox autorelease];
+    [messageBox show];
+}  
+
+
+
+
 // ios no MessageBox, use log instead
 void MessageBox(const char * msg, const char * title)
 {

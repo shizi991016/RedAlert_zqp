@@ -23,6 +23,7 @@ private:
     //MenuItemImage* closeItem;
     //Menu* menu;
     Button* botton;
+    Sprite* RightMenuPicture;
     //Camera* _camera;
 public:
     static cocos2d::Scene* createScene();

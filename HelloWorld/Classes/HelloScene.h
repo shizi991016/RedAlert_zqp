@@ -13,13 +13,15 @@ public:
     
     virtual bool init();
     
-    // a selector callback
     void menuExitCallback(cocos2d::Ref* pSender);
+    
     void menuStartCallback(cocos2d::Ref* pSender);
+    
     void menuSettingCallback(cocos2d::Ref* pSender);
-    // implement the "static create()" method manually
+    
     CREATE_FUNC(HelloScene);
     
+    void Exit();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

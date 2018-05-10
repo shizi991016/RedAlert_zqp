@@ -31,7 +31,19 @@ THE SOFTWARE.
 
 NS_CC_BEGIN
 
+#include <functional>
+
+// 回调类型
+typedef std::function<void()> MessageBox_Callback;
+
+// 带回调的消息框
+void CC_DLL MessageBox(const char * msg, const char * title, const MessageBox_Callback & callback);
+
+
+
 /**
+ 
+ 
  * @addtogroup platform
  * @{
  */
