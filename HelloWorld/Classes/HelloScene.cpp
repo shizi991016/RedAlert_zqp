@@ -2,13 +2,16 @@
 #include "SimpleAudioEngine.h"
 #include "HelloWorldScene.h"
 #include "SettingScene.h"
+
 USING_NS_CC;
 using namespace CocosDenshion;
+
 
 Scene* HelloScene::createScene()
 {
     return HelloScene::create();
 }
+
 
 bool HelloScene::init()
 {
@@ -18,8 +21,8 @@ bool HelloScene::init()
     }
     //SimpleAudioEngine::getInstance()->preloadBackgroundMusic("HelloMusic.mp3");
     //SimpleAudioEngine::getInstance()->playBackgroundMusic("HelloMusic.mp3",true);
-    SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BackgroundMusic.mp3");
-    SimpleAudioEngine::getInstance()->playBackgroundMusic("BackgroundMusic.mp3",true);
+    SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Common/BackgroundMusic.mp3");
+    SimpleAudioEngine::getInstance()->playBackgroundMusic("Common/BackgroundMusic.mp3",true);
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -29,7 +32,7 @@ bool HelloScene::init()
     
     //auto menu = Menu::create(closeItem, NULL);
     
-    auto BackGroundPciture = Sprite::create("HelloSceneBackGround.png");
+    auto BackGroundPciture = Sprite::create("HelloScenePicture/HelloSceneBackGround.png");
     BackGroundPciture->setAnchorPoint(Vec2::ZERO);
     BackGroundPciture->setPosition(Vec2::ZERO);
     auto BackGround_Width = BackGroundPciture->getContentSize().width;
@@ -41,9 +44,12 @@ bool HelloScene::init()
     
     this->addChild(BackGroundPciture, -1);
     
-    auto StartItem = MenuItemImage::create("StartNormal.png", "StartSelected.png",CC_CALLBACK_1(HelloScene::menuStartCallback, this));
-    auto SettingItem = MenuItemImage::create("SettingNormal.png", "SettingSelected.png",CC_CALLBACK_1(HelloScene::menuSettingCallback, this));
-    auto ExitItem = MenuItemImage::create("ExitNormal.png", "ExitSelected.png",CC_CALLBACK_1(HelloScene::menuExitCallback, this));
+    auto StartItem = MenuItemImage::create("HelloScenePicture/StartNormal.png", "HelloScenePicture/StartSelected.png",
+                                           CC_CALLBACK_1(HelloScene::menuStartCallback, this));
+    auto SettingItem = MenuItemImage::create("HelloScenePicture/SettingNormal.png", "HelloScenePicture/SettingSelected.png",
+                                             CC_CALLBACK_1(HelloScene::menuSettingCallback, this));
+    auto ExitItem = MenuItemImage::create("HelloScenePicture/ExitNormal.png", "HelloScenePicture/ExitSelected.png",
+                                          CC_CALLBACK_1(HelloScene::menuExitCallback, this));
     StartItem->setScale(1.7f);
     SettingItem->setScale(1.7f);
     ExitItem->setScale(1.7f);
@@ -79,8 +85,9 @@ void HelloScene::menuSettingCallback(cocos2d::Ref* pSender)
 {
     Director::getInstance()->pushScene(TransitionFade::create(0.4f, SettingScene::createScene()));
 }
-
+/*
 void HelloScene::Exit()
 {
     Director::getInstance()->end();
 }
+*/

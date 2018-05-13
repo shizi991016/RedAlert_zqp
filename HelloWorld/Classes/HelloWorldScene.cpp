@@ -35,11 +35,11 @@ bool HelloWorld::init()
     this->addChild(_tileMap,-1);
 
     
-    camera = Sprite::create("camera.png");
+    camera = Sprite::create("Common/camera.png");
     camera->setPosition(Vec2(_screenWidth/2,_screenHeight/2));
     this->addChild(camera);
     
-    RightMenuPicture = Sprite::create("RightMenu.png");
+    RightMenuPicture = Sprite::create("MenuPicture/RightMenu.png");
     RightMenuPicture->setPosition(Vec2(_screenWidth-100, _screenHeight/2));
     RightMenuPicture->setScale(1, 1.279);
     this->addChild(RightMenuPicture);

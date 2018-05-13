@@ -24,7 +24,7 @@ bool SettingScene::init()
     float x = origin.x + visibleSize.width/2;
     float y = origin.y + visibleSize.height/2;
     
-    auto ReturnItem = MenuItemImage::create("ReturnNormal.png", "ReturnSelected.png",
+    auto ReturnItem = MenuItemImage::create("HelloScenePicture/ReturnNormal.png", "HelloScenePicture/ReturnSelected.png",
                                             CC_CALLBACK_1(SettingScene::menuReturnCallback, this));
     ReturnItem->setPosition(Vec2(x,y-250));
     ReturnItem->setScale(1.5f);//大小缩放
@@ -34,7 +34,7 @@ bool SettingScene::init()
     
     
     
-    auto BackGroundPciture = Sprite::create("SettingBackGroundPicture.png");
+    auto BackGroundPciture = Sprite::create("HelloScenePicture/SettingBackGroundPicture.png");
     BackGroundPciture->setAnchorPoint(Vec2::ZERO);
     BackGroundPciture->setPosition(Vec2::ZERO);
     auto BackGround_Width = BackGroundPciture->getContentSize().width;
@@ -53,9 +53,9 @@ bool SettingScene::init()
     this->addChild(DisplayBackGroundValue);
     
     auto BackGroundSlider = Slider::create();
-    BackGroundSlider->loadBarTexture("sliderTrack.png");
-    BackGroundSlider->loadSlidBallTextures("sliderThumb.png");
-    BackGroundSlider->loadProgressBarTexture("sliderProgress.png");
+    BackGroundSlider->loadBarTexture("SliderPicture/sliderTrack.png");
+    BackGroundSlider->loadSlidBallTextures("SliderPicture/sliderThumb.png");
+    BackGroundSlider->loadProgressBarTexture("SliderPicture/sliderProgress.png");
     BackGroundSlider->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2+80));
     BackGroundSlider->setPercent(SimpleAudioEngine::getInstance()->getBackgroundMusicVolume() * 100);
     BackGroundSlider->addEventListener([=](Ref * pSender,Slider::EventType type)
@@ -75,9 +75,9 @@ bool SettingScene::init()
     this->addChild(DisplayEffectValue);
     
     auto EffectSlider = Slider::create();
-    EffectSlider->loadBarTexture("sliderTrack.png");
-    EffectSlider->loadSlidBallTextures("sliderThumb.png");
-    EffectSlider->loadProgressBarTexture("sliderProgress.png");
+    EffectSlider->loadBarTexture("SliderPicture/sliderTrack.png");
+    EffectSlider->loadSlidBallTextures("SliderPicture/sliderThumb.png");
+    EffectSlider->loadProgressBarTexture("SliderPicture/sliderProgress.png");
     EffectSlider->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2-90));
     EffectSlider->setPercent(SimpleAudioEngine::getInstance()->getEffectsVolume() * 100);
     EffectSlider->addEventListener([=](Ref * pSender,Slider::EventType type)
