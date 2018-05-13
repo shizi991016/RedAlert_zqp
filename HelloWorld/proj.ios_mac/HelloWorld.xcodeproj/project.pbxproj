@@ -37,6 +37,12 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
+		E21E176C20A7F79C008AA4D8 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21E176820A7F79C008AA4D8 /* HelloWorldScene.cpp */; };
+		E21E176D20A7F79C008AA4D8 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21E176820A7F79C008AA4D8 /* HelloWorldScene.cpp */; };
+		E21E176E20A7F79C008AA4D8 /* HelloScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21E176920A7F79C008AA4D8 /* HelloScene.cpp */; };
+		E21E176F20A7F79C008AA4D8 /* HelloScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21E176920A7F79C008AA4D8 /* HelloScene.cpp */; };
+		E21E177020A7F79C008AA4D8 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21E176B20A7F79C008AA4D8 /* SettingScene.cpp */; };
+		E21E177120A7F79C008AA4D8 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21E176B20A7F79C008AA4D8 /* SettingScene.cpp */; };
 		E26E022420A7E609000DD5C4 /* MenuPicture in Resources */ = {isa = PBXBuildFile; fileRef = E26E022320A7E609000DD5C4 /* MenuPicture */; };
 		E26E022520A7E609000DD5C4 /* MenuPicture in Resources */ = {isa = PBXBuildFile; fileRef = E26E022320A7E609000DD5C4 /* MenuPicture */; };
 		E26E022720A7E682000DD5C4 /* Common in Resources */ = {isa = PBXBuildFile; fileRef = E26E022620A7E682000DD5C4 /* Common */; };
@@ -47,12 +53,6 @@
 		E26E023020A7E7A4000DD5C4 /* SliderPicture in Resources */ = {isa = PBXBuildFile; fileRef = E26E022E20A7E7A4000DD5C4 /* SliderPicture */; };
 		E26E023420A7E823000DD5C4 /* HelloScenePicture in Resources */ = {isa = PBXBuildFile; fileRef = E26E023320A7E823000DD5C4 /* HelloScenePicture */; };
 		E26E023520A7E823000DD5C4 /* HelloScenePicture in Resources */ = {isa = PBXBuildFile; fileRef = E26E023320A7E823000DD5C4 /* HelloScenePicture */; };
-		E26E025520A7ECF2000DD5C4 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E26E024F20A7ECF1000DD5C4 /* HelloWorldScene.cpp */; };
-		E26E025620A7ECF2000DD5C4 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E26E024F20A7ECF1000DD5C4 /* HelloWorldScene.cpp */; };
-		E26E025720A7ECF2000DD5C4 /* HelloScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E26E025120A7ECF1000DD5C4 /* HelloScene.cpp */; };
-		E26E025820A7ECF2000DD5C4 /* HelloScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E26E025120A7ECF1000DD5C4 /* HelloScene.cpp */; };
-		E26E025920A7ECF2000DD5C4 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E26E025420A7ECF2000DD5C4 /* SettingScene.cpp */; };
-		E26E025A20A7ECF2000DD5C4 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E26E025420A7ECF2000DD5C4 /* SettingScene.cpp */; };
 		E2FA08BE2099DB31004FC68E /* picture in Resources */ = {isa = PBXBuildFile; fileRef = E2FA08BD2099DB31004FC68E /* picture */; };
 		E2FA08BF2099DB31004FC68E /* picture in Resources */ = {isa = PBXBuildFile; fileRef = E2FA08BD2099DB31004FC68E /* picture */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
@@ -126,17 +126,17 @@
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		E21E176620A7F79C008AA4D8 /* SettingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingScene.h; sourceTree = "<group>"; };
+		E21E176720A7F79C008AA4D8 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldScene.h; sourceTree = "<group>"; };
+		E21E176820A7F79C008AA4D8 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorldScene.cpp; sourceTree = "<group>"; };
+		E21E176920A7F79C008AA4D8 /* HelloScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloScene.cpp; sourceTree = "<group>"; };
+		E21E176A20A7F79C008AA4D8 /* HelloScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloScene.h; sourceTree = "<group>"; };
+		E21E176B20A7F79C008AA4D8 /* SettingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SettingScene.cpp; sourceTree = "<group>"; };
 		E26E022320A7E609000DD5C4 /* MenuPicture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MenuPicture; sourceTree = "<group>"; };
 		E26E022620A7E682000DD5C4 /* Common */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Common; sourceTree = "<group>"; };
 		E26E022920A7E71E000DD5C4 /* RedAlertMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RedAlertMap.tmx; sourceTree = "<group>"; };
 		E26E022E20A7E7A4000DD5C4 /* SliderPicture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SliderPicture; sourceTree = "<group>"; };
 		E26E023320A7E823000DD5C4 /* HelloScenePicture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HelloScenePicture; sourceTree = "<group>"; };
-		E26E024F20A7ECF1000DD5C4 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorldScene.cpp; sourceTree = "<group>"; };
-		E26E025020A7ECF1000DD5C4 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldScene.h; sourceTree = "<group>"; };
-		E26E025120A7ECF1000DD5C4 /* HelloScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloScene.cpp; sourceTree = "<group>"; };
-		E26E025220A7ECF1000DD5C4 /* SettingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingScene.h; sourceTree = "<group>"; };
-		E26E025320A7ECF1000DD5C4 /* HelloScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloScene.h; sourceTree = "<group>"; };
-		E26E025420A7ECF2000DD5C4 /* SettingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SettingScene.cpp; sourceTree = "<group>"; };
 		E2FA08BD2099DB31004FC68E /* picture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = picture; sourceTree = "<group>"; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -263,12 +263,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E26E025120A7ECF1000DD5C4 /* HelloScene.cpp */,
-				E26E025320A7ECF1000DD5C4 /* HelloScene.h */,
-				E26E024F20A7ECF1000DD5C4 /* HelloWorldScene.cpp */,
-				E26E025020A7ECF1000DD5C4 /* HelloWorldScene.h */,
-				E26E025420A7ECF2000DD5C4 /* SettingScene.cpp */,
-				E26E025220A7ECF1000DD5C4 /* SettingScene.h */,
+				E21E176520A7F79C008AA4D8 /* Scene */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 			);
@@ -294,6 +289,19 @@
 				503AE10417EB98FF00D1A890 /* Prefix.pch */,
 			);
 			name = mac;
+			sourceTree = "<group>";
+		};
+		E21E176520A7F79C008AA4D8 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				E21E176620A7F79C008AA4D8 /* SettingScene.h */,
+				E21E176720A7F79C008AA4D8 /* HelloWorldScene.h */,
+				E21E176820A7F79C008AA4D8 /* HelloWorldScene.cpp */,
+				E21E176920A7F79C008AA4D8 /* HelloScene.cpp */,
+				E21E176A20A7F79C008AA4D8 /* HelloScene.h */,
+				E21E176B20A7F79C008AA4D8 /* SettingScene.cpp */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,9 +438,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E26E025720A7ECF2000DD5C4 /* HelloScene.cpp in Sources */,
-				E26E025920A7ECF2000DD5C4 /* SettingScene.cpp in Sources */,
-				E26E025520A7ECF2000DD5C4 /* HelloWorldScene.cpp in Sources */,
+				E21E176E20A7F79C008AA4D8 /* HelloScene.cpp in Sources */,
+				E21E177020A7F79C008AA4D8 /* SettingScene.cpp in Sources */,
+				E21E176C20A7F79C008AA4D8 /* HelloWorldScene.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,11 +449,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E26E025A20A7ECF2000DD5C4 /* SettingScene.cpp in Sources */,
+				E21E177120A7F79C008AA4D8 /* SettingScene.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
-				E26E025820A7ECF2000DD5C4 /* HelloScene.cpp in Sources */,
+				E21E176F20A7F79C008AA4D8 /* HelloScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
-				E26E025620A7ECF2000DD5C4 /* HelloWorldScene.cpp in Sources */,
+				E21E176D20A7F79C008AA4D8 /* HelloWorldScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

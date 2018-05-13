@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "HelloScene.h"
+#include "Scene/HelloScene.h"
 #include "SimpleAudioEngine.h"
 
 #if USE_AUDIO_ENGINE && USE_SIMPLE_AUDIO_ENGINE
