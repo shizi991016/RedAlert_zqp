@@ -18,29 +18,28 @@ bool SettingScene::init()
     }
     
     
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto VisibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 Origin = Director::getInstance()->getVisibleOrigin();
     
-    float x = origin.x + visibleSize.width/2;
-    float y = origin.y + visibleSize.height/2;
+    float x = Origin.x + VisibleSize.width/2;
+    float y = Origin.y + VisibleSize.height/2;
     
     auto ReturnItem = MenuItemImage::create("HelloScenePicture/ReturnNormal.png", "HelloScenePicture/ReturnSelected.png",
                                             CC_CALLBACK_1(SettingScene::menuReturnCallback, this));
     ReturnItem->setPosition(Vec2(x,y-250));
-    ReturnItem->setScale(1.5f);//大小缩放
+    ReturnItem->setScale(1.5f);
     auto menu = Menu::create(ReturnItem,NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     
-    
-    
+
     auto BackGroundPciture = Sprite::create("HelloScenePicture/SettingBackGroundPicture.png");
     BackGroundPciture->setAnchorPoint(Vec2::ZERO);
     BackGroundPciture->setPosition(Vec2::ZERO);
     auto BackGround_Width = BackGroundPciture->getContentSize().width;
     auto BackGround_Height = BackGroundPciture->getContentSize().height;
-    auto ScaleX = visibleSize.width / BackGround_Width;
-    auto ScaleY = visibleSize.height / BackGround_Height;
+    auto ScaleX = VisibleSize.width / BackGround_Width;
+    auto ScaleY = VisibleSize.height / BackGround_Height;
     BackGroundPciture->setScale(ScaleX, ScaleY);
     //让地图铺满屏幕
     this->addChild(BackGroundPciture, -1);
@@ -56,7 +55,7 @@ bool SettingScene::init()
     BackGroundSlider->loadBarTexture("SliderPicture/sliderTrack.png");
     BackGroundSlider->loadSlidBallTextures("SliderPicture/sliderThumb.png");
     BackGroundSlider->loadProgressBarTexture("SliderPicture/sliderProgress.png");
-    BackGroundSlider->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2+80));
+    BackGroundSlider->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2+80));
     BackGroundSlider->setPercent(SimpleAudioEngine::getInstance()->getBackgroundMusicVolume() * 100);
     BackGroundSlider->addEventListener([=](Ref * pSender,Slider::EventType type)
     {
@@ -78,7 +77,7 @@ bool SettingScene::init()
     EffectSlider->loadBarTexture("SliderPicture/sliderTrack.png");
     EffectSlider->loadSlidBallTextures("SliderPicture/sliderThumb.png");
     EffectSlider->loadProgressBarTexture("SliderPicture/sliderProgress.png");
-    EffectSlider->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2-90));
+    EffectSlider->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2-90));
     EffectSlider->setPercent(SimpleAudioEngine::getInstance()->getEffectsVolume() * 100);
     EffectSlider->addEventListener([=](Ref * pSender,Slider::EventType type)
                                         {
@@ -91,11 +90,7 @@ bool SettingScene::init()
                                            }
                                        });
     this->addChild(EffectSlider);
-    
-    
-    
-    
-    
+
     return true;
 }
 
@@ -103,6 +98,4 @@ void SettingScene::menuReturnCallback(cocos2d::Ref * pSender)
 {
     Director::getInstance()->popSceneWithTransition<TransitionFade>(0.4f);
 }
-
-
 

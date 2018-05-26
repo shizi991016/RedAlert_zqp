@@ -19,26 +19,23 @@ bool HelloScene::init()
     {
         return false;
     }
-    //SimpleAudioEngine::getInstance()->preloadBackgroundMusic("HelloMusic.mp3");
-    //SimpleAudioEngine::getInstance()->playBackgroundMusic("HelloMusic.mp3",true);
+    
     SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Common/BackgroundMusic.mp3");
     SimpleAudioEngine::getInstance()->playBackgroundMusic("Common/BackgroundMusic.mp3",true);
     
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto VisibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 Origin = Director::getInstance()->getVisibleOrigin();
     
-    float x = origin.x + visibleSize.width/2;
-    float y = origin.y + visibleSize.height/2;
-    
-    //auto menu = Menu::create(closeItem, NULL);
+    float x = Origin.x + VisibleSize.width/2;
+    float y = Origin.y + VisibleSize.height/2;
     
     auto BackGroundPciture = Sprite::create("HelloScenePicture/HelloSceneBackGround.png");
     BackGroundPciture->setAnchorPoint(Vec2::ZERO);
     BackGroundPciture->setPosition(Vec2::ZERO);
     auto BackGround_Width = BackGroundPciture->getContentSize().width;
     auto BackGround_Height = BackGroundPciture->getContentSize().height;
-    auto ScaleX = visibleSize.width / BackGround_Width;
-    auto ScaleY = visibleSize.height / BackGround_Height;
+    auto ScaleX = VisibleSize.width / BackGround_Width;
+    auto ScaleY = VisibleSize.height / BackGround_Height;
     BackGroundPciture->setScale(ScaleX, ScaleY);
     
     
@@ -85,9 +82,4 @@ void HelloScene::menuSettingCallback(cocos2d::Ref* pSender)
 {
     Director::getInstance()->pushScene(TransitionFade::create(0.4f, SettingScene::createScene()));
 }
-/*
-void HelloScene::Exit()
-{
-    Director::getInstance()->end();
-}
-*/
+

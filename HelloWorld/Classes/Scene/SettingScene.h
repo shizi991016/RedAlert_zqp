@@ -20,7 +20,6 @@ public:
     
     virtual bool init();
     
-    
     CREATE_FUNC(SettingScene);
     
     void menuReturnCallback(cocos2d::Ref* pSender);
