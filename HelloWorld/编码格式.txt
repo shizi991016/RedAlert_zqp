@@ -1,0 +1,20 @@
+变量字面英文大写单词首字母
+如：RightMenu    CloseBotton
+
+函数第一个单词小写之后单词大写首字母
+如：menuCloseCallBack  setCameraPosition
+
+if while 等c++结构加括号，且回车一行
+如： 
+if( )
+{
+}
+else
+{
+}
+
+头文件函数声明之间空一行
+
+代码段之间空行
+
+函数之间空两行
