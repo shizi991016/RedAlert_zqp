@@ -75,7 +75,7 @@ void HelloScene::menuExitCallback(cocos2d::Ref* pSender)
 
 void HelloScene::menuStartCallback(cocos2d::Ref* pSender)
 {
-    Director::getInstance()->replaceScene(TransitionFade::create(4.0f, GameScene::createScene()));
+    Director::getInstance()->replaceScene(TransitionFade::create(3.0f, GameScene::createScene()));
 }
 
 void HelloScene::menuSettingCallback(cocos2d::Ref* pSender)

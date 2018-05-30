@@ -14,12 +14,16 @@ class GameScene : public cocos2d::Scene
 private:
     
     TMXTiledMap* TileMap; // 地图
-    //Sprite* _player; // 玩家
+    
     Sprite* Camera;//相机
     int  ScreenWidth, ScreenHeight; // 屏幕的宽度和高度
     std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
-    //Button* botton;
+    
+    Button* Textbutton;
     Sprite* RightMenuPicture;
+    
+    
+    
     
 public:
     
@@ -37,6 +41,8 @@ public:
     bool isKeyPressed(EventKeyboard::KeyCode keyCode);
     
     void keyPressedDuration(EventKeyboard::KeyCode code);
+    
+    //void textButtonCallBack(cocos2d::Ref* pSender);
     
 };
 

@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "SimpleAudioEngine.h"
+#include "../Army/AllArmy.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -59,6 +60,36 @@ bool GameScene::init()
     };
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     
+    
+    
+    //*******************************ButtonText***************************************
+    Textbutton = Button::create("GamePicture/Barracks.png");
+    Textbutton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
+    
+    //WarFactoryButton = Button::create("GamePicture/Barracks.png");
+    //WarFactoryButtonPicture = Sprite::create("GamePicture/Barracks.png");
+    
+    
+    Textbutton->addTouchEventListener([=](Ref* pSender,Widget::TouchEventType type)
+                                      {
+                                          switch (type)
+                                          {
+                                              case Widget::TouchEventType::ENDED:
+                                              {
+                                                  auto TextPic = Sprite::create("MenuPicture/CommonTextButton.png");
+                                                  TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                                                  this->addChild(TextPic,1);
+                                                  break;
+                                              }
+                                                  
+                                              default:
+                                                  break;
+                                          }
+                                      });
+    this->addChild(Textbutton,1);
+    //*******************************ButtonText***************************************
+    
+   
     
     this->scheduleUpdate();
     
@@ -171,3 +202,11 @@ void GameScene::keyPressedDuration(EventKeyboard::KeyCode code)
     auto RightMenuMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
     RightMenuPicture->runAction(RightMenuMoveBy);
 }
+
+
+
+
+
+
+
+
