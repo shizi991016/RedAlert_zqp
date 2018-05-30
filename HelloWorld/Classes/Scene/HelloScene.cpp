@@ -1,6 +1,6 @@
 #include "HelloScene.h"
 #include "SimpleAudioEngine.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "SettingScene.h"
 
 USING_NS_CC;
@@ -75,7 +75,7 @@ void HelloScene::menuExitCallback(cocos2d::Ref* pSender)
 
 void HelloScene::menuStartCallback(cocos2d::Ref* pSender)
 {
-    Director::getInstance()->replaceScene(TransitionFade::create(4.0f, HelloWorld::createScene()));
+    Director::getInstance()->replaceScene(TransitionFade::create(4.0f, GameScene::createScene()));
 }
 
 void HelloScene::menuSettingCallback(cocos2d::Ref* pSender)
