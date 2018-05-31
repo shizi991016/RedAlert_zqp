@@ -1,6 +1,9 @@
 #include "GameScene.h"
 #include "SimpleAudioEngine.h"
+#include "CountryChoiceScene.h"
 #include "../Army/AllArmy.h"
+//#include "../PublicData.h"
+int CountryChoice;
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -62,7 +65,7 @@ bool GameScene::init()
     
     
     
-    //*******************************ButtonText***************************************
+    /*******************************ButtonText***************************************
     Textbutton = Button::create("GamePicture/Barracks.png");
     Textbutton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
     
@@ -76,8 +79,9 @@ bool GameScene::init()
                                           {
                                               case Widget::TouchEventType::ENDED:
                                               {
-                                                  auto TextPic = Sprite::create("MenuPicture/CommonTextButton.png");
+                                                  auto TextPic = Sprite::create("GamePicture/Barracks.png");
                                                   TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                                                  //TextPic->setScale(2.0f);
                                                   this->addChild(TextPic,1);
                                                   break;
                                               }
@@ -87,7 +91,146 @@ bool GameScene::init()
                                           }
                                       });
     this->addChild(Textbutton,1);
-    //*******************************ButtonText***************************************
+    */
+    
+    switch (CountryChoice)
+    {
+        case 1:
+        {
+            //*******************************ButtonText***************************************
+            Textbutton = Button::create("GamePicture/Cannon.png");
+            Textbutton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
+            
+            //WarFactoryButton = Button::create("GamePicture/Barracks.png");
+            //WarFactoryButtonPicture = Sprite::create("GamePicture/Barracks.png");
+            
+            
+            Textbutton->addTouchEventListener([=](Ref* pSender,Widget::TouchEventType type)
+                                              {
+                                                  switch (type)
+                                                  {
+                                                      case Widget::TouchEventType::ENDED:
+                                                      {
+                                                          auto TextPic = Sprite::create("GamePicture/Cannon.png");
+                                                          TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                                                          //TextPic->setScale(2.0f);
+                                                          this->addChild(TextPic,1);
+                                                          break;
+                                                      }
+                                                          
+                                                      default:
+                                                          break;
+                                                  }
+                                              });
+            this->addChild(Textbutton,1);
+            //*******************************ButtonText***************************************
+            
+            break;
+        }
+            
+        case 2:
+        {
+            //*******************************ButtonText***************************************
+            Textbutton = Button::create("GamePicture/Rtank.png");
+            Textbutton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
+            
+            //WarFactoryButton = Button::create("GamePicture/Barracks.png");
+            //WarFactoryButtonPicture = Sprite::create("GamePicture/Barracks.png");
+            
+            
+            Textbutton->addTouchEventListener([=](Ref* pSender,Widget::TouchEventType type)
+                                              {
+                                                  switch (type)
+                                                  {
+                                                      case Widget::TouchEventType::ENDED:
+                                                      {
+                                                          auto TextPic = Sprite::create("GamePicture/Rtank.png");
+                                                          TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                                                          //TextPic->setScale(2.0f);
+                                                          this->addChild(TextPic,1);
+                                                          break;
+                                                      }
+                                                          
+                                                      default:
+                                                          break;
+                                                  }
+                                              });
+            this->addChild(Textbutton,1);
+            //*******************************ButtonText***************************************
+            
+            break;
+        }
+        
+        case 3:
+        {
+            //*******************************ButtonText***************************************
+            Textbutton = Button::create("GamePicture/Barracks.png");
+            Textbutton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
+            
+            //WarFactoryButton = Button::create("GamePicture/Barracks.png");
+            //WarFactoryButtonPicture = Sprite::create("GamePicture/Barracks.png");
+            
+            
+            Textbutton->addTouchEventListener([=](Ref* pSender,Widget::TouchEventType type)
+                                              {
+                                                  switch (type)
+                                                  {
+                                                      case Widget::TouchEventType::ENDED:
+                                                      {
+                                                          auto TextPic = Sprite::create("GamePicture/Barracks.png");
+                                                          TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                                                          //TextPic->setScale(2.0f);
+                                                          this->addChild(TextPic,1);
+                                                          break;
+                                                      }
+                                                          
+                                                      default:
+                                                          break;
+                                                  }
+                                              });
+            this->addChild(Textbutton,1);
+            //*******************************ButtonText***************************************
+            
+            break;
+        }
+        
+        default:
+        {
+            //*******************************ButtonText***************************************
+            Textbutton = Button::create("GamePicture/Ship.png");
+            Textbutton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
+            
+            //WarFactoryButton = Button::create("GamePicture/Barracks.png");
+            //WarFactoryButtonPicture = Sprite::create("GamePicture/Barracks.png");
+            
+            
+            Textbutton->addTouchEventListener([=](Ref* pSender,Widget::TouchEventType type)
+                                              {
+                                                  switch (type)
+                                                  {
+                                                      case Widget::TouchEventType::ENDED:
+                                                      {
+                                                          auto TextPic = Sprite::create("GamePicture/Ship.png");
+                                                          TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                                                          //TextPic->setScale(2.0f);
+                                                          this->addChild(TextPic,1);
+                                                          break;
+                                                      }
+                                                          
+                                                      default:
+                                                          break;
+                                                  }
+                                              });
+            this->addChild(Textbutton,1);
+            //*******************************ButtonText***************************
+            break;
+        }
+            
+    }
+    
+    
+    
+    
     
    
     

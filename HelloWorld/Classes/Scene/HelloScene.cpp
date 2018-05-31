@@ -1,7 +1,8 @@
 #include "HelloScene.h"
 #include "SimpleAudioEngine.h"
-#include "GameScene.h"
+#include "CountryChoiceScene.h"
 #include "SettingScene.h"
+
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -75,7 +76,7 @@ void HelloScene::menuExitCallback(cocos2d::Ref* pSender)
 
 void HelloScene::menuStartCallback(cocos2d::Ref* pSender)
 {
-    Director::getInstance()->replaceScene(TransitionFade::create(3.0f, GameScene::createScene()));
+    Director::getInstance()->replaceScene(TransitionFade::create(2.0f, CountryChoiceScene::createScene()));
 }
 
 void HelloScene::menuSettingCallback(cocos2d::Ref* pSender)
