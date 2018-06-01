@@ -47,7 +47,7 @@ bool SettingScene::init()
     
     
     
-    auto DisplayBackGroundValue = Text::create("移动滑块调节背景音量","Marker Felt.ttf",35);
+    auto DisplayBackGroundValue = Text::create("移动滑块调节背景音量","fonts/Marker Felt.ttf",35);
     DisplayBackGroundValue->setPosition(Vec2(x, y+150));
     this->addChild(DisplayBackGroundValue);
     
@@ -69,7 +69,7 @@ bool SettingScene::init()
     });
     this->addChild(BackGroundSlider);
     
-    auto DisplayEffectValue = Text::create("移动滑块调节特效音量","Marker Felt.ttf",35);
+    auto DisplayEffectValue = Text::create("移动滑块调节特效音量","fonts/Marker Felt.ttf",35);
     DisplayEffectValue->setPosition(Vec2(x, y-20));
     this->addChild(DisplayEffectValue);
     

@@ -49,16 +49,16 @@ bool CountryChoiceScene::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu,1);
     
-    auto TopLabel = Text::create("Fight For Your Country", "Marker Felt.ttf", 35);
+    auto TopLabel = Text::create("Fight For Your Country", "fonts/Marker Felt.ttf", 55);
     TopLabel->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2 + 140));
     this->addChild(TopLabel,1);
     
-    auto CountryOneText = Text::create("有大炮有大炮有大炮\n有大炮","Marker Felt.ttf", 15);
-    auto CountryTwoText = Text::create("有大炮","Marker Felt.ttf", 15);
-    auto CountryThreeText = Text::create("有大炮","Marker Felt.ttf", 15);
-    CountryOneText->setPosition(Vec2(VisibleSize.width/4, VisibleSize.height/2 - 120));
-    CountryTwoText->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2 - 120));
-    CountryThreeText->setPosition(Vec2(VisibleSize.width/4*3, VisibleSize.height/2 - 120));
+    auto CountryOneText = Text::create("拥有强大的空中部队\n地面防守薄弱","fonts/Marker Felt.ttf", 25);
+    auto CountryTwoText = Text::create("拥有强大的地面部队\n空战能力弱","fonts/Marker Felt.ttf", 25);
+    auto CountryThreeText = Text::create("拥有强大的人力部队\n有核打击能力","fonts/Marker Felt.ttf", 25);
+    CountryOneText->setPosition(Vec2(VisibleSize.width/4, VisibleSize.height/2 - 150));
+    CountryTwoText->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2 - 150));
+    CountryThreeText->setPosition(Vec2(VisibleSize.width/4*3, VisibleSize.height/2 - 150));
     this->addChild(CountryThreeText,1);
     this->addChild(CountryOneText,1);
     this->addChild(CountryTwoText,1);

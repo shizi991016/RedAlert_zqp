@@ -18,16 +18,45 @@ private:
     Sprite* Camera;//相机
     int  ScreenWidth, ScreenHeight; // 屏幕的宽度和高度
     std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
+    Size VisibleSize;
     
     Button* Textbutton;
     Sprite* RightMenuPicture;
     
+    Button* CommonBarracksButton;
+    Button* CommonCannonButton;
+    Button* CommonElectricPowerPlantButton;
+    Button* CommonRefineryButton;
+    Button* CommonSoldierButton;
+    Button* CommonTankButton;
+    Button* CommonWarFactoryButton;
     
+    Sprite* CommonBarracksPicture;
+    Sprite* CommonCannonPicture;
+    Sprite* CommonElectricPowerPlantPicture;
+    Sprite* CommonRefineryPicture;
+    Sprite* CommonSoldierPicture;
+    Sprite* CommonTankPicture;
+    Sprite* CommonWarFactoryPicture;
+
+    Button* OneBattlePlaneButton;
+    Button* OneJetButton;
+    Button* TwoRTankButton;
+    Button* TwoTTankButton;
+    Button* ThreeSoldierXButton;
+    Button* ThreeMissileWellButton;
     
+    Sprite* OneBattlePlanePicture;
+    Sprite* OneJetPicture;
+    Sprite* TwoRTankPicture;
+    Sprite* TwoTTankPicture;
+    Sprite* ThreeSoldierXPicture;
+    Sprite* ThreeMissileWellPicture;
     
 public:
     
     static cocos2d::Scene* createScene();
+    
     virtual bool init();
     
     void setViewpointCenter(Vec2 position);
@@ -42,8 +71,9 @@ public:
     
     void keyPressedDuration(EventKeyboard::KeyCode code);
     
-    //void textButtonCallBack(cocos2d::Ref* pSender);
+    void countryChoiceSwitch(int CountryChoice);
     
+    void commonGamePictureLoading();
 };
 
 #endif /* GameScene_h */
