@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="43">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="45">
  <tileset firstgid="1" name="soil" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="picture/ç±»ä¼¼çº¢è²è­¦æçæäºå³æ¶ç­ç¥æ¸¸ææºç -10_ç±ç»ç½_aigei_com.png" width="128" height="128"/>
  </tileset>

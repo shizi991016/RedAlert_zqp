@@ -21,8 +21,6 @@ public:
     void menuSettingCallback(cocos2d::Ref* pSender);
     
     CREATE_FUNC(HelloScene);
-    
-    void Exit();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

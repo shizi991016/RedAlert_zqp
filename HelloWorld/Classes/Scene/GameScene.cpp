@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "SimpleAudioEngine.h"
 #include "CountryChoiceScene.h"
+#include "../Army/ArmyClass.h"
 
 int CountryChoice;
 
@@ -37,6 +38,26 @@ bool GameScene::init()
     TileMap->setPosition(Vec2::ZERO);
     this->addChild(TileMap,-1);
     
+    /*
+     获得tilemap中MiningYard 并且将地图所对应位置设置为有矿井与有建筑物
+     */
+    auto MiningYardPoints = TileMap->getObjectGroup("MiningYard");
+    auto MiningYardPositionGroup = MiningYardPoints->getObjects();
+    for (auto& obj : MiningYardPositionGroup)
+    {
+        auto dic = obj.asValueMap();
+        int x = dic.at("x").asInt();
+        int y = dic.at("y").asInt();
+        for (int i = 0; i < 125; i++)
+        {
+            for (int j = 0; j < 125; j++)
+            {
+                MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                MyData.IsPositionHaveMiningYard[x+i][y+j] = 1;
+            }
+        }
+    }
+    
     
     Camera = Sprite::create("Common/camera.png");
     Camera->setPosition(Vec2(ScreenWidth/2,ScreenHeight/2));
@@ -66,6 +87,60 @@ bool GameScene::init()
     commonGamePictureLoading();
     countryChoiceSwitch(CountryChoice);
    
+    
+    
+    //************************************************************************************
+    
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("CommonElectricPowerPlant_action.plist");
+    
+    auto TexTSP = Sprite::create("CountryPicture/CountryOne.png");
+    TexTSP->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2));
+    this->addChild(TexTSP);
+    //AnimationCache::getInstance()->addAnimationsWithFile("CommonElectricPowerPlant_action.plist");
+    
+    auto animation = Animation::create();
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_16.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_17.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_18.png");
+    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_19.png");
+    animation->setDelayPerUnit(3.0f/15.0f);
+    auto animate = Animate::create(animation);
+    auto rep = RepeatForever::create(animate);
+    
+    TexTSP->runAction(rep);
+    
+    
+    /*
+    auto animatio = Animation::create();
+    for (int i = 1; i <= 20; i++)
+    {
+        std::string szName = StringUtils::format("CommonElectricPowerPlant_action%d",i);
+        animatio->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(szName));
+    }
+    animatio->setDelayPerUnit(3.0f/15.0f);
+    animatio->setRestoreOriginalFrame(true);
+    AnimationCache::getInstance()->addAnimation(animatio, "work");
+    auto work = AnimationCache::getInstance()->getAnimation("work");
+    auto animate = Animate::create(work);
+    TexTSP->runAction(animate);
+    */
+    //************************************************************************************
+    
     
     this->scheduleUpdate();
     
@@ -177,10 +252,22 @@ void GameScene::keyPressedDuration(EventKeyboard::KeyCode code)
     Camera->runAction(CameraMoveBy);
     auto RightMenuMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
     RightMenuPicture->runAction(RightMenuMoveBy);
+    auto CommonElectricPowerPlantMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
+    CommonElectricPowerPlantPicture->runAction(CommonElectricPowerPlantMoveBy);
 }
 
 void GameScene::countryChoiceSwitch(int CountryChoice)
 {
+    /*
+     BattlePlane            战斗机
+     Jet                    喷气机
+     RTank                  坦克
+     TTank                  坦克
+     SoldierX               大兵
+     MissileWell            核弹井
+     */
+    
+    
     switch (CountryChoice)
     {
         case 1:
@@ -244,6 +331,18 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
 
 void GameScene::commonGamePictureLoading()
 {
+    
+    /*
+     Barracks               兵营 对应Soldier与SoldierX
+     Cannon                 加农炮 对空伤害高对地伤害低
+     ElectricPowerPlant     电厂 没有电厂不让建除矿场以外其他建筑 电厂越多建筑速度越快
+     Refinery               矿场 没有矿场不给加钱 矿场越多加钱越快
+     Soldier                大兵 对地伤害高对空伤害低
+     Tank                   坦克
+     WarFactory             战车工厂 对应Tank TTank RTank
+     
+     */
+    
     CommonBarracksButton           = Button::create("MenuPicture/CommonMenuButton.png");
     CommonCannonButton             = Button::create("MenuPicture/CommonMenuButton.png");
     CommonElectricPowerPlantButton = Button::create("MenuPicture/CommonMenuButton.png");
@@ -273,6 +372,7 @@ void GameScene::commonGamePictureLoading()
                                                                       auto TextPic = Sprite::create("GamePicture/CommonElectricPowerPlant.png");
                                                                       TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
                                                                       this->addChild(TextPic,1);
+                                                                      TextSpriteCallBack(TextPic);
                                                                       break;
                                                                   }
                                                                       
@@ -328,6 +428,37 @@ void GameScene::commonGamePictureLoading()
     this->addChild(CommonWarFactoryPicture,4);
 }
 
-
+void GameScene::TextSpriteCallBack(cocos2d::Sprite* sprite)
+{
+    auto listener1 = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    listener1->setSwallowTouches(true);//设置是否想下传递触摸
+    
+    listener1->onTouchBegan = [](Touch* touch, Event* event)
+    {
+        auto target = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = target->convertToNodeSpace(touch->getLocation());
+        Size s = target->getContentSize();
+        Rect rect = Rect(0, 0, s.width, s.height);
+        
+        if (rect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+            return true;
+        else
+            return false;
+    };
+    
+    listener1->onTouchMoved = [](Touch* touch, Event* event)
+    {
+        auto target = static_cast<Sprite*>(event->getCurrentTarget());
+        target->setPosition(target->getPosition() + touch->getDelta());
+    };
+    
+    listener1->onTouchEnded = [=](Touch* touch, Event* event)
+    {
+        _eventDispatcher->removeEventListener(listener1);
+    };
+    
+    //将触摸监听添加到eventDispacher中去
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener1, sprite);
+}
 
 

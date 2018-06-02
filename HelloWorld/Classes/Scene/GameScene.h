@@ -1,7 +1,7 @@
 #ifndef GameScene_h
 #define GameScene_h
 
-
+#include "../Army/BaseAndFlags.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 
@@ -53,6 +53,8 @@ private:
     Sprite* ThreeSoldierXPicture;
     Sprite* ThreeMissileWellPicture;
     
+    BaseAndFlags MyData;
+    
 public:
     
     static cocos2d::Scene* createScene();
@@ -74,6 +76,8 @@ public:
     void countryChoiceSwitch(int CountryChoice);
     
     void commonGamePictureLoading();
+    
+    void TextSpriteCallBack(Sprite* sprite);
 };
 
 #endif /* GameScene_h */
