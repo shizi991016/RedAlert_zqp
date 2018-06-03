@@ -1,7 +1,7 @@
 #include "GameScene.h"
 #include "SimpleAudioEngine.h"
 #include "CountryChoiceScene.h"
-#include "../Army/ArmyClass.h"
+//#include "../Army/ArmyClass.cpp"
 
 int CountryChoice;
 
@@ -92,7 +92,7 @@ bool GameScene::init()
     //************************************************************************************
     
     //SpriteFrameCache::getInstance()->addSpriteFramesWithFile("CommonElectricPowerPlant_action.plist");
-    
+    /*
     auto TexTSP = Sprite::create("CountryPicture/CountryOne.png");
     TexTSP->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2));
     this->addChild(TexTSP);
@@ -114,16 +114,12 @@ bool GameScene::init()
     animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
     animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
     animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
-    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_16.png");
-    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_17.png");
-    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_18.png");
-    animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_19.png");
     animation->setDelayPerUnit(3.0f/15.0f);
     auto animate = Animate::create(animation);
     auto rep = RepeatForever::create(animate);
     
     TexTSP->runAction(rep);
-    
+    */
     
     /*
     auto animatio = Animation::create();
@@ -364,42 +360,55 @@ void GameScene::commonGamePictureLoading()
     CommonElectricPowerPlantButton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
     CommonElectricPowerPlantPicture->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
     CommonElectricPowerPlantButton->addTouchEventListener([=](Ref* pSender,Widget::TouchEventType type)
-                                                          {
-                                                              switch (type)
-                                                              {
-                                                                  case Widget::TouchEventType::ENDED:
-                                                                  {
-                                                                      auto TextPic = Sprite::create("GamePicture/CommonElectricPowerPlant.png");
-                                                                      TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                                                                      this->addChild(TextPic,1);
-                                                                      TextSpriteCallBack(TextPic);
-                                                                      break;
-                                                                  }
-                                                                      
-                                                                  default:
-                                                                      break;
-                                                              }
-                                                          });
+    {
+        switch (type)
+        {
+            case Widget::TouchEventType::ENDED:
+            {
+                /*
+                ElectricPowerPlantClass* ElectricPowerPlant;
+                
+                
+                int LifeValue = 100;
+                ElectricPowerPlant->setLifeValue(LifeValue);
+                
+                
+                */
+                CCLOG("&&&&&&&&&&&&&&&&&&&&&&&&");
+                auto ElectricPowerPlantPicture = Sprite::create
+                ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                ElectricPowerPlantPicture->setScale(0.25f);
+                this->addChild(ElectricPowerPlantPicture,1);
+                ElectricPowerPlantPicture->setOpacity(140);
+                //ElectricPowerPlantCallBack(ElectricPowerPlantPicture);
+                ArmySelectionCallBack(ElectricPowerPlantPicture);
+                break;
+            }
+                
+            default:
+                break;
+        }
+    });
     CommonRefineryButton->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height-28));
     CommonRefineryPicture->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height-28));
     CommonRefineryButton->addTouchEventListener([=](Ref* pSender,Widget::TouchEventType type)
-                                                {
-                                                    switch (type)
-                                                    {
-                                                        case Widget::TouchEventType::ENDED:
-                                                        {
-                                                            auto TextPic = Sprite::create("GamePicture/CommonRefinery.png");
-                                                            TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                                                            CCLOG("**************%d  %d************",(int)Camera->getPosition().x,(int)Camera->getPosition().y);
-                                                            this->addChild(TextPic,1);
-                                                            break;
-                                                        }
-                                                            
-                                                        default:
-                                                            break;
-                                                    }
-                                                });
-    
+     {
+         switch (type)
+         {
+             case Widget::TouchEventType::ENDED:
+             {
+                 auto TextPic = Sprite::create("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                 TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                 this->addChild(TextPic,1);
+                 ArmySelectionCallBack(TextPic);
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+     });
     CommonWarFactoryButton->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height-28));
     CommonWarFactoryPicture->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height-28));
     CommonSoldierButton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 85));
@@ -465,7 +474,7 @@ void GameScene::ArmySelectionCallBack(cocos2d::Sprite* ArmyName)
             {
                 if (IsPositionHaveBuildings[x+i][y+j] == 1)
                 {
-                    this->removeChild(ArmyName);
+                    this->removeChild(ArmyName,true);
                     _eventDispatcher->removeEventListener(ArmyListener);
                     return false;
                 }
@@ -479,10 +488,77 @@ void GameScene::ArmySelectionCallBack(cocos2d::Sprite* ArmyName)
             }
         }
         _eventDispatcher->removeEventListener(ArmyListener);
+        CCLOG("&&&&&&&&&&&&&&&&&&&&&&&&******************");
     };
 }
 
-
+void GameScene::ElectricPowerPlantCallBack(Sprite* ArmyName)
+{
+    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
+        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
+        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
+        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+            return true;
+        else
+            return false;
+    };
+    
+    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
+        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());//精灵随鼠标移动
+    };
+    
+    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
+        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
+        Size ArmySize = ArmyTarget->getContentSize();
+        int x = LocationInWorld.x - LocationInNode.x;
+        int y = LocationInWorld.y - LocationInNode.y;
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (IsPositionHaveBuildings[x+i][y+j] == 1)
+                {
+                    this->removeChild(ArmyName,true);
+                    _eventDispatcher->removeEventListener(ArmyListener);
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                IsPositionHaveBuildings[x+i][y+j] = 1;
+            }
+        }
+        _eventDispatcher->removeEventListener(ArmyListener);
+        ElectricPowerPlantClass* ElectricPowerPlant;
+        auto animation = Animation::create();
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
+        animation->setDelayPerUnit(3.0f/5.0f);
+        auto animate = Animate::create(animation);
+        auto rep = RepeatForever::create(animate);
+        ElectricPowerPlant->runAction(rep);
+    };
+}
 
 
 

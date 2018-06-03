@@ -8,7 +8,7 @@ USING_NS_CC;
 using namespace ui;
 
 
-class Buildings : public cocos2d::Sprite
+class BuildingsClass : public cocos2d::Sprite
 {
 public:
     void setLifeValue(int LifeValue)
@@ -40,6 +40,12 @@ public:
     {
         return _HPInterval;
     }
+    
+    bool isBuildingDestoried()
+    {
+        return (_LifeValue <= 0);
+    }
+    
 private:
     int _LifeValue;
     LoadingBar* _HP;

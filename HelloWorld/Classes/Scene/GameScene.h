@@ -4,6 +4,7 @@
 #include "../Army/BaseAndFlags.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
+#include "../Army/ArmyClass.cpp"
 
 USING_NS_CC;
 using namespace ui;
@@ -78,7 +79,10 @@ public:
     
     void commonGamePictureLoading();
     
-    void ArmySelectionCallBack(Sprite* sprite);
+    void ArmySelectionCallBack(cocos2d::Sprite* sprite);
+    
+    void ElectricPowerPlantCallBack(Sprite* ArmyName);
+    //bool ArmySelectionCallBack(Sprite* sprite,int a);
 };
 
 #endif /* GameScene_h */
