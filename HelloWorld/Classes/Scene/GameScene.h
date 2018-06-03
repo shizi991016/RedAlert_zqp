@@ -54,6 +54,7 @@ private:
     Sprite* ThreeMissileWellPicture;
     
     BaseAndFlags MyData;
+    int IsPositionHaveBuildings[3201][3201] = {0};
     
 public:
     
@@ -77,7 +78,7 @@ public:
     
     void commonGamePictureLoading();
     
-    void TextSpriteCallBack(Sprite* sprite);
+    void ArmySelectionCallBack(Sprite* sprite);
 };
 
 #endif /* GameScene_h */

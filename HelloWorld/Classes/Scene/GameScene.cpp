@@ -52,7 +52,7 @@ bool GameScene::init()
         {
             for (int j = 0; j < 125; j++)
             {
-                MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                IsPositionHaveBuildings[x+i][y+j] = 1;
                 MyData.IsPositionHaveMiningYard[x+i][y+j] = 1;
             }
         }
@@ -91,7 +91,7 @@ bool GameScene::init()
     
     //************************************************************************************
     
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("CommonElectricPowerPlant_action.plist");
+    //SpriteFrameCache::getInstance()->addSpriteFramesWithFile("CommonElectricPowerPlant_action.plist");
     
     auto TexTSP = Sprite::create("CountryPicture/CountryOne.png");
     TexTSP->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2));
@@ -390,6 +390,7 @@ void GameScene::commonGamePictureLoading()
                                                         {
                                                             auto TextPic = Sprite::create("GamePicture/CommonRefinery.png");
                                                             TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                                                            CCLOG("**************%d  %d************",(int)Camera->getPosition().x,(int)Camera->getPosition().y);
                                                             this->addChild(TextPic,1);
                                                             break;
                                                         }
@@ -428,37 +429,61 @@ void GameScene::commonGamePictureLoading()
     this->addChild(CommonWarFactoryPicture,4);
 }
 
-void GameScene::TextSpriteCallBack(cocos2d::Sprite* sprite)
+
+void GameScene::ArmySelectionCallBack(cocos2d::Sprite* ArmyName)
 {
-    auto listener1 = EventListenerTouchOneByOne::create();//创建一个触摸监听
-    listener1->setSwallowTouches(true);//设置是否想下传递触摸
-    
-    listener1->onTouchBegan = [](Touch* touch, Event* event)
+    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
     {
-        auto target = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point locationInNode = target->convertToNodeSpace(touch->getLocation());
-        Size s = target->getContentSize();
-        Rect rect = Rect(0, 0, s.width, s.height);
-        
-        if (rect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
+        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
+        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
+        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
             return true;
         else
             return false;
     };
     
-    listener1->onTouchMoved = [](Touch* touch, Event* event)
+    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
     {
-        auto target = static_cast<Sprite*>(event->getCurrentTarget());
-        target->setPosition(target->getPosition() + touch->getDelta());
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
+        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());//精灵随鼠标移动
     };
     
-    listener1->onTouchEnded = [=](Touch* touch, Event* event)
+    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
     {
-        _eventDispatcher->removeEventListener(listener1);
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
+        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
+        Size ArmySize = ArmyTarget->getContentSize();
+        int x = LocationInWorld.x - LocationInNode.x;
+        int y = LocationInWorld.y - LocationInNode.y;
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (IsPositionHaveBuildings[x+i][y+j] == 1)
+                {
+                    this->removeChild(ArmyName);
+                    _eventDispatcher->removeEventListener(ArmyListener);
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                IsPositionHaveBuildings[x+i][y+j] = 1;
+            }
+        }
+        _eventDispatcher->removeEventListener(ArmyListener);
     };
-    
-    //将触摸监听添加到eventDispacher中去
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener1, sprite);
 }
+
+
+
+
 
 
