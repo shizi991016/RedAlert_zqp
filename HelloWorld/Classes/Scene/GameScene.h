@@ -55,7 +55,7 @@ private:
     Sprite* ThreeMissileWellPicture;
     
     BaseAndFlags MyData;
-    int IsPositionHaveBuildings[3201][3201] = {0};
+    //int IsPositionHaveBuildings[3201][3201] = {0};
     
 public:
     
@@ -79,10 +79,10 @@ public:
     
     void commonGamePictureLoading();
     
-    void ArmySelectionCallBack(cocos2d::Sprite* sprite);
-    
     void ElectricPowerPlantCallBack(Sprite* ArmyName);
-    //bool ArmySelectionCallBack(Sprite* sprite,int a);
+    
+    void ArmyMoveOnce(Sprite* ArmyName);
+    
 };
 
 #endif /* GameScene_h */
