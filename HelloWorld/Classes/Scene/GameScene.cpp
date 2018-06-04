@@ -86,8 +86,6 @@ bool GameScene::init()
     
     commonGamePictureLoading();
     countryChoiceSwitch(CountryChoice);
-   
-    
     
     //************************************************************************************
     
@@ -372,8 +370,35 @@ void GameScene::commonGamePictureLoading()
                 ElectricPowerPlantPicture->setScale(0.25f);
                 this->addChild(ElectricPowerPlantPicture,1);
                 ElectricPowerPlantPicture->setOpacity(140);
-                //ArmyMoveOnce(ElectricPowerPlantPicture);
-                ElectricPowerPlantCallBack(ElectricPowerPlantPicture);
+                ArmyMoveOnce(ElectricPowerPlantPicture);
+                /*
+                auto animation = Animation::create();
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
+                animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                animation->setDelayPerUnit(3.0f/2.0f);
+                auto animate = Animate::create(animation);
+                auto rep = RepeatForever::create(animate);
+                //std::string str = "CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png";
+                
+                
+                if (IsTouchPositionAvailable)
+                {
+                    ArmyBuildCallBack(rep,"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                }
+                 */
                 break;
             }
                 
@@ -392,8 +417,6 @@ void GameScene::commonGamePictureLoading()
                  auto TextPic = Sprite::create("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
                  TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
                  this->addChild(TextPic,1);
-                 //CCLOG("&&&&&&&&&&&&&&&&&&&&&&&&******************");
-                 //TextFun(TextPic);
                  break;
              }
                  
@@ -430,78 +453,6 @@ void GameScene::commonGamePictureLoading()
     this->addChild(CommonWarFactoryPicture,4);
 }
 
-
-void GameScene::ElectricPowerPlantCallBack(Sprite* ArmyName)
-{
-    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
-    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
-    {
-        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
-        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
-        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
-        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
-            return true;
-        else
-            return false;
-    };
-    
-    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
-    {
-        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
-        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());//精灵随鼠标移动
-    };
-    
-    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
-    {
-        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
-        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
-        Size ArmySize = ArmyTarget->getContentSize();
-        int x = LocationInWorld.x - LocationInNode.x;
-        int y = LocationInWorld.y - LocationInNode.y;
-        for (int i = 0; i <= ArmySize.width; i++)
-        {
-            for (int j = 0; j <= ArmySize.height; j++)
-            {
-                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1)
-                {
-                    this->removeChild(ArmyName,true);
-                    _eventDispatcher->removeEventListener(ArmyListener);
-                    return false;
-                }
-            }
-        }
-        for (int i = 0; i <= ArmySize.width; i++)
-        {
-            for (int j = 0; j <= ArmySize.height; j++)
-            {
-                MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
-            }
-        }
-        _eventDispatcher->removeEventListener(ArmyListener);
-        /*
-        ElectricPowerPlantClass* ElectricPowerPlant;
-        auto animation = Animation::create();
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
-        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
-        animation->setDelayPerUnit(3.0f/5.0f);
-        auto animate = Animate::create(animation);
-        auto rep = RepeatForever::create(animate);
-        ElectricPowerPlant->runAction(rep);
-         */
-    };
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
-}
-
 void GameScene::ArmyMoveOnce(Sprite* ArmyName)
 {
     auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
@@ -535,7 +486,7 @@ void GameScene::ArmyMoveOnce(Sprite* ArmyName)
         {
             for (int j = 0; j <= ArmySize.height; j++)
             {
-                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1)
+                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
                 {
                     this->removeChild(ArmyName);
                     _eventDispatcher->removeEventListener(ArmyListener);
@@ -547,19 +498,58 @@ void GameScene::ArmyMoveOnce(Sprite* ArmyName)
         {
             for (int j = 0; j <= ArmySize.height; j++)
             {
-                MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                }
             }
         }
         _eventDispatcher->removeEventListener(ArmyListener);
+        TouchPosition = this->convertToNodeSpace(touch->getLocation());
+        IsTouchPositionAvailable = 1;
+        this->removeChild(ArmyName);
+        auto animation = Animation::create();
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
+        animation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+        animation->setDelayPerUnit(3.0f/2.0f);
+        auto animate = Animate::create(animation);
+        auto rep = RepeatForever::create(animate);
+        //std::string str = "CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png";
+        
+        
+        if (IsTouchPositionAvailable)
+        {
+            ArmyBuildCallBack(rep,"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+        }
     };
     //将触摸监听添加到eventDispacher中去
-    
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
-
-   
+    
+    
+    
 }
 
-
+void GameScene::ArmyBuildCallBack(Action* BuildingAction,const std::string& FileName)
+{
+    auto BuildingSprite = Sprite::create(FileName);
+    BuildingSprite->setPosition(TouchPosition);
+    this->addChild(BuildingSprite);
+    BuildingSprite->runAction(BuildingAction);
+    IsTouchPositionAvailable = 0;
+}
 
 
 
