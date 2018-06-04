@@ -182,3 +182,42 @@ void GameScene::commonGamePictureLoading()
     this->addChild(CommonTankPicture,4);
     this->addChild(CommonWarFactoryPicture,4);
 }
+
+
+Action* GameScene::LoadingElectricPowerPlantAction()
+{
+    auto BuildingAnimation = Animation::create();
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+    BuildingAnimation->setDelayPerUnit(3.0f/2.0f);
+    BuildingAnimation->setRestoreOriginalFrame(true);
+    auto BuildingAction = Animate::create(BuildingAnimation);
+    
+    auto NormalAnimation = Animation::create();
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
+    NormalAnimation->setDelayPerUnit(3.0f/3.0f);
+    NormalAnimation->setLoops(-1);
+    auto NormalAction = Animate::create(NormalAnimation);
+    auto AllAction = Sequence::create(BuildingAction,NormalAction,NULL);
+    return AllAction;
+}
+
+
+
+

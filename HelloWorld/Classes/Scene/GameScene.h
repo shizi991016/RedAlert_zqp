@@ -79,14 +79,16 @@ public:
     
     void commonGamePictureLoading();
     
-    //void ElectricPowerPlantCallBack(Sprite* ArmyName);
-    
     void ArmyMoveOnce(Sprite* ArmyName);
     
     Point TouchPosition;
+    
     bool IsTouchPositionAvailable = 0;
     
     void ArmyBuildCallBack(Action* BuildingAction,const std::string& FileName);
+    
+    Action* LoadingElectricPowerPlantAction();
+    
 };
 
 #endif /* GameScene_h */
