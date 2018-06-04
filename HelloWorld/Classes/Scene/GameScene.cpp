@@ -69,6 +69,22 @@ bool GameScene::init()
     RightMenuPicture->setScale(1, 1.279);
     this->addChild(RightMenuPicture,3);
     
+    /*
+    BuildingsClass* TextSp ;
+    MyData.MyBuildings.push_back(TextSp);               //Text
+    this->addChild(TextSp);                             //this->removechild可以删除vector中的指针
+    this->removeChild(MyData.MyBuildings[0]);
+    */
+    /*
+    auto o = LoadingBar::create("GamePicture/HPBar.png");
+    o->setPercent(100);
+    o->setScale(0.08f);
+    o->setDirection(LoadingBar::Direction::LEFT);
+    o->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2));
+    this->addChild(o,6);
+    */
+    
+    
     auto listener = EventListenerKeyboard::create();
     
     
@@ -200,14 +216,15 @@ void GameScene::keyPressedDuration(EventKeyboard::KeyCode code)
     }
     auto CameraMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
     Camera->runAction(CameraMoveBy);
-    auto RightMenuMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
-    RightMenuPicture->runAction(RightMenuMoveBy);
-    auto CommonElectricPowerPlantMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
-    CommonElectricPowerPlantPicture->runAction(CommonElectricPowerPlantMoveBy);
+    auto RightMenuMoveByAction = MoveBy::create(0, Vec2(offsetX, offsetY));
+    rightMenuMoveBy(RightMenuMoveByAction,CountryChoice);
+    //RightMenuPicture->runAction(RightMenuMoveBy);
+    //auto CommonElectricPowerPlantMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
+    //CommonElectricPowerPlantPicture->runAction(RightMenuMoveBy->clone());
 }
 
 
-void GameScene::ArmyMoveOnce(Sprite* ArmyName)
+void GameScene::armyMoveOnce(Sprite* ArmyName)
 {
     auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
     ArmyListener->setSwallowTouches(true);
@@ -259,28 +276,111 @@ void GameScene::ArmyMoveOnce(Sprite* ArmyName)
             }
         }
         _eventDispatcher->removeEventListener(ArmyListener);
-        TouchPosition = this->convertToNodeSpace(touch->getLocation());
-        IsTouchPositionAvailable = 1;
+        MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
+        MyData.IsTouchPositionAvailable = 1;
         this->removeChild(ArmyName);
         
-        if (IsTouchPositionAvailable)
+        if (MyData.IsTouchPositionAvailable)
         {
-            ArmyBuildCallBack(LoadingElectricPowerPlantAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+            armyBuildCallBack(loadingElectricPowerPlantAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
         }
     };
     //将触摸监听添加到eventDispacher中去
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
 }
 
-void GameScene::ArmyBuildCallBack(Action* BuildingAction,const std::string& FileName)
+void GameScene::armyBuildCallBack(Action* BuildingAction,const std::string& FileName)
 {
-    auto BuildingSprite = Sprite::create(FileName);
-    BuildingSprite->setPosition(TouchPosition);
+    auto BuildingSprite = BuildingsClass::createWithSpriteFileName(FileName);
+    BuildingSprite->setPosition(MyData.LastTouchPosition);
     this->addChild(BuildingSprite);
     BuildingSprite->runAction(BuildingAction);
-    //BuildingSprite->runAction(LoadingElectricPowerPlantActionInNormal());
-    IsTouchPositionAvailable = 0;
+    MyData.IsTouchPositionAvailable = 0;
+    MyData.MyBuildings.push_back(BuildingSprite);
+    //*****************以下为修改***********
+    auto BuildingHPBar = LoadingBar::create("GamePicture/HPBar.png");
+    BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
+    BuildingHPBar->setScale(0.08f);
+    BuildingHPBar->setPercent(100);
+    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+100));
+    this->addChild(BuildingHPBar,2);
+    auto HPBarDelay = DelayTime::create(21.0f);
+    auto HPBarFadeIn = FadeIn::create(0.0f);
+    auto HPBarFadeOut = FadeOut::create(0.0f);
+    auto HPBarSequence = Sequence::create(HPBarFadeOut,HPBarDelay,HPBarFadeIn,NULL);
+    BuildingHPBar->runAction(HPBarSequence);
+    BuildingSprite->setHP(BuildingHPBar);
+    BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
 }
+
+
+
+//&%&%&%&%&%&%&%&%&%&%&%努力修改%&%&%&%&%&%&%&%&%&
+void GameScene::armyMoveOnce(Sprite* ArmyName,Action* ArmyAction)
+{
+    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    ArmyListener->setSwallowTouches(true);
+    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
+        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
+        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
+        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+            return true;
+        else
+            return false;
+    };
+    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
+        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());
+    };
+    
+    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
+        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
+        Size ArmySize = ArmyTarget->getContentSize();
+        int x = LocationInWorld.x - LocationInNode.x;
+        int y = LocationInWorld.y - LocationInNode.y;
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    this->removeChild(ArmyName);
+                    _eventDispatcher->removeEventListener(ArmyListener);
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                }
+            }
+        }
+        _eventDispatcher->removeEventListener(ArmyListener);
+        MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
+        MyData.IsTouchPositionAvailable = 1;
+        this->removeChild(ArmyName);
+        
+        if (MyData.IsTouchPositionAvailable)
+        {
+            armyBuildCallBack(ArmyAction,"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+        }
+    };
+    //将触摸监听添加到eventDispacher中去
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
+}
+
 
 
 

@@ -28,12 +28,54 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
             OneBattlePlanePicture = Sprite::create("GamePicture/OneBattlePlane.png");
             OneBattlePlaneButton->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height - 140));
             OneBattlePlanePicture->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height - 140));
+            OneBattlePlaneButton->addTouchEventListener
+            ([=](Ref* pSender,Widget::TouchEventType type)
+             {
+                 switch (type)
+                 {
+                     case Widget::TouchEventType::ENDED:
+                     {
+                         auto ElectricPowerPlantPicture = Sprite::create
+                         ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                         ElectricPowerPlantPicture->setScale(0.25f);
+                         this->addChild(ElectricPowerPlantPicture,1);
+                         ElectricPowerPlantPicture->setOpacity(140);
+                         armyMoveOnce(ElectricPowerPlantPicture);
+                         break;
+                     }
+                         
+                     default:
+                         break;
+                 }
+             });
             this->addChild(OneBattlePlaneButton,5);
             this->addChild(OneBattlePlanePicture,4);
             OneJetButton  = Button::create("MenuPicture/CommonMenuButton.png");
             OneJetPicture = Sprite::create("GamePicture/OneJet.png");
             OneJetButton->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height - 140));
             OneJetPicture->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height - 140));
+            OneJetButton->addTouchEventListener
+            ([=](Ref* pSender,Widget::TouchEventType type)
+             {
+                 switch (type)
+                 {
+                     case Widget::TouchEventType::ENDED:
+                     {
+                         auto ElectricPowerPlantPicture = Sprite::create
+                         ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                         ElectricPowerPlantPicture->setScale(0.25f);
+                         this->addChild(ElectricPowerPlantPicture,1);
+                         ElectricPowerPlantPicture->setOpacity(140);
+                         armyMoveOnce(ElectricPowerPlantPicture);
+                         break;
+                     }
+                         
+                     default:
+                         break;
+                 }
+             });
             this->addChild(OneJetButton,5);
             this->addChild(OneJetPicture,4);
             break;
@@ -45,12 +87,54 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
             TwoRTankPicture = Sprite::create("GamePicture/TwoRtank.png");
             TwoRTankButton->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height - 140));
             TwoRTankPicture->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height - 140));
+            TwoRTankButton->addTouchEventListener
+            ([=](Ref* pSender,Widget::TouchEventType type)
+             {
+                 switch (type)
+                 {
+                     case Widget::TouchEventType::ENDED:
+                     {
+                         auto ElectricPowerPlantPicture = Sprite::create
+                         ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                         ElectricPowerPlantPicture->setScale(0.25f);
+                         this->addChild(ElectricPowerPlantPicture,1);
+                         ElectricPowerPlantPicture->setOpacity(140);
+                         armyMoveOnce(ElectricPowerPlantPicture);
+                         break;
+                     }
+                         
+                     default:
+                         break;
+                 }
+             });
             this->addChild(TwoRTankButton,5);
             this->addChild(TwoRTankPicture,4);
             TwoTTankButton  = Button::create("MenuPicture/CommonMenuButton.png");
             TwoTTankPicture = Sprite::create("GamePicture/TwoTtank.png");
             TwoTTankButton->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height - 140));
             TwoTTankPicture->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height - 140));
+            TwoTTankButton->addTouchEventListener
+            ([=](Ref* pSender,Widget::TouchEventType type)
+             {
+                 switch (type)
+                 {
+                     case Widget::TouchEventType::ENDED:
+                     {
+                         auto ElectricPowerPlantPicture = Sprite::create
+                         ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                         ElectricPowerPlantPicture->setScale(0.25f);
+                         this->addChild(ElectricPowerPlantPicture,1);
+                         ElectricPowerPlantPicture->setOpacity(140);
+                         armyMoveOnce(ElectricPowerPlantPicture);
+                         break;
+                     }
+                         
+                     default:
+                         break;
+                 }
+             });
             this->addChild(TwoTTankButton,5);
             this->addChild(TwoTTankPicture,4);
             break;
@@ -64,10 +148,52 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
             ThreeSoldierXPicture->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height - 140));
             this->addChild(ThreeSoldierXPicture,4);
             this->addChild(ThreeSoldierXButton,5);
+            ThreeSoldierXButton->addTouchEventListener
+            ([=](Ref* pSender,Widget::TouchEventType type)
+             {
+                 switch (type)
+                 {
+                     case Widget::TouchEventType::ENDED:
+                     {
+                         auto ElectricPowerPlantPicture = Sprite::create
+                         ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                         ElectricPowerPlantPicture->setScale(0.25f);
+                         this->addChild(ElectricPowerPlantPicture,1);
+                         ElectricPowerPlantPicture->setOpacity(140);
+                         armyMoveOnce(ElectricPowerPlantPicture);
+                         break;
+                     }
+                         
+                     default:
+                         break;
+                 }
+             });
             ThreeMissileWellButton = Button::create("MenuPicture/CommonMenuButton.png");
             ThreeMissileWellPicture = Sprite::create("GamePicture/ThreeMissileWell.png");
             ThreeMissileWellButton->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height - 140));
             ThreeMissileWellPicture->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height - 140));
+            ThreeMissileWellButton->addTouchEventListener
+            ([=](Ref* pSender,Widget::TouchEventType type)
+             {
+                 switch (type)
+                 {
+                     case Widget::TouchEventType::ENDED:
+                     {
+                         auto ElectricPowerPlantPicture = Sprite::create
+                         ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                         ElectricPowerPlantPicture->setScale(0.25f);
+                         this->addChild(ElectricPowerPlantPicture,1);
+                         ElectricPowerPlantPicture->setOpacity(140);
+                         armyMoveOnce(ElectricPowerPlantPicture);
+                         break;
+                     }
+                         
+                     default:
+                         break;
+                 }
+             });
             this->addChild(ThreeMissileWellPicture,4);
             this->addChild(ThreeMissileWellButton,5);
             break;
@@ -116,54 +242,171 @@ void GameScene::commonGamePictureLoading()
     
     CommonElectricPowerPlantButton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
     CommonElectricPowerPlantPicture->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 28));
-    CommonElectricPowerPlantButton->addTouchEventListener([=](Ref* pSender,Widget::TouchEventType type)
-                                                          {
-                                                              switch (type)
-                                                              {
-                                                                  case Widget::TouchEventType::ENDED:
-                                                                  {
-                                                                      auto ElectricPowerPlantPicture = Sprite::create
-                                                                      ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
-                                                                      ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                                                                      ElectricPowerPlantPicture->setScale(0.25f);
-                                                                      this->addChild(ElectricPowerPlantPicture,1);
-                                                                      ElectricPowerPlantPicture->setOpacity(140);
-                                                                      ArmyMoveOnce(ElectricPowerPlantPicture);
-                                                                      break;
-                                                                  }
-                                                                      
-                                                                  default:
-                                                                      break;
-                                                              }
-                                                          });
+    CommonElectricPowerPlantButton->addTouchEventListener
+    ([=](Ref* pSender,Widget::TouchEventType type)
+    {
+        switch (type)
+        {
+            case Widget::TouchEventType::ENDED:
+            {
+                auto ElectricPowerPlantPicture = Sprite::create
+                ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                ElectricPowerPlantPicture->setScale(0.25f);
+                this->addChild(ElectricPowerPlantPicture,1);
+                ElectricPowerPlantPicture->setOpacity(140);
+                armyMoveOnce(ElectricPowerPlantPicture,loadingElectricPowerPlantAction());
+                break;
+            }
+
+            default:
+                break;
+        }
+    });
+    
     CommonRefineryButton->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height-28));
     CommonRefineryPicture->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height-28));
-    CommonRefineryButton->addTouchEventListener([=](Ref* pSender,Widget::TouchEventType type)
-                                                {
-                                                    switch (type)
-                                                    {
-                                                        case Widget::TouchEventType::ENDED:
-                                                        {
-                                                            auto TextPic = Sprite::create("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
-                                                            TextPic->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                                                            this->addChild(TextPic,1);
-                                                            break;
-                                                        }
-                                                            
-                                                        default:
-                                                            break;
-                                                    }
-                                                });
+    CommonRefineryButton->addTouchEventListener
+    ([=](Ref* pSender,Widget::TouchEventType type)
+     {
+         switch (type)
+         {
+             case Widget::TouchEventType::ENDED:
+             {
+                 auto ElectricPowerPlantPicture = Sprite::create
+                 ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                 ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                 ElectricPowerPlantPicture->setScale(0.25f);
+                 this->addChild(ElectricPowerPlantPicture,1);
+                 ElectricPowerPlantPicture->setOpacity(140);
+                 armyMoveOnce(ElectricPowerPlantPicture);
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+     });
+   
     CommonWarFactoryButton->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height-28));
     CommonWarFactoryPicture->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height-28));
+    CommonWarFactoryButton->addTouchEventListener
+    ([=](Ref* pSender,Widget::TouchEventType type)
+     {
+         switch (type)
+         {
+             case Widget::TouchEventType::ENDED:
+             {
+                 auto ElectricPowerPlantPicture = Sprite::create
+                 ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                 ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                 ElectricPowerPlantPicture->setScale(0.25f);
+                 this->addChild(ElectricPowerPlantPicture,1);
+                 ElectricPowerPlantPicture->setOpacity(140);
+                 armyMoveOnce(ElectricPowerPlantPicture);
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+     });
+    
     CommonSoldierButton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 85));
     CommonSoldierPicture->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 85));
+    CommonSoldierButton->addTouchEventListener
+    ([=](Ref* pSender,Widget::TouchEventType type)
+     {
+         switch (type)
+         {
+             case Widget::TouchEventType::ENDED:
+             {
+                 auto ElectricPowerPlantPicture = Sprite::create
+                 ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                 ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                 ElectricPowerPlantPicture->setScale(0.25f);
+                 this->addChild(ElectricPowerPlantPicture,1);
+                 ElectricPowerPlantPicture->setOpacity(140);
+                 armyMoveOnce(ElectricPowerPlantPicture);
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+     });
+    
     CommonTankButton->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height - 85));
     CommonTankPicture->setPosition(Vec2(VisibleSize.width - 98, VisibleSize.height - 85));
+    CommonTankButton->addTouchEventListener
+    ([=](Ref* pSender,Widget::TouchEventType type)
+     {
+         switch (type)
+         {
+             case Widget::TouchEventType::ENDED:
+             {
+                 auto ElectricPowerPlantPicture = Sprite::create
+                 ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                 ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                 ElectricPowerPlantPicture->setScale(0.25f);
+                 this->addChild(ElectricPowerPlantPicture,1);
+                 ElectricPowerPlantPicture->setOpacity(140);
+                 armyMoveOnce(ElectricPowerPlantPicture);
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+     });
+    
     CommonCannonButton->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height - 85));
     CommonCannonPicture->setPosition(Vec2(VisibleSize.width - 44, VisibleSize.height - 85));
+    CommonCannonButton->addTouchEventListener
+    ([=](Ref* pSender,Widget::TouchEventType type)
+     {
+         switch (type)
+         {
+             case Widget::TouchEventType::ENDED:
+             {
+                 auto ElectricPowerPlantPicture = Sprite::create
+                 ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                 ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                 ElectricPowerPlantPicture->setScale(0.25f);
+                 this->addChild(ElectricPowerPlantPicture,1);
+                 ElectricPowerPlantPicture->setOpacity(140);
+                 armyMoveOnce(ElectricPowerPlantPicture);
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+     });
+    
     CommonBarracksButton->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 140));
     CommonBarracksPicture->setPosition(Vec2(VisibleSize.width - 150, VisibleSize.height - 140));
+    CommonBarracksButton->addTouchEventListener
+    ([=](Ref* pSender,Widget::TouchEventType type)
+     {
+         switch (type)
+         {
+             case Widget::TouchEventType::ENDED:
+             {
+                 auto ElectricPowerPlantPicture = Sprite::create
+                 ("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+                 ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                 ElectricPowerPlantPicture->setScale(0.25f);
+                 this->addChild(ElectricPowerPlantPicture,1);
+                 ElectricPowerPlantPicture->setOpacity(140);
+                 armyMoveOnce(ElectricPowerPlantPicture);
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+     });
     
     this->addChild(CommonBarracksButton,5);
     this->addChild(CommonCannonButton,5);
@@ -184,7 +427,7 @@ void GameScene::commonGamePictureLoading()
 }
 
 
-Action* GameScene::LoadingElectricPowerPlantAction()
+Action* GameScene::loadingElectricPowerPlantAction()
 {
     auto BuildingAnimation = Animation::create();
     BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
@@ -200,7 +443,6 @@ Action* GameScene::LoadingElectricPowerPlantAction()
     BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
     BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
     BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
-    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
     BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
     BuildingAnimation->setDelayPerUnit(3.0f/2.0f);
     BuildingAnimation->setRestoreOriginalFrame(true);
@@ -214,10 +456,38 @@ Action* GameScene::LoadingElectricPowerPlantAction()
     NormalAnimation->setDelayPerUnit(3.0f/3.0f);
     NormalAnimation->setLoops(-1);
     auto NormalAction = Animate::create(NormalAnimation);
-    auto AllAction = Sequence::create(BuildingAction,NormalAction,NULL);
+    auto AllAction = Sequence::createWithTwoActions(BuildingAction,NormalAction);
     return AllAction;
 }
 
-
+void GameScene::rightMenuMoveBy(MoveBy* SpriteMoveBy,int CountryChoice)
+{
+    RightMenuPicture                    ->runAction(SpriteMoveBy->clone());
+    CommonBarracksPicture               ->runAction(SpriteMoveBy->clone());
+    CommonCannonPicture                 ->runAction(SpriteMoveBy->clone());
+    CommonElectricPowerPlantPicture     ->runAction(SpriteMoveBy->clone());
+    CommonRefineryPicture               ->runAction(SpriteMoveBy->clone());
+    CommonSoldierPicture                ->runAction(SpriteMoveBy->clone());
+    CommonTankPicture                   ->runAction(SpriteMoveBy->clone());
+    CommonWarFactoryPicture             ->runAction(SpriteMoveBy->clone());
+    switch (CountryChoice)
+    {
+        case 1:
+            OneBattlePlanePicture               ->runAction(SpriteMoveBy->clone());
+            OneJetPicture                       ->runAction(SpriteMoveBy->clone());
+            break;
+            
+        case 2:
+            TwoRTankPicture                     ->runAction(SpriteMoveBy->clone());
+            TwoTTankPicture                     ->runAction(SpriteMoveBy->clone());
+            
+        case 3:
+            ThreeSoldierXPicture                ->runAction(SpriteMoveBy->clone());
+            ThreeMissileWellPicture             ->runAction(SpriteMoveBy->clone());
+       
+        default:
+            break;
+    }
+}
 
 

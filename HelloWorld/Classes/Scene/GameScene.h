@@ -4,7 +4,7 @@
 #include "../Army/BaseAndFlags.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
-#include "../Army/ArmyClass.cpp"
+//#include "../Army/ArmyClass.cpp"
 
 USING_NS_CC;
 using namespace ui;
@@ -79,15 +79,29 @@ public:
     
     void commonGamePictureLoading();
     
-    void ArmyMoveOnce(Sprite* ArmyName);
+    void armyMoveOnce(Sprite* ArmyName);
+    void armyMoveOnce(Sprite* ArmyName,Action* ArmyAction);
+    //我曾经想把所有的东西都由这一个函数加进去，但是函数参数传递中Action的Target会出现错误，所以我放弃了这个方法
+    //迫不得已只能多次重写armyMoveOnce函数来支持不同的建筑物动画
+    //以及多次重写loadingAction加载建筑物动画
     
-    Point TouchPosition;
+    void armyBuildCallBack(Action* BuildingAction,const std::string& FileName);
     
-    bool IsTouchPositionAvailable = 0;
+    Action* loadingElectricPowerPlantAction();
+    Action* loadingBarracksAction();
+    //Action* loadingCannonAction();加农炮另写
+    Action* loadingRefinerytAction();
+    Action* loadingSoldierAction();
+    Action* loadingTankAction();
+    Action* loadingWarFactoryAction();
+    Action* loadingBattlePlaneAction();
+    Action* loadingJetAction();
+    Action* loadingRTankAction();
+    Action* loadingTTankAction();
+    Action* loadingSoldierXAction();
+    Action* loadingMissileWell();
     
-    void ArmyBuildCallBack(Action* BuildingAction,const std::string& FileName);
-    
-    Action* LoadingElectricPowerPlantAction();
+    void rightMenuMoveBy(MoveBy* SpriteMoveBy,int CountryChoice);
     
 };
 

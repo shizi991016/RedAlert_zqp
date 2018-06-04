@@ -46,6 +46,17 @@ public:
         return (_LifeValue <= 0);
     }
     
+    static BuildingsClass* createWithSpriteFileName(const std::string& FileName)
+    {
+        BuildingsClass* Building = new BuildingsClass();
+        if (Building && Building->initWithFile(FileName))
+        {
+            Building->autorelease();
+            return Building;
+        }
+        CC_SAFE_DELETE(Building);
+        return nullptr;
+    }
 private:
     int _LifeValue;
     LoadingBar* _HP;
