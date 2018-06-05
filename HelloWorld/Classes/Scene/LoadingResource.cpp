@@ -42,6 +42,8 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                          this->addChild(ElectricPowerPlantPicture,1);
                          ElectricPowerPlantPicture->setOpacity(140);
                          armyMoveOnce(ElectricPowerPlantPicture);
+                         std::string value = StringUtils::format("战斗机\n造价60$");
+                         RightMenuText->setString(value);
                          break;
                      }
                          
@@ -69,6 +71,8 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                          this->addChild(ElectricPowerPlantPicture,1);
                          ElectricPowerPlantPicture->setOpacity(140);
                          armyMoveOnce(ElectricPowerPlantPicture);
+                         std::string value = StringUtils::format("喷气机\n造价40$");
+                         RightMenuText->setString(value);
                          break;
                      }
                          
@@ -101,6 +105,8 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                          this->addChild(ElectricPowerPlantPicture,1);
                          ElectricPowerPlantPicture->setOpacity(140);
                          armyMoveOnce(ElectricPowerPlantPicture);
+                         std::string value = StringUtils::format("R型坦克\n造价60$");
+                         RightMenuText->setString(value);
                          break;
                      }
                          
@@ -128,6 +134,8 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                          this->addChild(ElectricPowerPlantPicture,1);
                          ElectricPowerPlantPicture->setOpacity(140);
                          armyMoveOnce(ElectricPowerPlantPicture);
+                         std::string value = StringUtils::format("T型坦克\n造价60$");
+                         RightMenuText->setString(value);
                          break;
                      }
                          
@@ -162,6 +170,8 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                          this->addChild(ElectricPowerPlantPicture,1);
                          ElectricPowerPlantPicture->setOpacity(140);
                          armyMoveOnce(ElectricPowerPlantPicture);
+                         std::string value = StringUtils::format("特种兵\n造价30$");
+                         RightMenuText->setString(value);
                          break;
                      }
                          
@@ -187,6 +197,8 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                          this->addChild(ElectricPowerPlantPicture,1);
                          ElectricPowerPlantPicture->setOpacity(140);
                          armyMoveOnce(ElectricPowerPlantPicture);
+                         std::string value = StringUtils::format("核弹井\n造价400$");
+                         RightMenuText->setString(value);
                          break;
                      }
                          
@@ -256,6 +268,8 @@ void GameScene::commonGamePictureLoading()
                 this->addChild(ElectricPowerPlantPicture,1);
                 ElectricPowerPlantPicture->setOpacity(140);
                 electricPowerPlantMoveOnce(ElectricPowerPlantPicture);
+                std::string value = StringUtils::format("电厂\n造价50$");
+                RightMenuText->setString(value);
                 break;
             }
 
@@ -280,6 +294,8 @@ void GameScene::commonGamePictureLoading()
                  this->addChild(ElectricPowerPlantPicture,1);
                  ElectricPowerPlantPicture->setOpacity(140);
                  refineryMoveOnce(ElectricPowerPlantPicture);
+                 std::string value = StringUtils::format("矿场\n造价60$");
+                 RightMenuText->setString(value);
                  break;
              }
                  
@@ -304,6 +320,8 @@ void GameScene::commonGamePictureLoading()
                  this->addChild(ElectricPowerPlantPicture,1);
                  ElectricPowerPlantPicture->setOpacity(140);
                  warFactoryMoveOnce(ElectricPowerPlantPicture);
+                 std::string value = StringUtils::format("战车工厂\n造价150$");
+                 RightMenuText->setString(value);
                  break;
              }
                  
@@ -328,6 +346,8 @@ void GameScene::commonGamePictureLoading()
                  this->addChild(ElectricPowerPlantPicture,1);
                  ElectricPowerPlantPicture->setOpacity(140);
                  armyMoveOnce(ElectricPowerPlantPicture);
+                 std::string value = StringUtils::format("大兵\n造价20$");
+                 RightMenuText->setString(value);
                  break;
              }
                  
@@ -352,6 +372,8 @@ void GameScene::commonGamePictureLoading()
                  this->addChild(ElectricPowerPlantPicture,1);
                  ElectricPowerPlantPicture->setOpacity(140);
                  armyMoveOnce(ElectricPowerPlantPicture);
+                 std::string value = StringUtils::format("坦克\n造价50$");
+                 RightMenuText->setString(value);
                  break;
              }
                  
@@ -376,6 +398,8 @@ void GameScene::commonGamePictureLoading()
                  this->addChild(ElectricPowerPlantPicture,1);
                  ElectricPowerPlantPicture->setOpacity(140);
                  armyMoveOnce(ElectricPowerPlantPicture);
+                 std::string value = StringUtils::format("加农炮\n造价40$");
+                 RightMenuText->setString(value);
                  break;
              }
                  
@@ -400,6 +424,8 @@ void GameScene::commonGamePictureLoading()
                  this->addChild(ElectricPowerPlantPicture,1);
                  ElectricPowerPlantPicture->setOpacity(140);
                  barracksMoveOnce(ElectricPowerPlantPicture);
+                 std::string value = StringUtils::format("兵营\n造价100$");
+                 RightMenuText->setString(value);
                  break;
              }
                  

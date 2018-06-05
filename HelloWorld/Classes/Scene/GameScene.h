@@ -56,6 +56,8 @@ private:
     
     BaseAndFlags MyData;
     
+    Text* RightMenuText;
+    
 public:
     
     static cocos2d::Scene* createScene();

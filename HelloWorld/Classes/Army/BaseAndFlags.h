@@ -18,6 +18,8 @@ public:
     int BarracksNumber = 0;
     int WarFactoryNumber = 0;
     
+    int MyMoney = 100;
+    
     cocos2d::Point TheLastBarracksPosition;
     cocos2d::Point TheLastWarFactoryPosition;
     

@@ -70,22 +70,22 @@ bool GameScene::init()
     RightMenuPicture->setScale(1, 1.279);
     this->addChild(RightMenuPicture,3);
     
+    RightMenuText = Text::create(" ","fonts/Marker Felt.ttf",23);
+    RightMenuText->setPosition(Vec2(ScreenWidth-100, ScreenHeight/2+150));
+    this->addChild(RightMenuText,4);
+    
+    auto PromptLabel = Label::create("将建筑拖到矿\n场或者已有建\n筑物上即可取\n消建筑","fonts/Marker Felt.ttf",23);
+    PromptLabel->setPosition(Vec2(ScreenWidth-100, ScreenHeight/2-300));
+    this->addChild(PromptLabel,4);
+    
+    
+    
     /*
     BuildingsClass* TextSp ;
     MyData.MyBuildings.push_back(TextSp);               //Text
     this->addChild(TextSp);                             //this->removechild可以删除vector中的指针
     this->removeChild(MyData.MyBuildings[0]);
     */
-    /*
-    auto o = LoadingBar::create("GamePicture/HPBar.png");
-    o->setPercent(100);
-    o->setScale(0.08f);
-    o->setDirection(LoadingBar::Direction::LEFT);
-    o->setPosition(Vec2(VisibleSize.width/2, VisibleSize.height/2));
-    this->addChild(o,6);
-    */
-    
-    
     auto listener = EventListenerKeyboard::create();
     
     
