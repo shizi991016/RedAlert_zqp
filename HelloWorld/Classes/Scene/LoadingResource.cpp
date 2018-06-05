@@ -460,6 +460,141 @@ Action* GameScene::loadingElectricPowerPlantAction()
     return AllAction;
 }
 
+
+Action* GameScene::loadingMissileWellAction()
+{
+    auto BuildingAnimation = Animation::create();
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+    BuildingAnimation->setDelayPerUnit(3.0f/2.0f);
+    BuildingAnimation->setRestoreOriginalFrame(true);
+    auto BuildingAction = Animate::create(BuildingAnimation);
+    
+    auto NormalAnimation = Animation::create();
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
+    NormalAnimation->setDelayPerUnit(3.0f/3.0f);
+    NormalAnimation->setLoops(-1);
+    auto NormalAction = Animate::create(NormalAnimation);
+    auto AllAction = Sequence::createWithTwoActions(BuildingAction,NormalAction);
+    return AllAction;
+}
+
+Action* GameScene::loadingBarracksAction()
+{
+    auto BuildingAnimation = Animation::create();
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+    BuildingAnimation->setDelayPerUnit(3.0f/2.0f);
+    BuildingAnimation->setRestoreOriginalFrame(true);
+    auto BuildingAction = Animate::create(BuildingAnimation);
+    
+    auto NormalAnimation = Animation::create();
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
+    NormalAnimation->setDelayPerUnit(3.0f/3.0f);
+    NormalAnimation->setLoops(-1);
+    auto NormalAction = Animate::create(NormalAnimation);
+    auto AllAction = Sequence::createWithTwoActions(BuildingAction,NormalAction);
+    return AllAction;
+}
+
+
+Action* GameScene::loadingWarFactoryAction()
+{
+    auto BuildingAnimation = Animation::create();
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+    BuildingAnimation->setDelayPerUnit(3.0f/2.0f);
+    BuildingAnimation->setRestoreOriginalFrame(true);
+    auto BuildingAction = Animate::create(BuildingAnimation);
+    
+    auto NormalAnimation = Animation::create();
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
+    NormalAnimation->setDelayPerUnit(3.0f/3.0f);
+    NormalAnimation->setLoops(-1);
+    auto NormalAction = Animate::create(NormalAnimation);
+    auto AllAction = Sequence::createWithTwoActions(BuildingAction,NormalAction);
+    return AllAction;
+}
+
+
+Action* GameScene::loadingRefinerytAction()
+{
+    auto BuildingAnimation = Animation::create();
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_3.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_4.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_5.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_6.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_7.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_8.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_9.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_10.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+    BuildingAnimation->setDelayPerUnit(3.0f/2.0f);
+    BuildingAnimation->setRestoreOriginalFrame(true);
+    auto BuildingAction = Animate::create(BuildingAnimation);
+    
+    auto NormalAnimation = Animation::create();
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
+    NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
+    NormalAnimation->setDelayPerUnit(3.0f/3.0f);
+    NormalAnimation->setLoops(-1);
+    auto NormalAction = Animate::create(NormalAnimation);
+    auto AllAction = Sequence::createWithTwoActions(BuildingAction,NormalAction);
+    return AllAction;
+}
+
 void GameScene::rightMenuMoveBy(MoveBy* SpriteMoveBy,int CountryChoice)
 {
     RightMenuPicture                    ->runAction(SpriteMoveBy->clone());
@@ -490,4 +625,333 @@ void GameScene::rightMenuMoveBy(MoveBy* SpriteMoveBy,int CountryChoice)
     }
 }
 
+void GameScene::electricPowerPlantMoveOnce(Sprite* ArmyName)
+{
+    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    ArmyListener->setSwallowTouches(true);
+    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
+        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
+        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
+        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+            return true;
+        else
+            return false;
+    };
+    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
+        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());
+    };
+    
+    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
+        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
+        Size ArmySize = ArmyTarget->getContentSize();
+        int x = LocationInWorld.x - LocationInNode.x;
+        int y = LocationInWorld.y - LocationInNode.y;
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    this->removeChild(ArmyName);
+                    _eventDispatcher->removeEventListener(ArmyListener);
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                }
+            }
+        }
+        _eventDispatcher->removeEventListener(ArmyListener);
+        MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
+        MyData.IsTouchPositionAvailable = 1;
+        this->removeChild(ArmyName);
+        
+        if (MyData.IsTouchPositionAvailable)
+        {
+            armyBuildCallBack(loadingElectricPowerPlantAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+        }
+    };
+    //将触摸监听添加到eventDispacher中去
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
 
+}
+
+
+void GameScene::barracksMoveOnce(Sprite* ArmyName)
+{
+    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    ArmyListener->setSwallowTouches(true);
+    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
+        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
+        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
+        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+            return true;
+        else
+            return false;
+    };
+    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
+        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());
+    };
+    
+    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
+        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
+        Size ArmySize = ArmyTarget->getContentSize();
+        int x = LocationInWorld.x - LocationInNode.x;
+        int y = LocationInWorld.y - LocationInNode.y;
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    this->removeChild(ArmyName);
+                    _eventDispatcher->removeEventListener(ArmyListener);
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                }
+            }
+        }
+        _eventDispatcher->removeEventListener(ArmyListener);
+        MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
+        MyData.IsTouchPositionAvailable = 1;
+        this->removeChild(ArmyName);
+        
+        if (MyData.IsTouchPositionAvailable)
+        {
+            armyBuildCallBack(loadingBarracksAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+        }
+    };
+    //将触摸监听添加到eventDispacher中去
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
+}
+
+
+void GameScene::refineryMoveOnce(Sprite* ArmyName)
+{
+    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    ArmyListener->setSwallowTouches(true);
+    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
+        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
+        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
+        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+            return true;
+        else
+            return false;
+    };
+    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
+        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());
+    };
+    
+    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
+        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
+        Size ArmySize = ArmyTarget->getContentSize();
+        int x = LocationInWorld.x - LocationInNode.x;
+        int y = LocationInWorld.y - LocationInNode.y;
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    this->removeChild(ArmyName);
+                    _eventDispatcher->removeEventListener(ArmyListener);
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                }
+            }
+        }
+        _eventDispatcher->removeEventListener(ArmyListener);
+        MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
+        MyData.IsTouchPositionAvailable = 1;
+        this->removeChild(ArmyName);
+        
+        if (MyData.IsTouchPositionAvailable)
+        {
+            armyBuildCallBack(loadingRefinerytAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+        }
+    };
+    //将触摸监听添加到eventDispacher中去
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
+}
+
+
+void GameScene::warFactoryMoveOnce(Sprite* ArmyName)
+{
+    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    ArmyListener->setSwallowTouches(true);
+    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
+        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
+        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
+        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+            return true;
+        else
+            return false;
+    };
+    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
+        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());
+    };
+    
+    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
+        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
+        Size ArmySize = ArmyTarget->getContentSize();
+        int x = LocationInWorld.x - LocationInNode.x;
+        int y = LocationInWorld.y - LocationInNode.y;
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    this->removeChild(ArmyName);
+                    _eventDispatcher->removeEventListener(ArmyListener);
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                }
+            }
+        }
+        _eventDispatcher->removeEventListener(ArmyListener);
+        MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
+        MyData.IsTouchPositionAvailable = 1;
+        this->removeChild(ArmyName);
+        
+        if (MyData.IsTouchPositionAvailable)
+        {
+            armyBuildCallBack(loadingWarFactoryAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+        }
+    };
+    //将触摸监听添加到eventDispacher中去
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
+}
+
+
+void GameScene::missileWellMoveOnce(Sprite* ArmyName)
+{
+    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    ArmyListener->setSwallowTouches(true);
+    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
+        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
+        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
+        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+            return true;
+        else
+            return false;
+    };
+    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
+        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());
+    };
+    
+    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
+    {
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
+        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
+        Size ArmySize = ArmyTarget->getContentSize();
+        int x = LocationInWorld.x - LocationInNode.x;
+        int y = LocationInWorld.y - LocationInNode.y;
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    this->removeChild(ArmyName);
+                    _eventDispatcher->removeEventListener(ArmyListener);
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i <= ArmySize.width; i++)
+        {
+            for (int j = 0; j <= ArmySize.height; j++)
+            {
+                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                {
+                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                }
+            }
+        }
+        _eventDispatcher->removeEventListener(ArmyListener);
+        MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
+        MyData.IsTouchPositionAvailable = 1;
+        this->removeChild(ArmyName);
+        
+        if (MyData.IsTouchPositionAvailable)
+        {
+            armyBuildCallBack(loadingMissileWellAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+        }
+    };
+    //将触摸监听添加到eventDispacher中去
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
+    
+}
