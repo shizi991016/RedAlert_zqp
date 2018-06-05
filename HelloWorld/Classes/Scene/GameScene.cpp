@@ -30,6 +30,7 @@ bool GameScene::init()
     VisibleSize = Director::getInstance()->getVisibleSize();
     Vec2 Origin = Director::getInstance()->getVisibleOrigin();
     
+    MyData.MyCountryChoice = CountryChoice;
     
     ScreenWidth = VisibleSize.width;
     ScreenHeight = VisibleSize.height;
@@ -152,6 +153,92 @@ void GameScene::update(float delta)
         keyPressedDuration(downArrow);
     }
     this->setViewpointCenter(Camera->getPosition());
+    
+    if (MyData.RefineryNumber <= 0 || MyData.ElectricPowerPlantNumber <= 0)
+    {
+        CommonCannonButton->setTouchEnabled(false);
+        CommonBarracksButton->setTouchEnabled(false);
+        CommonSoldierButton->setTouchEnabled(false);
+        CommonTankButton->setTouchEnabled(false);
+        CommonWarFactoryButton->setTouchEnabled(false);
+        switch (MyData.MyCountryChoice)
+        {
+            case 1:
+                OneJetButton->setTouchEnabled(false);
+                OneBattlePlaneButton->setTouchEnabled(false);
+                break;
+                
+            case 2:
+                TwoRTankButton->setTouchEnabled(false);
+                TwoTTankButton->setTouchEnabled(false);
+                break;
+                
+            case 3:
+                ThreeSoldierXButton->setTouchEnabled(false);
+                ThreeMissileWellButton->setTouchEnabled(false);
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    if (MyData.RefineryNumber <= 0)
+        CommonElectricPowerPlantButton->setTouchEnabled(false);
+    if (MyData.RefineryNumber > 0)
+        CommonElectricPowerPlantButton->setTouchEnabled(true);
+    
+    if (MyData.RefineryNumber > 0 && MyData.ElectricPowerPlantNumber > 0)
+    {
+        CommonCannonButton->setTouchEnabled(true);
+        CommonBarracksButton->setTouchEnabled(true);
+        CommonWarFactoryButton->setTouchEnabled(true);
+        switch (MyData.MyCountryChoice)
+        {
+            case 3:
+                ThreeMissileWellButton->setTouchEnabled(true);
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    if (MyData.RefineryNumber > 0 && MyData.ElectricPowerPlantNumber > 0 && MyData.WarFactoryNumber > 0)
+    {
+        CommonTankButton->setTouchEnabled(true);
+        switch (MyData.MyCountryChoice)
+        {
+            case 1:
+                OneBattlePlaneButton->setTouchEnabled(true);
+                OneJetButton->setTouchEnabled(true);
+                break;
+                
+            case 2:
+                TwoTTankButton->setTouchEnabled(true);
+                TwoRTankButton->setTouchEnabled(true);
+            default:
+                break;
+        }
+    }
+    
+    if (MyData.RefineryNumber > 0 && MyData.ElectricPowerPlantNumber > 0 && MyData.BarracksNumber > 0)
+    {
+        CommonSoldierButton->setEnabled(true);
+        switch (MyData.MyCountryChoice)
+        {
+            case 3:
+                ThreeSoldierXButton->setEnabled(true);
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    
+    
+    
 }
 
 bool GameScene::isKeyPressed(EventKeyboard::KeyCode keyCode)
@@ -217,7 +304,7 @@ void GameScene::keyPressedDuration(EventKeyboard::KeyCode code)
     auto CameraMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
     Camera->runAction(CameraMoveBy);
     auto RightMenuMoveByAction = MoveBy::create(0, Vec2(offsetX, offsetY));
-    rightMenuMoveBy(RightMenuMoveByAction,CountryChoice);
+    rightMenuMoveBy(RightMenuMoveByAction);
     //RightMenuPicture->runAction(RightMenuMoveBy);
     //auto CommonElectricPowerPlantMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
     //CommonElectricPowerPlantPicture->runAction(RightMenuMoveBy->clone());

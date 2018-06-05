@@ -11,10 +11,12 @@ public:
     
     int MyEdgeSelection;
     
-    int ElectricPowerPlantNumber;
-    int RefineryNumber;
-    int BarracksNumber;
-    int WarFactoryNumber;
+    int MyCountryChoice = 0;
+    
+    int ElectricPowerPlantNumber = 0;
+    int RefineryNumber = 0;
+    int BarracksNumber = 0;
+    int WarFactoryNumber = 0;
     
     cocos2d::Point TheLastBarracksPosition;
     cocos2d::Point TheLastWarFactoryPosition;

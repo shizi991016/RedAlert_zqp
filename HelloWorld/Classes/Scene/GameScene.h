@@ -55,7 +55,6 @@ private:
     Sprite* ThreeMissileWellPicture;
     
     BaseAndFlags MyData;
-    //int IsPositionHaveBuildings[3201][3201] = {0};
     
 public:
     
@@ -107,7 +106,7 @@ public:
     //Action* loadingSoldierXAction();
     Action* loadingMissileWellAction();
     
-    void rightMenuMoveBy(MoveBy* SpriteMoveBy,int CountryChoice);
+    void rightMenuMoveBy(MoveBy* SpriteMoveBy);
     
 };
 

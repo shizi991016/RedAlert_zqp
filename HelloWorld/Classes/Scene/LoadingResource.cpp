@@ -255,7 +255,7 @@ void GameScene::commonGamePictureLoading()
                 ElectricPowerPlantPicture->setScale(0.25f);
                 this->addChild(ElectricPowerPlantPicture,1);
                 ElectricPowerPlantPicture->setOpacity(140);
-                armyMoveOnce(ElectricPowerPlantPicture,loadingElectricPowerPlantAction());
+                electricPowerPlantMoveOnce(ElectricPowerPlantPicture);
                 break;
             }
 
@@ -279,7 +279,7 @@ void GameScene::commonGamePictureLoading()
                  ElectricPowerPlantPicture->setScale(0.25f);
                  this->addChild(ElectricPowerPlantPicture,1);
                  ElectricPowerPlantPicture->setOpacity(140);
-                 armyMoveOnce(ElectricPowerPlantPicture);
+                 refineryMoveOnce(ElectricPowerPlantPicture);
                  break;
              }
                  
@@ -303,7 +303,7 @@ void GameScene::commonGamePictureLoading()
                  ElectricPowerPlantPicture->setScale(0.25f);
                  this->addChild(ElectricPowerPlantPicture,1);
                  ElectricPowerPlantPicture->setOpacity(140);
-                 armyMoveOnce(ElectricPowerPlantPicture);
+                 warFactoryMoveOnce(ElectricPowerPlantPicture);
                  break;
              }
                  
@@ -399,7 +399,7 @@ void GameScene::commonGamePictureLoading()
                  ElectricPowerPlantPicture->setScale(0.25f);
                  this->addChild(ElectricPowerPlantPicture,1);
                  ElectricPowerPlantPicture->setOpacity(140);
-                 armyMoveOnce(ElectricPowerPlantPicture);
+                 barracksMoveOnce(ElectricPowerPlantPicture);
                  break;
              }
                  
@@ -595,7 +595,7 @@ Action* GameScene::loadingRefinerytAction()
     return AllAction;
 }
 
-void GameScene::rightMenuMoveBy(MoveBy* SpriteMoveBy,int CountryChoice)
+void GameScene::rightMenuMoveBy(MoveBy* SpriteMoveBy)
 {
     RightMenuPicture                    ->runAction(SpriteMoveBy->clone());
     CommonBarracksPicture               ->runAction(SpriteMoveBy->clone());
@@ -605,7 +605,7 @@ void GameScene::rightMenuMoveBy(MoveBy* SpriteMoveBy,int CountryChoice)
     CommonSoldierPicture                ->runAction(SpriteMoveBy->clone());
     CommonTankPicture                   ->runAction(SpriteMoveBy->clone());
     CommonWarFactoryPicture             ->runAction(SpriteMoveBy->clone());
-    switch (CountryChoice)
+    switch (MyData.MyCountryChoice)
     {
         case 1:
             OneBattlePlanePicture               ->runAction(SpriteMoveBy->clone());
@@ -684,6 +684,7 @@ void GameScene::electricPowerPlantMoveOnce(Sprite* ArmyName)
         if (MyData.IsTouchPositionAvailable)
         {
             armyBuildCallBack(loadingElectricPowerPlantAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+            MyData.ElectricPowerPlantNumber++;
         }
     };
     //将触摸监听添加到eventDispacher中去
@@ -751,6 +752,8 @@ void GameScene::barracksMoveOnce(Sprite* ArmyName)
         if (MyData.IsTouchPositionAvailable)
         {
             armyBuildCallBack(loadingBarracksAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+            MyData.BarracksNumber++;
+            MyData.TheLastBarracksPosition = MyData.LastTouchPosition;
         }
     };
     //将触摸监听添加到eventDispacher中去
@@ -817,6 +820,7 @@ void GameScene::refineryMoveOnce(Sprite* ArmyName)
         if (MyData.IsTouchPositionAvailable)
         {
             armyBuildCallBack(loadingRefinerytAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+            MyData.RefineryNumber++;
         }
     };
     //将触摸监听添加到eventDispacher中去
@@ -882,7 +886,10 @@ void GameScene::warFactoryMoveOnce(Sprite* ArmyName)
         
         if (MyData.IsTouchPositionAvailable)
         {
-            armyBuildCallBack(loadingWarFactoryAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+            armyBuildCallBack(loadingWarFactoryAction(),
+                              "CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
+            MyData.WarFactoryNumber++;
+            MyData.TheLastWarFactoryPosition = MyData.LastTouchPosition;
         }
     };
     //将触摸监听添加到eventDispacher中去
