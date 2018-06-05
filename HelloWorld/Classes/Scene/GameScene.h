@@ -57,6 +57,11 @@ private:
     BaseAndFlags MyData;
     
     Text* RightMenuText;
+    Text* PromptText;
+    
+    int TimeCount = 0;
+    
+    Text* MoneyText;
     
 public:
     

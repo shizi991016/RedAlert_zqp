@@ -74,10 +74,13 @@ bool GameScene::init()
     RightMenuText->setPosition(Vec2(ScreenWidth-100, ScreenHeight/2+150));
     this->addChild(RightMenuText,4);
     
-    auto PromptLabel = Label::create("将建筑拖到矿\n场或者已有建\n筑物上即可取\n消建筑","fonts/Marker Felt.ttf",23);
-    PromptLabel->setPosition(Vec2(ScreenWidth-100, ScreenHeight/2-300));
-    this->addChild(PromptLabel,4);
+    PromptText = Text::create("将建筑拖到矿\n场或者已有建\n筑物上即可取\n消建筑","fonts/Marker Felt.ttf",23);
+    PromptText->setPosition(Vec2(ScreenWidth-100, ScreenHeight/2-300));
+    this->addChild(PromptText,4);
     
+    MoneyText = Text::create(" ","fonts/Marker Felt.ttf",35);
+    MoneyText->setPosition(Vec2(50, ScreenHeight-50));
+    this->addChild(MoneyText,4);
     
     
     /*
@@ -134,6 +137,15 @@ void GameScene::menuCloseCallback(Ref* pSender)
 void GameScene::update(float delta)
 {
     Node::update(delta);
+    
+    TimeCount++;
+    if (TimeCount % 60 == 0)
+    {
+        MyData.MyMoney += 1 * MyData.RefineryNumber;
+        std::string value = StringUtils::format("%d $",MyData.MyMoney);
+        MoneyText->setString(value);
+    }
+    
     auto leftArrow =  EventKeyboard::KeyCode::KEY_A,  rightArrow =  EventKeyboard::KeyCode::KEY_D,
          upArrow   =  EventKeyboard::KeyCode::KEY_W,  downArrow  =  EventKeyboard::KeyCode::KEY_S;
     if(isKeyPressed(leftArrow))
@@ -153,6 +165,15 @@ void GameScene::update(float delta)
         keyPressedDuration(downArrow);
     }
     this->setViewpointCenter(Camera->getPosition());
+    
+    if (MyData.MyMoney < 60)
+    {
+        CommonRefineryButton->setTouchEnabled(false);
+    }
+    else
+    {
+        CommonRefineryButton->setTouchEnabled(true);
+    }
     
     if (MyData.RefineryNumber <= 0 || MyData.ElectricPowerPlantNumber <= 0)
     {
@@ -185,60 +206,177 @@ void GameScene::update(float delta)
     
     if (MyData.RefineryNumber <= 0)
         CommonElectricPowerPlantButton->setTouchEnabled(false);
+    
     if (MyData.RefineryNumber > 0)
-        CommonElectricPowerPlantButton->setTouchEnabled(true);
+    {
+        if (MyData.MyMoney > 50)
+        {
+            CommonElectricPowerPlantButton->setTouchEnabled(true);
+        }
+        else
+            CommonElectricPowerPlantButton->setTouchEnabled(false);
+    }
+    
     
     if (MyData.RefineryNumber > 0 && MyData.ElectricPowerPlantNumber > 0)
     {
-        CommonCannonButton->setTouchEnabled(true);
-        CommonBarracksButton->setTouchEnabled(true);
-        CommonWarFactoryButton->setTouchEnabled(true);
-        switch (MyData.MyCountryChoice)
+        if (MyData.MyMoney > 40)
         {
-            case 3:
-                ThreeMissileWellButton->setTouchEnabled(true);
+            CommonCannonButton->setTouchEnabled(true);
+        }
+        else
+        {
+            CommonCannonButton->setTouchEnabled(false);
+        }
+        
+        if (MyData.MyMoney > 100)
+        {
+            CommonBarracksButton->setTouchEnabled(true);
+        }
+        else
+        {
+            CommonBarracksButton->setTouchEnabled(false);
+        }
+        
+        if (MyData.MyMoney > 150)
+        {
+            CommonWarFactoryButton->setTouchEnabled(true);
+        }
+        else
+        {
+            CommonWarFactoryButton->setTouchEnabled(false);
+        }
+        
+        if (MyData.MyMoney > 400)
+        {
+            switch (MyData.MyCountryChoice)
+            {
+                case 3:
+                    ThreeMissileWellButton->setTouchEnabled(true);
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch (MyData.MyCountryChoice)
+            {
+                case 3:
+                    ThreeMissileWellButton->setTouchEnabled(false);
+                    break;
+                    
+                default:
                 break;
-                
-            default:
-                break;
+            }
+        }
+    
+        if (MyData.RefineryNumber > 0 && MyData.ElectricPowerPlantNumber > 0 && MyData.WarFactoryNumber > 0)
+        {
+            if (MyData.MyMoney > 50)
+            {
+                CommonTankButton->setTouchEnabled(true);
+            }
+            else
+            {
+                CommonTankButton->setTouchEnabled(false);
+            }
+        
+            if (MyData.MyMoney > 40)
+            {
+                switch (MyData.MyCountryChoice)
+                {
+                    case 1:
+                        OneJetButton->setTouchEnabled(true);
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (MyData.MyCountryChoice)
+                {
+                    case 1:
+                        OneJetButton->setTouchEnabled(false);
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
+        
+            if (MyData.MyMoney > 60)
+            {
+                switch (MyData.MyCountryChoice)
+                {
+                    case 1:
+                        OneBattlePlaneButton->setTouchEnabled(true);
+                        break;
+                    
+                    case 2:
+                        TwoTTankButton->setTouchEnabled(true);
+                        TwoRTankButton->setTouchEnabled(true);
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (MyData.MyCountryChoice)
+                {
+                    case 1:
+                        OneBattlePlaneButton->setTouchEnabled(false);
+                        break;
+                    
+                    case 2:
+                        TwoTTankButton->setTouchEnabled(false);
+                        TwoRTankButton->setTouchEnabled(false);
+                    default:
+                        break;
+                }
+            }
+        }
+    
+        if (MyData.RefineryNumber > 0 && MyData.ElectricPowerPlantNumber > 0 && MyData.BarracksNumber > 0)
+        {
+            if (MyData.MyMoney > 20)
+            {
+                CommonSoldierButton->setTouchEnabled(true);
+            }
+            else
+            {
+                CommonSoldierButton->setTouchEnabled(false);
+            }
+        
+            if (MyData.MyMoney > 30)
+            {
+                switch (MyData.MyCountryChoice)
+                {
+                    case 3:
+                        ThreeSoldierXButton->setTouchEnabled(true);
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (MyData.MyCountryChoice)
+                {
+                    case 3:
+                        ThreeSoldierXButton->setTouchEnabled(false);
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
         }
     }
-    
-    if (MyData.RefineryNumber > 0 && MyData.ElectricPowerPlantNumber > 0 && MyData.WarFactoryNumber > 0)
-    {
-        CommonTankButton->setTouchEnabled(true);
-        switch (MyData.MyCountryChoice)
-        {
-            case 1:
-                OneBattlePlaneButton->setTouchEnabled(true);
-                OneJetButton->setTouchEnabled(true);
-                break;
-                
-            case 2:
-                TwoTTankButton->setTouchEnabled(true);
-                TwoRTankButton->setTouchEnabled(true);
-            default:
-                break;
-        }
-    }
-    
-    if (MyData.RefineryNumber > 0 && MyData.ElectricPowerPlantNumber > 0 && MyData.BarracksNumber > 0)
-    {
-        CommonSoldierButton->setEnabled(true);
-        switch (MyData.MyCountryChoice)
-        {
-            case 3:
-                ThreeSoldierXButton->setEnabled(true);
-                break;
-                
-            default:
-                break;
-        }
-    }
-    
-    
-    
-    
 }
 
 bool GameScene::isKeyPressed(EventKeyboard::KeyCode keyCode)

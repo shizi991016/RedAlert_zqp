@@ -631,6 +631,10 @@ void GameScene::rightMenuMoveBy(MoveBy* SpriteMoveBy)
     CommonSoldierPicture                ->runAction(SpriteMoveBy->clone());
     CommonTankPicture                   ->runAction(SpriteMoveBy->clone());
     CommonWarFactoryPicture             ->runAction(SpriteMoveBy->clone());
+    RightMenuText                       ->runAction(SpriteMoveBy->clone());
+    PromptText                          ->runAction(SpriteMoveBy->clone());
+    MoneyText                           ->runAction(SpriteMoveBy->clone());
+    
     switch (MyData.MyCountryChoice)
     {
         case 1:
@@ -712,6 +716,7 @@ void GameScene::electricPowerPlantMoveOnce(Sprite* ArmyName)
             armyBuildCallBack(loadingElectricPowerPlantAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
             MyData.ElectricPowerPlantNumber++;
         }
+        MyData.MyMoney -= 50;
     };
     //将触摸监听添加到eventDispacher中去
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
@@ -781,6 +786,7 @@ void GameScene::barracksMoveOnce(Sprite* ArmyName)
             MyData.BarracksNumber++;
             MyData.TheLastBarracksPosition = MyData.LastTouchPosition;
         }
+        MyData.MyMoney -= 100;
     };
     //将触摸监听添加到eventDispacher中去
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
@@ -848,6 +854,7 @@ void GameScene::refineryMoveOnce(Sprite* ArmyName)
             armyBuildCallBack(loadingRefinerytAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
             MyData.RefineryNumber++;
         }
+        MyData.MyMoney -= 60;
     };
     //将触摸监听添加到eventDispacher中去
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
@@ -917,6 +924,7 @@ void GameScene::warFactoryMoveOnce(Sprite* ArmyName)
             MyData.WarFactoryNumber++;
             MyData.TheLastWarFactoryPosition = MyData.LastTouchPosition;
         }
+        MyData.MyMoney -= 150;
     };
     //将触摸监听添加到eventDispacher中去
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
@@ -983,6 +991,7 @@ void GameScene::missileWellMoveOnce(Sprite* ArmyName)
         {
             armyBuildCallBack(loadingMissileWellAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
         }
+        MyData.MyMoney -= 400;
     };
     //将触摸监听添加到eventDispacher中去
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
