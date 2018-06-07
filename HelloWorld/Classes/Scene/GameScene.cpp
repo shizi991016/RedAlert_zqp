@@ -89,18 +89,14 @@ bool GameScene::init()
     this->addChild(TextSp);                             //this->removechild可以删除vector中的指针
     this->removeChild(MyData.MyBuildings[0]);
     */
-    
-    
-    
-    
-    
-    
     auto listener = EventListenerKeyboard::create();
+    
     
     listener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event)
     {
         keys[keyCode] = true;
     };
+    
     
     listener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event)
     {
@@ -108,7 +104,7 @@ bool GameScene::init()
     };
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     
-
+    
     commonGamePictureLoading();
     countryChoiceSwitch(CountryChoice);
     
@@ -148,47 +144,6 @@ void GameScene::update(float delta)
         MyData.MyMoney += 1 * MyData.RefineryNumber;
         std::string value = StringUtils::format("%d $",MyData.MyMoney);
         MoneyText->setString(value);
-    }
-    
-    MyData.WarFactoryNumber         = MyData.MyWarFactory.size();
-    MyData.RefineryNumber           = MyData.MyRefinery.size();
-    MyData.BarracksNumber           = MyData.MyBarracks.size();
-    MyData.ElectricPowerPlantNumber = MyData.MyElectricPowerPlant.size();
-    
-    for (int i = 0; i < MyData.MyWarFactory.size(); i++)
-    {
-        if (MyData.MyWarFactory[i]->getLifeValue() <= 0)
-        {
-            MyData.MyWarFactory.erase(MyData.MyWarFactory.begin()+i);
-            this->removeChild(MyData.MyWarFactory[i],true);
-        }
-    }
-    
-    for (int i = 0; i < MyData.MyBarracks.size(); i++)
-    {
-        if (MyData.MyBarracks[i]->getLifeValue() <= 0)
-        {
-            MyData.MyBarracks.erase(MyData.MyBarracks.begin()+i);
-            this->removeChild(MyData.MyBarracks[i],true);
-        }
-    }
-    
-    for (int i = 0; i < MyData.MyElectricPowerPlant.size(); i++)
-    {
-        if (MyData.MyElectricPowerPlant[i]->getLifeValue() <= 0)
-        {
-            MyData.MyElectricPowerPlant.erase(MyData.MyElectricPowerPlant.begin()+i);
-            this->removeChild(MyData.MyElectricPowerPlant[i],true);
-        }
-    }
-    
-    for (int i = 0; i < MyData.MyRefinery.size(); i++)
-    {
-        if (MyData.MyRefinery[i]->getLifeValue() <= 0)
-        {
-            MyData.MyRefinery.erase(MyData.MyRefinery.begin()+i);
-            this->removeChild(MyData.MyRefinery[i],true);
-        }
     }
     
     auto leftArrow =  EventKeyboard::KeyCode::KEY_A,  rightArrow =  EventKeyboard::KeyCode::KEY_D,
@@ -650,15 +605,6 @@ void GameScene::armyMoveOnce(Sprite* ArmyName,Action* ArmyAction)
     //将触摸监听添加到eventDispacher中去
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
 }
-
-
-
-
-
-
-
-
-
 
 
 

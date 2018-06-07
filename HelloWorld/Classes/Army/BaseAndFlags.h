@@ -18,7 +18,7 @@ public:
     int BarracksNumber = 0;
     int WarFactoryNumber = 0;
     
-    int MyMoney = 1000;
+    int MyMoney = 100;
     
     cocos2d::Point TheLastBarracksPosition;
     cocos2d::Point TheLastWarFactoryPosition;
@@ -27,10 +27,7 @@ public:
     bool IsTouchPositionAvailable = 0;
     
     std::vector<BuildingsClass*> MyBuildings;//用于在update函数中遍历数组，HP<=0删除
-    std::vector<ElectricPowerPlantClass*> MyElectricPowerPlant;
-    std::vector<RefineryClass*> MyRefinery;
-    std::vector<BarracksClass*> MyBarracks;
-    std::vector<WarFactoryClass*> MyWarFactory;
+    
 private:
     
 };
