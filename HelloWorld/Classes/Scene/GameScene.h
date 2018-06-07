@@ -58,10 +58,11 @@ private:
     
     Text* RightMenuText;
     Text* PromptText;
+    Text* MoneyText;
     
     int TimeCount = 0;
     
-    Text* MoneyText;
+    
     
 public:
     
@@ -98,6 +99,13 @@ public:
     
     
     void armyBuildCallBack(Action* BuildingAction,const std::string& FileName);
+    void electricPowerPlantBuildCallBack();
+    void refineryBuildCallBack();
+    void barracksBuildCallBack();
+    void warFactoryBuildCallBack();
+    
+    
+    
     
     Action* loadingElectricPowerPlantAction();
     Action* loadingBarracksAction();
@@ -114,6 +122,16 @@ public:
     Action* loadingMissileWellAction();
     
     void rightMenuMoveBy(MoveBy* SpriteMoveBy);
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 };
 

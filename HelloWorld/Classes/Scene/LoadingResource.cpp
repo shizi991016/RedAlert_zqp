@@ -455,6 +455,7 @@ void GameScene::commonGamePictureLoading()
 
 Action* GameScene::loadingElectricPowerPlantAction()
 {
+    /*
     auto BuildingAnimation = Animation::create();
     BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_1.png");
     BuildingAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_2.png");
@@ -473,17 +474,26 @@ Action* GameScene::loadingElectricPowerPlantAction()
     BuildingAnimation->setDelayPerUnit(3.0f/2.0f);
     BuildingAnimation->setRestoreOriginalFrame(true);
     auto BuildingAction = Animate::create(BuildingAnimation);
-    
+    */
     auto NormalAnimation = Animation::create();
+    /*
     NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_11.png");
     NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_12.png");
     NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_13.png");
     NormalAnimation->addSpriteFrameWithFile("CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_14.png");
     NormalAnimation->setDelayPerUnit(3.0f/3.0f);
     NormalAnimation->setLoops(-1);
+     */
+    NormalAnimation->addSpriteFrameWithFile("TwoBattlePlane_action/OneBattlePlane_action_1.png");
+    NormalAnimation->addSpriteFrameWithFile("TwoBattlePlane_action/OneBattlePlane_action_2.png");
+    NormalAnimation->setRestoreOriginalFrame(true);
+    NormalAnimation->setLoops(-1);
+    NormalAnimation->setDelayPerUnit(3.0f/3.0f);
+    
     auto NormalAction = Animate::create(NormalAnimation);
-    auto AllAction = Sequence::createWithTwoActions(BuildingAction,NormalAction);
-    return AllAction;
+    //auto AllAction = Sequence::createWithTwoActions(BuildingAction,NormalAction);
+    //return AllAction;
+    return NormalAction;
 }
 
 
@@ -713,8 +723,7 @@ void GameScene::electricPowerPlantMoveOnce(Sprite* ArmyName)
         
         if (MyData.IsTouchPositionAvailable)
         {
-            armyBuildCallBack(loadingElectricPowerPlantAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
-            MyData.ElectricPowerPlantNumber++;
+            electricPowerPlantBuildCallBack();
         }
         MyData.MyMoney -= 50;
     };
@@ -782,8 +791,7 @@ void GameScene::barracksMoveOnce(Sprite* ArmyName)
         
         if (MyData.IsTouchPositionAvailable)
         {
-            armyBuildCallBack(loadingBarracksAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
-            MyData.BarracksNumber++;
+            barracksBuildCallBack();
             MyData.TheLastBarracksPosition = MyData.LastTouchPosition;
         }
         MyData.MyMoney -= 100;
@@ -851,8 +859,7 @@ void GameScene::refineryMoveOnce(Sprite* ArmyName)
         
         if (MyData.IsTouchPositionAvailable)
         {
-            armyBuildCallBack(loadingRefinerytAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
-            MyData.RefineryNumber++;
+            refineryBuildCallBack();
         }
         MyData.MyMoney -= 60;
     };
@@ -919,9 +926,7 @@ void GameScene::warFactoryMoveOnce(Sprite* ArmyName)
         
         if (MyData.IsTouchPositionAvailable)
         {
-            armyBuildCallBack(loadingWarFactoryAction(),
-                              "CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
-            MyData.WarFactoryNumber++;
+            warFactoryBuildCallBack();
             MyData.TheLastWarFactoryPosition = MyData.LastTouchPosition;
         }
         MyData.MyMoney -= 150;
@@ -996,4 +1001,97 @@ void GameScene::missileWellMoveOnce(Sprite* ArmyName)
     //将触摸监听添加到eventDispacher中去
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
     
+}
+
+void GameScene::electricPowerPlantBuildCallBack()
+{
+    auto BuildingSprite = ElectricPowerPlantClass::createWithSpriteFileName("Common/camera.png");
+    BuildingSprite->setPosition(MyData.LastTouchPosition);
+    this->addChild(BuildingSprite);
+    BuildingSprite->runAction(loadingElectricPowerPlantAction());
+    MyData.IsTouchPositionAvailable = 0;
+    MyData.MyElectricPowerPlant.push_back(BuildingSprite);
+    auto BuildingHPBar = LoadingBar::create("GamePicture/HPBar.png");
+    BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
+    BuildingHPBar->setScale(0.08f);
+    BuildingHPBar->setPercent(100);
+    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+100));
+    this->addChild(BuildingHPBar,2);
+    auto HPBarDelay = DelayTime::create(21.0f);
+    auto HPBarFadeIn = FadeIn::create(0.0f);
+    auto HPBarFadeOut = FadeOut::create(0.0f);
+    auto HPBarSequence = Sequence::create(HPBarFadeOut,HPBarDelay,HPBarFadeIn,NULL);
+    BuildingHPBar->runAction(HPBarSequence);
+    BuildingSprite->setHP(BuildingHPBar);
+    BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
+}
+
+void GameScene::refineryBuildCallBack()
+{
+    auto BuildingSprite = RefineryClass::createWithSpriteFileName("Common/camera.png");
+    BuildingSprite->setPosition(MyData.LastTouchPosition);
+    this->addChild(BuildingSprite);
+    BuildingSprite->runAction(loadingRefinerytAction());
+    MyData.IsTouchPositionAvailable = 0;
+    MyData.MyRefinery.push_back(BuildingSprite);
+    auto BuildingHPBar = LoadingBar::create("GamePicture/HPBar.png");
+    BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
+    BuildingHPBar->setScale(0.08f);
+    BuildingHPBar->setPercent(100);
+    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+100));
+    this->addChild(BuildingHPBar,2);
+    auto HPBarDelay = DelayTime::create(21.0f);
+    auto HPBarFadeIn = FadeIn::create(0.0f);
+    auto HPBarFadeOut = FadeOut::create(0.0f);
+    auto HPBarSequence = Sequence::create(HPBarFadeOut,HPBarDelay,HPBarFadeIn,NULL);
+    BuildingHPBar->runAction(HPBarSequence);
+    BuildingSprite->setHP(BuildingHPBar);
+    BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
+}
+
+void GameScene::barracksBuildCallBack()
+{
+    auto BuildingSprite = BarracksClass::createWithSpriteFileName("Common/camera.png");
+    BuildingSprite->setPosition(MyData.LastTouchPosition);
+    this->addChild(BuildingSprite);
+    BuildingSprite->runAction(loadingBarracksAction());
+    MyData.IsTouchPositionAvailable = 0;
+    MyData.MyBarracks.push_back(BuildingSprite);
+    auto BuildingHPBar = LoadingBar::create("GamePicture/HPBar.png");
+    BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
+    BuildingHPBar->setScale(0.08f);
+    BuildingHPBar->setPercent(100);
+    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+100));
+    this->addChild(BuildingHPBar,2);
+    auto HPBarDelay = DelayTime::create(21.0f);
+    auto HPBarFadeIn = FadeIn::create(0.0f);
+    auto HPBarFadeOut = FadeOut::create(0.0f);
+    auto HPBarSequence = Sequence::create(HPBarFadeOut,HPBarDelay,HPBarFadeIn,NULL);
+    BuildingHPBar->runAction(HPBarSequence);
+    BuildingSprite->setHP(BuildingHPBar);
+    BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
+}
+
+
+void GameScene::warFactoryBuildCallBack()
+{
+    auto BuildingSprite = WarFactoryClass::createWithSpriteFileName("Common/camera.png");
+    BuildingSprite->setPosition(MyData.LastTouchPosition);
+    this->addChild(BuildingSprite);
+    BuildingSprite->runAction(loadingWarFactoryAction());
+    MyData.IsTouchPositionAvailable = 0;
+    MyData.MyWarFactory.push_back(BuildingSprite);
+    auto BuildingHPBar = LoadingBar::create("GamePicture/HPBar.png");
+    BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
+    BuildingHPBar->setScale(0.08f);
+    BuildingHPBar->setPercent(100);
+    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+100));
+    this->addChild(BuildingHPBar,2);
+    auto HPBarDelay = DelayTime::create(21.0f);
+    auto HPBarFadeIn = FadeIn::create(0.0f);
+    auto HPBarFadeOut = FadeOut::create(0.0f);
+    auto HPBarSequence = Sequence::create(HPBarFadeOut,HPBarDelay,HPBarFadeIn,NULL);
+    BuildingHPBar->runAction(HPBarSequence);
+    BuildingSprite->setHP(BuildingHPBar);
+    BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
 }
