@@ -87,39 +87,43 @@ public:
     void commonGamePictureLoading();
     
     void armyMoveOnce(Sprite* ArmyName);
-    void armyMoveOnce(Sprite* ArmyName,Action* ArmyAction);
+    //void armyMoveOnce(Sprite* ArmyName,Action* ArmyAction);
     //我曾经想把所有的东西都由这一个函数加进去，但是函数参数传递中Action的Target会出现错误，所以我放弃了这个方法
     //迫不得已只能多次重写armyMoveOnce函数来支持不同的建筑物动画
     //以及多次重写loadingAction加载建筑物动画
-    void electricPowerPlantMoveOnce(Sprite* ArmyName);
-    void barracksMoveOnce(Sprite* ArmyName);
-    void refineryMoveOnce(Sprite* ArmyName);
-    void warFactoryMoveOnce(Sprite* ArmyName);
-    void missileWellMoveOnce(Sprite* ArmyName);
+    
     
     
     void armyBuildCallBack(Action* BuildingAction,const std::string& FileName);
+    
+    
+    void electricPowerPlantMoveOnce(Sprite* ArmyName);
     void electricPowerPlantBuildCallBack();
-    void refineryBuildCallBack();
-    void barracksBuildCallBack();
-    void warFactoryBuildCallBack();
-    
-    
-    
-    
     Action* loadingElectricPowerPlantAction();
-    Action* loadingBarracksAction();
-    //Action* loadingCannonAction();加农炮另写
+    
+    void refineryMoveOnce(Sprite* ArmyName);
+    void refineryBuildCallBack();
     Action* loadingRefinerytAction();
-    //Action* loadingSoldierAction();
-    //Action* loadingTankAction();
+    
+    void barracksMoveOnce(Sprite* ArmyName);
+    void barracksBuildCallBack();
+    Action* loadingBarracksAction();
+    
+    void warFactoryMoveOnce(Sprite* ArmyName);
+    void warFactoryBuildCallBack();
     Action* loadingWarFactoryAction();
-    //Action* loadingBattlePlaneAction();
-    //Action* loadingJetAction();
-    //Action* loadingRTankAction();
-   // Action* loadingTTankAction();
-    //Action* loadingSoldierXAction();
+    
+    void missileWellMoveOnce(Sprite* ArmyName);
+    void missileWellBuildCallBack();
     Action* loadingMissileWellAction();
+    
+    
+    void tankBuildCallBack();
+    Action* TankMoveUp(int ActionTime);
+    Action* TankMoveLeft(int ActionTime);
+    Action* TankMoveRight(int ActionTime);
+    Action* TankMoveDown(int ActionTime);
+    
     
     void rightMenuMoveBy(MoveBy* SpriteMoveBy);
   
@@ -127,12 +131,11 @@ public:
     
     
     
-    
-    
-    
-    
-    
-    
 };
 
 #endif /* GameScene_h */
+
+
+
+
+

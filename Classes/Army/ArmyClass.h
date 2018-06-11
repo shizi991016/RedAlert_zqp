@@ -287,4 +287,115 @@ private:
 };
 
 
+class TankClass : public cocos2d::Sprite
+{
+public:
+    void setLifeValue(int LifeValue)
+    {
+        _LifeValue = LifeValue;
+    }
+    
+    int getLifeValue()
+    {
+        return _LifeValue;
+    }
+    
+    void setHP(LoadingBar* HP)
+    {
+        _HP = HP;
+    }
+    
+    LoadingBar* getHP()
+    {
+        return _HP;
+    }
+    
+    void setHPInterval(float HPInterval)
+    {
+        _HPInterval = HPInterval;
+    }
+    
+    float getHPInterval()
+    {
+        return _HPInterval;
+    }
+    
+    bool isBuildingDestoried()
+    {
+        return (_LifeValue <= 0);
+    }
+    
+    static TankClass* createWithSpriteFileName(const std::string& FileName)
+    {
+        TankClass* Building = new TankClass();
+        if (Building && Building->initWithFile(FileName))
+        {
+            Building->autorelease();
+            return Building;
+        }
+        CC_SAFE_DELETE(Building);
+        return nullptr;
+    }
+private:
+    int _LifeValue = 100;
+    LoadingBar* _HP;
+    float _HPInterval;
+};
+
+class MissileWellClass : public cocos2d::Sprite
+{
+public:
+    void setLifeValue(int LifeValue)
+    {
+        _LifeValue = LifeValue;
+    }
+    
+    int getLifeValue()
+    {
+        return _LifeValue;
+    }
+    
+    void setHP(LoadingBar* HP)
+    {
+        _HP = HP;
+    }
+    
+    LoadingBar* getHP()
+    {
+        return _HP;
+    }
+    
+    void setHPInterval(float HPInterval)
+    {
+        _HPInterval = HPInterval;
+    }
+    
+    float getHPInterval()
+    {
+        return _HPInterval;
+    }
+    
+    bool isBuildingDestoried()
+    {
+        return (_LifeValue <= 0);
+    }
+    
+    static MissileWellClass* createWithSpriteFileName(const std::string& FileName)
+    {
+        MissileWellClass* Building = new MissileWellClass();
+        if (Building && Building->initWithFile(FileName))
+        {
+            Building->autorelease();
+            return Building;
+        }
+        CC_SAFE_DELETE(Building);
+        return nullptr;
+    }
+private:
+    int _LifeValue = 100;
+    LoadingBar* _HP;
+    float _HPInterval;
+};
+
+
 #endif /* ArmyClass_h */

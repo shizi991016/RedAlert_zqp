@@ -31,6 +31,12 @@ public:
     std::vector<RefineryClass*> MyRefinery;
     std::vector<BarracksClass*> MyBarracks;
     std::vector<WarFactoryClass*> MyWarFactory;
+    std::vector<MissileWellClass*> MyMissileWell;
+    
+    Point ArmyFirstTouchPosition;
+    Point ArmyLastTouchPosition;
+    
+    
 private:
     
 };
