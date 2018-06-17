@@ -8,8 +8,8 @@
 class chat_message
 {
 public:
-    enum { header_length = 4 };
-    enum { max_body_length = 512 };
+    enum { header_length = 4};
+    enum { max_body_length = 512};
     
     chat_message()
     : body_length_(0)
@@ -28,15 +28,15 @@ public:
     
     size_t length() const
     {
-        return header_length + body_length_;
+        return body_length_ + header_length;
     }
     
-    const char* body() const
+    const char * body() const
     {
-        return data_ + header_length;
+        return data_ + header_length ;
     }
     
-    char* body()
+    char * body()
     {
         return data_ + header_length;
     }
@@ -73,32 +73,14 @@ public:
     {
         using namespace std;
         char header[header_length + 1] = "";
-        sprintf(header, "%4d", body_length_);
+        sprintf(header, "%4d",body_length_);
         memcpy(data_, header, header_length);
     }
     
 private:
     char data_[header_length + max_body_length];
     size_t body_length_;
-    
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
