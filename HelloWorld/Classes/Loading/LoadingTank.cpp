@@ -9,9 +9,10 @@
 
 void GameScene::tankBuildCallBack()
 {
-    auto BuildingSprite = TankClass::createWithSpriteFileName("ArmyAction/CommonTank_action/CommonTank_action_up_1.png");
+    auto BuildingSprite = BuildingsClass::createWithSpriteFileName("ArmyAction/CommonTank_action/CommonTank_action_up_1.png");
     BuildingSprite->setPosition(Vec2(MyData.TheLastWarFactoryPosition.x, MyData.TheLastWarFactoryPosition.y));
     this->addChild(BuildingSprite,2);
+    MyData.MyTank.push_back(BuildingSprite);
     auto BuildingHPBar = LoadingBar::create("GamePicture/HPBar.png");
     BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
     BuildingHPBar->setScale(0.07f);
@@ -20,6 +21,9 @@ void GameScene::tankBuildCallBack()
     this->addChild(BuildingHPBar,2);
     BuildingSprite->setHP(BuildingHPBar);
     BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
+    MyData.TagNumber += 2;
+    BuildingSprite->setTag(MyData.TagNumber-1);
+    BuildingHPBar->setTag(MyData.TagNumber);
     
     auto FinishBuildAction = MoveBy::create(1.0f, Vec2(0, 100));
     auto FinishBuildAnimation = Animation::create();
@@ -31,6 +35,8 @@ void GameScene::tankBuildCallBack()
     auto FinishBuildSpawn = Spawn::createWithTwoActions(FinishBuildAnimate, FinishBuildAction);
     BuildingSprite->runAction(FinishBuildSpawn);
     BuildingHPBar->runAction(FinishBuildAction->clone());
+    
+    MyData.MyMoney -= 40;
     
     auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
     ArmyListener->setSwallowTouches(true);
@@ -49,75 +55,95 @@ void GameScene::tankBuildCallBack()
     
     ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
     {
-        /*
-        auto ArmyTarget = static_cast<BuildingsClass*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point ArmyPosition = ArmyTarget->getPosition();
-        if (((ArmyPosition.x-MyData.ArmyFirstTouchPosition.x) *
-             (ArmyPosition.x-MyData.ArmyFirstTouchPosition.x))< 150*150 &&
-            ((ArmyPosition.y-MyData.ArmyFirstTouchPosition.y) *
-             (ArmyPosition.y-MyData.ArmyFirstTouchPosition.y))< 150*150)
-        {
-            ArmyTarget->setLifeValue(getLifeValue()-10);
-        }
-        */
-        //回去看继承，今天不写了
-        
-        
-        //以下注释是正常版本的移动
-        //之上的是攻击尝试
-        /*
-        BuildingSprite->stopAllActions();
-        BuildingHPBar->stopAllActions();
         MyData.ArmyLastTouchPosition = this->convertToNodeSpace(touch->getLocation());
-        double DistanceX2 = (MyData.ArmyLastTouchPosition.x - MyData.ArmyFirstTouchPosition.x)
-        * (MyData.ArmyLastTouchPosition.x - MyData.ArmyFirstTouchPosition.x);
-        double DistanceY2 = (MyData.ArmyLastTouchPosition.y - MyData.ArmyFirstTouchPosition.y)
-        * (MyData.ArmyLastTouchPosition.y - MyData.ArmyFirstTouchPosition.y);
-        double AbsoluteDistanceX = sqrt(DistanceX2);
-        double AbsoluteDistanceY = sqrt(DistanceY2);
-        double DistanceX = MyData.ArmyLastTouchPosition.x - MyData.ArmyFirstTouchPosition.x;
-        double DistanceY = MyData.ArmyLastTouchPosition.y - MyData.ArmyFirstTouchPosition.y;
-        auto MoveActionX = MoveBy::create(AbsoluteDistanceX/60, Vec2(DistanceX, 0));
-        auto MoveActionY = MoveBy::create(AbsoluteDistanceY/60, Vec2(0, DistanceY));
-        
-        
-        if (DistanceX <= 0)
+        if (MyData.IsPositionHaveArmyAndTag
+            [(int)MyData.ArmyLastTouchPosition.x][(int)MyData.ArmyLastTouchPosition.y])
         {
-            auto SpawnActionX = Spawn::createWithTwoActions(MoveActionX, (FiniteTimeAction*)TankMoveLeft(AbsoluteDistanceX/60));
-            if (DistanceY <= 0)
+            if ((MyData.ArmyLastTouchPosition.x-MyData.ArmyFirstTouchPosition.x) *
+                (MyData.ArmyLastTouchPosition.x-MyData.ArmyFirstTouchPosition.x) <= 150*150 &&
+                (MyData.ArmyLastTouchPosition.y-MyData.ArmyFirstTouchPosition.y) *
+                (MyData.ArmyLastTouchPosition.y-MyData.ArmyFirstTouchPosition.y) <= 150*150)
             {
-                auto SpawnActionY = Spawn::createWithTwoActions(MoveActionY, (FiniteTimeAction*)TankMoveDown(AbsoluteDistanceY/60));
-                auto SequenceAction = Sequence::createWithTwoActions(SpawnActionX, SpawnActionY);
-                BuildingSprite->runAction(SequenceAction);
-                BuildingHPBar->runAction(Sequence::createWithTwoActions(MoveActionX->clone(), MoveActionY->clone()));
-            }
-            else
-            {
-                auto SpawnActionY = Spawn::createWithTwoActions(MoveActionY, (FiniteTimeAction*)TankMoveUp(AbsoluteDistanceY/60));
-                auto SequenceAction = Sequence::createWithTwoActions(SpawnActionX, SpawnActionY);
-                BuildingSprite->runAction(SequenceAction);
-                BuildingHPBar->runAction(Sequence::createWithTwoActions(MoveActionX->clone(), MoveActionY->clone()));
+                BuildingsClass* BuildingSprite = (BuildingsClass*)this->getChildByTag
+                (MyData.IsPositionHaveArmyAndTag
+                 [(int)MyData.ArmyLastTouchPosition.x][(int)MyData.ArmyLastTouchPosition.y]);
+                BuildingSprite->setLifeValue(BuildingSprite->getLifeValue()-20);
+                LoadingBar* HPBar = (LoadingBar*)this->getChildByTag(BuildingSprite->getTag()+1);
+                HPBar->setPercent(HPBar->getPercent()-20);
             }
         }
         else
         {
-            auto SpawnActionX = Spawn::createWithTwoActions(MoveActionX, (FiniteTimeAction*)TankMoveRight(AbsoluteDistanceX/60));
-            if (DistanceY <= 0)
+            if (MyData.IsPositionHaveBuildings
+                [(int)MyData.ArmyLastTouchPosition.x][(int)MyData.ArmyLastTouchPosition.y] == 1)
             {
-                auto SpawnActionY = Spawn::createWithTwoActions(MoveActionY, (FiniteTimeAction*)TankMoveDown(AbsoluteDistanceY/60));
-                auto SequenceAction = Sequence::createWithTwoActions(SpawnActionX, SpawnActionY);
-                BuildingSprite->runAction(SequenceAction);
-                BuildingHPBar->runAction(Sequence::createWithTwoActions(MoveActionX->clone(), MoveActionY->clone()));
+                if ((MyData.ArmyLastTouchPosition.x-MyData.ArmyFirstTouchPosition.x) *
+                    (MyData.ArmyLastTouchPosition.x-MyData.ArmyFirstTouchPosition.x) <= 150*150 &&
+                    (MyData.ArmyLastTouchPosition.y-MyData.ArmyFirstTouchPosition.y) *
+                    (MyData.ArmyLastTouchPosition.y-MyData.ArmyFirstTouchPosition.y) <= 150*150)
+                {
+                    BuildingsClass* BuildingSprite = (BuildingsClass*)this->getChildByTag
+                    (MyData.PositionTag[(int)MyData.ArmyLastTouchPosition.x][(int)MyData.ArmyLastTouchPosition.y]);
+                    BuildingSprite->setLifeValue(BuildingSprite->getLifeValue()-20);
+                    LoadingBar* HPBar = (LoadingBar*)this->getChildByTag(BuildingSprite->getTag()+1);
+                    HPBar->setPercent(HPBar->getPercent()-20);
+                }
             }
             else
             {
-                auto SpawnActionY = Spawn::createWithTwoActions(MoveActionY, (FiniteTimeAction*)TankMoveUp(AbsoluteDistanceY/60));
-                auto SequenceAction = Sequence::createWithTwoActions(SpawnActionX, SpawnActionY);
-                BuildingSprite->runAction(SequenceAction);
-                BuildingHPBar->runAction(Sequence::createWithTwoActions(MoveActionX->clone(), MoveActionY->clone()));
+                BuildingSprite->stopAllActions();
+                BuildingHPBar->stopAllActions();
+                MyData.ArmyLastTouchPosition = this->convertToNodeSpace(touch->getLocation());
+                double DistanceX2 = (MyData.ArmyLastTouchPosition.x - MyData.ArmyFirstTouchPosition.x)
+                * (MyData.ArmyLastTouchPosition.x - MyData.ArmyFirstTouchPosition.x);
+                double DistanceY2 = (MyData.ArmyLastTouchPosition.y - MyData.ArmyFirstTouchPosition.y)
+                * (MyData.ArmyLastTouchPosition.y - MyData.ArmyFirstTouchPosition.y);
+                double AbsoluteDistanceX = sqrt(DistanceX2);
+                double AbsoluteDistanceY = sqrt(DistanceY2);
+                double DistanceX = MyData.ArmyLastTouchPosition.x - MyData.ArmyFirstTouchPosition.x;
+                double DistanceY = MyData.ArmyLastTouchPosition.y - MyData.ArmyFirstTouchPosition.y;
+                auto MoveActionX = MoveBy::create(AbsoluteDistanceX/60, Vec2(DistanceX, 0));
+                auto MoveActionY = MoveBy::create(AbsoluteDistanceY/60, Vec2(0, DistanceY));
+                
+                
+                if (DistanceX <= 0)
+                {
+                    auto SpawnActionX = Spawn::createWithTwoActions(MoveActionX, (FiniteTimeAction*)TankMoveLeft(AbsoluteDistanceX/60));
+                    if (DistanceY <= 0)
+                    {
+                        auto SpawnActionY = Spawn::createWithTwoActions(MoveActionY, (FiniteTimeAction*)TankMoveDown(AbsoluteDistanceY/60));
+                        auto SequenceAction = Sequence::createWithTwoActions(SpawnActionX, SpawnActionY);
+                        BuildingSprite->runAction(SequenceAction);
+                        BuildingHPBar->runAction(Sequence::createWithTwoActions(MoveActionX->clone(), MoveActionY->clone()));
+                    }
+                    else
+                    {
+                        auto SpawnActionY = Spawn::createWithTwoActions(MoveActionY, (FiniteTimeAction*)TankMoveUp(AbsoluteDistanceY/60));
+                        auto SequenceAction = Sequence::createWithTwoActions(SpawnActionX, SpawnActionY);
+                        BuildingSprite->runAction(SequenceAction);
+                        BuildingHPBar->runAction(Sequence::createWithTwoActions(MoveActionX->clone(), MoveActionY->clone()));
+                    }
+                }
+                else
+                {
+                    auto SpawnActionX = Spawn::createWithTwoActions(MoveActionX, (FiniteTimeAction*)TankMoveRight(AbsoluteDistanceX/60));
+                    if (DistanceY <= 0)
+                    {
+                        auto SpawnActionY = Spawn::createWithTwoActions(MoveActionY, (FiniteTimeAction*)TankMoveDown(AbsoluteDistanceY/60));
+                        auto SequenceAction = Sequence::createWithTwoActions(SpawnActionX, SpawnActionY);
+                        BuildingSprite->runAction(SequenceAction);
+                        BuildingHPBar->runAction(Sequence::createWithTwoActions(MoveActionX->clone(), MoveActionY->clone()));
+                    }
+                    else
+                    {
+                        auto SpawnActionY = Spawn::createWithTwoActions(MoveActionY, (FiniteTimeAction*)TankMoveUp(AbsoluteDistanceY/60));
+                        auto SequenceAction = Sequence::createWithTwoActions(SpawnActionX, SpawnActionY);
+                        BuildingSprite->runAction(SequenceAction);
+                        BuildingHPBar->runAction(Sequence::createWithTwoActions(MoveActionX->clone(), MoveActionY->clone()));
+                    }
+                }
             }
         }
-         */
     };
     //将触摸监听添加到eventDispacher中去
     _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, BuildingSprite);

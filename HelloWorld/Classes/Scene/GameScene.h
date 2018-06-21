@@ -86,7 +86,7 @@ public:
     
     void commonGamePictureLoading();
     
-    void armyMoveOnce(Sprite* ArmyName);
+    //void armyMoveOnce(Sprite* ArmyName);
     //void armyMoveOnce(Sprite* ArmyName,Action* ArmyAction);
     //我曾经想把所有的东西都由这一个函数加进去，但是函数参数传递中Action的Target会出现错误，所以我放弃了这个方法
     //迫不得已只能多次重写armyMoveOnce函数来支持不同的建筑物动画
@@ -94,7 +94,7 @@ public:
     
     
     
-    void armyBuildCallBack(Action* BuildingAction,const std::string& FileName);
+    //void armyBuildCallBack(Action* BuildingAction,const std::string& FileName);
     
     
     void electricPowerPlantMoveOnce(Sprite* ArmyName);
@@ -117,6 +117,18 @@ public:
     void missileWellBuildCallBack();
     Action* loadingMissileWellAction();
     
+    void cannonMoveOnce(Sprite* ArmyName);
+    void cannonBuildCallBcak();
+    Action* loadingCannonAction();
+    
+    void baseBuildBallBack();
+    Action* loadingBaseAction();
+    
+    void soldierBuildCallBack();
+    Action* SoldierMoveUp(int ActionTime);
+    Action* SoldierMoveDown(int ActionTime);
+    Action* SoldierMoveLeft(int ActionTime);
+    Action* SoldierMoveRight(int ActionTime);
     
     void tankBuildCallBack();
     Action* TankMoveUp(int ActionTime);
@@ -124,9 +136,40 @@ public:
     Action* TankMoveRight(int ActionTime);
     Action* TankMoveDown(int ActionTime);
     
+    void rTankBuildCallBack();
+    Action* RTankMoveUp(int ActionTime);
+    Action* RTankMoveLeft(int ActionTime);
+    Action* RTankMoveRight(int ActionTime);
+    Action* RTankMoveDown(int ActionTime);
+    
+    void tTankBuildCallBack();
+    Action* TTankMoveUp(int ActionTime);
+    Action* TTankMoveLeft(int ActionTime);
+    Action* TTankMoveRight(int ActionTime);
+    Action* TTankMoveDown(int ActionTime);
+    
+    void battlePlaneBuildCallBack();
+    Action* BattlePlaneMoveUp(int ActionTime);
+    Action* BattlePlaneMoveLeft(int ActionTime);
+    Action* BattlePlaneMoveRight(int ActionTime);
+    Action* BattlePlaneMoveDown(int ActionTime);
+    
+    void jetBuildCallBack();
+    Action* JetMoveUp(int ActionTime);
+    Action* JetMoveLeft(int ActionTime);
+    Action* JetMoveRight(int ActionTime);
+    Action* JetMoveDown(int ActionTime);
+    
+    void soldierXBuildCallBack();
+    Action* SoldierXMoveUp(int ActionTime);
+    Action* SoldierXMoveLeft(int ActionTime);
+    Action* SoldierXMoveRight(int ActionTime);
+    Action* SoldierXMoveDown(int ActionTime);
+    
     
     void rightMenuMoveBy(MoveBy* SpriteMoveBy);
   
+    
     
     
     

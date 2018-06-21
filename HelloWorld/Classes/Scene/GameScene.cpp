@@ -1,8 +1,7 @@
 #include "GameScene.h"
-//#include "LoadingResource.cpp"
 #include "SimpleAudioEngine.h"
 #include "CountryChoiceScene.h"
-//#include "../Army/ArmyClass.cpp"
+#include "LoseScene.h"
 
 int CountryChoice;
 
@@ -35,7 +34,7 @@ bool GameScene::init()
     ScreenWidth = VisibleSize.width;
     ScreenHeight = VisibleSize.height;
     
-    TileMap = TMXTiledMap::create("RedAlertMap.tmx");
+    TileMap = TMXTiledMap::create("RedAlertTiledMap.tmx");
     TileMap->setAnchorPoint(Vec2::ZERO);
     TileMap->setPosition(Vec2::ZERO);
     this->addChild(TileMap,-1);
@@ -50,9 +49,9 @@ bool GameScene::init()
         auto dic = obj.asValueMap();
         int x = dic.at("x").asInt();
         int y = dic.at("y").asInt();
-        for (int i = 0; i < 125; i++)
+        for (int i = 0; i < 128; i++)
         {
-            for (int j = 0; j < 125; j++)
+            for (int j = 0; j < 128; j++)
             {
                 MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
                 MyData.IsPositionHaveMiningYard[x+i][y+j] = 1;
@@ -90,7 +89,7 @@ bool GameScene::init()
     this->removeChild(MyData.MyBuildings[0]);
     */
     
-    
+    baseBuildBallBack();
     
     
     
@@ -148,48 +147,324 @@ void GameScene::update(float delta)
         MyData.MyMoney += 1 * MyData.RefineryNumber;
         std::string value = StringUtils::format("%d $",MyData.MyMoney);
         MoneyText->setString(value);
-    }
-    
-    MyData.WarFactoryNumber         = MyData.MyWarFactory.size();
-    MyData.RefineryNumber           = MyData.MyRefinery.size();
-    MyData.BarracksNumber           = MyData.MyBarracks.size();
-    MyData.ElectricPowerPlantNumber = MyData.MyElectricPowerPlant.size();
-    
-    for (int i = 0; i < MyData.MyWarFactory.size(); i++)
-    {
-        if (MyData.MyWarFactory[i]->getLifeValue() <= 0)
+        if (MyData.MyBase->getLifeValue() <= 0)
         {
-            MyData.MyWarFactory.erase(MyData.MyWarFactory.begin()+i);
-            this->removeChild(MyData.MyWarFactory[i],true);
+            Director::getInstance()->replaceScene(TransitionFade::create(2.0f, LoseScene::createScene()));
         }
     }
     
-    for (int i = 0; i < MyData.MyBarracks.size(); i++)
+    if (TimeCount % 5 == 0)
     {
-        if (MyData.MyBarracks[i]->getLifeValue() <= 0)
+        MyData.WarFactoryNumber         = MyData.MyWarFactory.size();
+        MyData.RefineryNumber           = MyData.MyRefinery.size();
+        MyData.BarracksNumber           = MyData.MyBarracks.size();
+        MyData.ElectricPowerPlantNumber = MyData.MyElectricPowerPlant.size();
+        
+        for (int i = 0; i < 1601; i++)
         {
-            MyData.MyBarracks.erase(MyData.MyBarracks.begin()+i);
-            this->removeChild(MyData.MyBarracks[i],true);
+            for (int j = 0; j < 1601; j++)
+            {
+                MyData.IsPositionHaveArmyAndTag[i][j] = 0;
+            }
         }
+        for (int q = 0; q < MyData.MyTank.size(); q++)
+        {
+            int SpriteWidth = MyData.MyTank[q]->getContentSize().width;
+            int SpriteHeigth = MyData.MyTank[q]->getContentSize().height;
+            int x = MyData.MyTank[q]->getPosition().x-SpriteWidth/2;
+            int y = MyData.MyTank[q]->getPosition().y-SpriteHeigth/2;
+            int Tag = MyData.MyTank[q]->getTag();
+            for (int i = 0; i <= SpriteWidth; i++)
+            {
+                for (int j = 0; j <= SpriteHeigth; j++)
+                {
+                    MyData.IsPositionHaveArmyAndTag[x+i][y+j] = Tag;
+                }
+            }
+        }
+        for (int q = 0; q < MyData.MyTTank.size(); q++)
+        {
+            int SpriteWidth = MyData.MyTTank[q]->getContentSize().width;
+            int SpriteHeigth = MyData.MyTTank[q]->getContentSize().height;
+            int x = MyData.MyTTank[q]->getPosition().x-SpriteWidth/2;
+            int y = MyData.MyTTank[q]->getPosition().y-SpriteHeigth/2;
+            int Tag = MyData.MyTTank[q]->getTag();
+            for (int i = 0; i <= SpriteWidth; i++)
+            {
+                for (int j = 0; j <= SpriteHeigth; j++)
+                {
+                    MyData.IsPositionHaveArmyAndTag[x+i][y+j] = Tag;
+                }
+            }
+        }
+        for (int q = 0; q < MyData.MyRTank.size(); q++)
+        {
+            int SpriteWidth = MyData.MyRTank[q]->getContentSize().width;
+            int SpriteHeigth = MyData.MyRTank[q]->getContentSize().height;
+            int x = MyData.MyRTank[q]->getPosition().x-SpriteWidth/2;
+            int y = MyData.MyRTank[q]->getPosition().y-SpriteHeigth/2;
+            int Tag = MyData.MyRTank[q]->getTag();
+            for (int i = 0; i <= SpriteWidth; i++)
+            {
+                for (int j = 0; j <= SpriteHeigth; j++)
+                {
+                    MyData.IsPositionHaveArmyAndTag[x+i][y+j] = Tag;
+                }
+            }
+        }
+        for (int q = 0; q < MyData.MyBattlePlane.size(); q++)
+        {
+            int SpriteWidth = MyData.MyBattlePlane[q]->getContentSize().width;
+            int SpriteHeigth = MyData.MyBattlePlane[q]->getContentSize().height;
+            int x = MyData.MyBattlePlane[q]->getPosition().x-SpriteWidth/2;
+            int y = MyData.MyBattlePlane[q]->getPosition().y-SpriteHeigth/2;
+            int Tag = MyData.MyBattlePlane[q]->getTag();
+            for (int i = 0; i <= SpriteWidth; i++)
+            {
+                for (int j = 0; j <= SpriteHeigth; j++)
+                {
+                    MyData.IsPositionHaveArmyAndTag[x+i][y+j] = Tag;
+                }
+            }
+        }
+        for (int q = 0; q < MyData.MyJet.size(); q++)
+        {
+            int SpriteWidth = MyData.MyJet[q]->getContentSize().width;
+            int SpriteHeigth = MyData.MyJet[q]->getContentSize().height;
+            int x = MyData.MyJet[q]->getPosition().x-SpriteWidth/2;
+            int y = MyData.MyJet[q]->getPosition().y-SpriteHeigth/2;
+            int Tag = MyData.MyJet[q]->getTag();
+            for (int i = 0; i <= SpriteWidth; i++)
+            {
+                for (int j = 0; j <= SpriteHeigth; j++)
+                {
+                    MyData.IsPositionHaveArmyAndTag[x+i][y+j] = Tag;
+                }
+            }
+        }
+        for (int q = 0; q < MyData.MySoldier.size(); q++)
+        {
+            int SpriteWidth = MyData.MySoldier[q]->getContentSize().width;
+            int SpriteHeigth = MyData.MySoldier[q]->getContentSize().height;
+            int x = MyData.MySoldier[q]->getPosition().x-SpriteWidth/2;
+            int y = MyData.MySoldier[q]->getPosition().y-SpriteHeigth/2;
+            int Tag = MyData.MySoldier[q]->getTag();
+            for (int i = 0; i <= SpriteWidth; i++)
+            {
+                for (int j = 0; j <= SpriteHeigth; j++)
+                {
+                    MyData.IsPositionHaveArmyAndTag[x+i][y+j] = Tag;
+                }
+            }
+        }
+        for (int q = 0; q < MyData.MySoldierX.size(); q++)
+        {
+            int SpriteWidth = MyData.MySoldierX[q]->getContentSize().width;
+            int SpriteHeigth = MyData.MySoldierX[q]->getContentSize().height;
+            int x = MyData.MySoldierX[q]->getPosition().x-SpriteWidth/2;
+            int y = MyData.MySoldierX[q]->getPosition().y-SpriteHeigth/2;
+            int Tag = MyData.MySoldierX[q]->getTag();
+            for (int i = 0; i <= SpriteWidth; i++)
+            {
+                for (int j = 0; j <= SpriteHeigth; j++)
+                {
+                    MyData.IsPositionHaveArmyAndTag[x+i][y+j] = Tag;
+                }
+            }
+        }
+        for (int q = 0; q < MyData.MyCannon.size(); q++)
+        {
+            int SpriteWidth = MyData.MyCannon[q]->getContentSize().width;
+            int SpriteHeigth = MyData.MyCannon[q]->getContentSize().height;
+            int x = MyData.MyCannon[q]->getPosition().x-SpriteWidth/2;
+            int y = MyData.MyCannon[q]->getPosition().y-SpriteHeigth/2;
+            int Tag = MyData.MyCannon[q]->getTag();
+            for (int i = 0; i <= SpriteWidth; i++)
+            {
+                for (int j = 0; j <= SpriteHeigth; j++)
+                {
+                    MyData.IsPositionHaveArmyAndTag[x+i][y+j] = Tag;
+                }
+            }
+        }
+
+        for (int i = 0; i < MyData.MyTank.size(); i++)
+        {
+            if (MyData.MyTank[i]->getLifeValue() <= 0)
+            {
+                this->removeChild(MyData.MyTank[i],true);
+                MyData.MyTank.erase(MyData.MyTank.begin()+i);
+            }
+        }
+        for (int i = 0; i < MyData.MyTTank.size(); i++)
+        {
+            if (MyData.MyTTank[i]->getLifeValue() <= 0)
+            {
+                this->removeChild(MyData.MyTTank[i],true);
+                MyData.MyTTank.erase(MyData.MyTTank.begin()+i);
+            }
+        }
+        for (int i = 0; i < MyData.MyRTank.size(); i++)
+        {
+            if (MyData.MyRTank[i]->getLifeValue() <= 0)
+            {
+                this->removeChild(MyData.MyRTank[i],true);
+                MyData.MyRTank.erase(MyData.MyRTank.begin()+i);
+            }
+        }
+        for (int i = 0; i < MyData.MyBattlePlane.size(); i++)
+        {
+            if (MyData.MyBattlePlane[i]->getLifeValue() <= 0)
+            {
+                this->removeChild(MyData.MyBattlePlane[i],true);
+                MyData.MyBattlePlane.erase(MyData.MyBattlePlane.begin()+i);
+            }
+        }
+        for (int i = 0; i < MyData.MyJet.size(); i++)
+        {
+            if (MyData.MyJet[i]->getLifeValue() <= 0)
+            {
+                this->removeChild(MyData.MyJet[i],true);
+                MyData.MyJet.erase(MyData.MyJet.begin()+i);
+            }
+        }
+        for (int i = 0; i < MyData.MySoldier.size(); i++)
+        {
+            if (MyData.MySoldier[i]->getLifeValue() <= 0)
+            {
+                this->removeChild(MyData.MySoldier[i],true);
+                MyData.MySoldier.erase(MyData.MySoldier.begin()+i);
+            }
+        }
+        for (int i = 0; i < MyData.MySoldierX.size(); i++)
+        {
+            if (MyData.MySoldierX[i]->getLifeValue() <= 0)
+            {
+                this->removeChild(MyData.MySoldierX[i],true);
+                MyData.MySoldierX.erase(MyData.MySoldierX.begin()+i);
+            }
+        }
+        
+        for (int i = 0; i < MyData.MyWarFactory.size(); i++)
+        {
+            if (MyData.MyWarFactory[i]->getLifeValue() <= 0)
+            {
+                int SpriteWidth = MyData.MyWarFactory[i]->getContentSize().width;
+                int SpriteHeight = MyData.MyWarFactory[i]->getContentSize().height;
+                int x = MyData.MyWarFactory[i]->getPosition().x-SpriteWidth/2;
+                int y = MyData.MyWarFactory[i]->getPosition().y-SpriteHeight/2;
+                for (int i = 0; i <= SpriteWidth; i++)
+                {
+                    for (int j = 0; j <= SpriteHeight; j++)
+                    {
+                        if (x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
+                        {
+                            MyData.IsPositionHaveBuildings[x+i][y+j] = 0;
+                        }
+                    }
+                }
+                this->removeChild(MyData.MyWarFactory[i],true);
+                MyData.MyWarFactory.erase(MyData.MyWarFactory.begin()+i);
+            }
+        }
+        
+        for (int i = 0; i < MyData.MyBarracks.size(); i++)
+        {
+            if (MyData.MyBarracks[i]->getLifeValue() <= 0)
+            {
+                int SpriteWidth = MyData.MyBarracks[i]->getContentSize().width;
+                int SpriteHeight = MyData.MyBarracks[i]->getContentSize().height;
+                int x = MyData.MyBarracks[i]->getPosition().x-SpriteWidth/2;
+                int y = MyData.MyBarracks[i]->getPosition().y-SpriteHeight/2;
+                for (int i = 0; i <= SpriteWidth; i++)
+                {
+                    for (int j = 0; j <= SpriteHeight; j++)
+                    {
+                        if (x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
+                        {
+                            MyData.IsPositionHaveBuildings[x+i][y+j] = 0;
+                        }
+                    }
+                }
+                this->removeChild(MyData.MyBarracks[i],true);
+                MyData.MyBarracks.erase(MyData.MyBarracks.begin()+i);
+            }
+        }
+        
+        for (int i = 0; i < MyData.MyElectricPowerPlant.size(); i++)
+        {
+            if (MyData.MyElectricPowerPlant[i]->getLifeValue() <= 0)
+            {
+                int SpriteWidth = MyData.MyElectricPowerPlant[i]->getContentSize().width;
+                int SpriteHeight = MyData.MyElectricPowerPlant[i]->getContentSize().height;
+                int x = MyData.MyElectricPowerPlant[i]->getPosition().x-SpriteWidth/2;
+                int y = MyData.MyElectricPowerPlant[i]->getPosition().y-SpriteHeight/2;
+                for (int i = 0; i <= SpriteWidth; i++)
+                {
+                    for (int j = 0; j <= SpriteHeight; j++)
+                    {
+                        if (x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
+                        {
+                            MyData.IsPositionHaveBuildings[x+i][y+j] = 0;
+                        }
+                    }
+                }
+                this->removeChild(MyData.MyElectricPowerPlant[i],true);
+                MyData.MyElectricPowerPlant.erase(MyData.MyElectricPowerPlant.begin()+i);
+            }
+        }
+        
+        for (int i = 0; i < MyData.MyRefinery.size(); i++)
+        {
+            if (MyData.MyRefinery[i]->getLifeValue() <= 0)
+            {
+                int SpriteWidth = MyData.MyRefinery[i]->getContentSize().width;
+                int SpriteHeight = MyData.MyRefinery[i]->getContentSize().height;
+                int x = MyData.MyRefinery[i]->getPosition().x-SpriteWidth/2;
+                int y = MyData.MyRefinery[i]->getPosition().y-SpriteHeight/2;
+                for (int i = 0; i <= SpriteWidth; i++)
+                {
+                    for (int j = 0; j <= SpriteHeight; j++)
+                    {
+                        if (x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
+                        {
+                            MyData.IsPositionHaveBuildings[x+i][y+j] = 0;
+                        }
+                    }
+                }
+                this->removeChild(MyData.MyRefinery[i],true);
+                MyData.MyRefinery.erase(MyData.MyRefinery.begin()+i);
+            }
+        }
+        
+        for (int i = 0; i < MyData.MyCannon.size(); i++)
+        {
+            if (MyData.MyCannon[i]->getLifeValue() <= 0)
+            {
+                int SpriteWidth = MyData.MyCannon[i]->getContentSize().width;
+                int SpriteHeight = MyData.MyCannon[i]->getContentSize().height;
+                int x = MyData.MyCannon[i]->getPosition().x-SpriteWidth/2;
+                int y = MyData.MyCannon[i]->getPosition().y-SpriteHeight/2;
+                for (int i = 0; i <= SpriteWidth; i++)
+                {
+                    for (int j = 0; j <= SpriteHeight; j++)
+                    {
+                        if (x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
+                        {
+                            MyData.IsPositionHaveBuildings[x+i][y+j] = 0;
+                        }
+                    }
+                }
+                this->removeChild(MyData.MyCannon[i],true);
+                MyData.MyCannon.erase(MyData.MyCannon.begin()+i);
+            }
+        }
+        
+        
+        
+        
     }
     
-    for (int i = 0; i < MyData.MyElectricPowerPlant.size(); i++)
-    {
-        if (MyData.MyElectricPowerPlant[i]->getLifeValue() <= 0)
-        {
-            MyData.MyElectricPowerPlant.erase(MyData.MyElectricPowerPlant.begin()+i);
-            this->removeChild(MyData.MyElectricPowerPlant[i],true);
-        }
-    }
-    
-    for (int i = 0; i < MyData.MyRefinery.size(); i++)
-    {
-        if (MyData.MyRefinery[i]->getLifeValue() <= 0)
-        {
-            MyData.MyRefinery.erase(MyData.MyRefinery.begin()+i);
-            this->removeChild(MyData.MyRefinery[i],true);
-        }
-    }
     
     auto leftArrow =  EventKeyboard::KeyCode::KEY_A,  rightArrow =  EventKeyboard::KeyCode::KEY_D,
          upArrow   =  EventKeyboard::KeyCode::KEY_W,  downArrow  =  EventKeyboard::KeyCode::KEY_S;
@@ -451,7 +726,7 @@ void GameScene::keyPressedDuration(EventKeyboard::KeyCode code)
             }
             break;
         case EventKeyboard::KeyCode::KEY_D:
-            if ((int)Camera->getPositionX() < TileMap->getMapSize().width * TileMap->getTileSize().width - ScreenWidth/2 - 10)
+            if ((int)Camera->getPositionX() < TileMap->getMapSize().width * TileMap->getTileSize().width - ScreenWidth/2 + 190)
             {
                 offsetX = 5;
             }
@@ -488,169 +763,7 @@ void GameScene::keyPressedDuration(EventKeyboard::KeyCode code)
     Camera->runAction(CameraMoveBy);
     auto RightMenuMoveByAction = MoveBy::create(0, Vec2(offsetX, offsetY));
     rightMenuMoveBy(RightMenuMoveByAction);
-    //RightMenuPicture->runAction(RightMenuMoveBy);
-    //auto CommonElectricPowerPlantMoveBy = MoveBy::create(0, Vec2(offsetX, offsetY));
-    //CommonElectricPowerPlantPicture->runAction(RightMenuMoveBy->clone());
 }
-
-
-void GameScene::armyMoveOnce(Sprite* ArmyName)
-{
-    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
-    ArmyListener->setSwallowTouches(true);
-    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
-    {
-        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
-        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
-        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
-        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
-            return true;
-        else
-            return false;
-    };
-    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
-    {
-        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
-        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());
-    };
-    
-    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
-    {
-        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
-        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
-        Size ArmySize = ArmyTarget->getContentSize();
-        int x = LocationInWorld.x - LocationInNode.x;
-        int y = LocationInWorld.y - LocationInNode.y;
-        for (int i = 0; i <= ArmySize.width; i++)
-        {
-            for (int j = 0; j <= ArmySize.height; j++)
-            {
-                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
-                {
-                    this->removeChild(ArmyName);
-                    _eventDispatcher->removeEventListener(ArmyListener);
-                    return false;
-                }
-            }
-        }
-        for (int i = 0; i <= ArmySize.width; i++)
-        {
-            for (int j = 0; j <= ArmySize.height; j++)
-            {
-                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
-                {
-                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
-                }
-            }
-        }
-        _eventDispatcher->removeEventListener(ArmyListener);
-        MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
-        MyData.IsTouchPositionAvailable = 1;
-        this->removeChild(ArmyName);
-        
-        if (MyData.IsTouchPositionAvailable)
-        {
-            armyBuildCallBack(loadingElectricPowerPlantAction(),"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
-        }
-    };
-    //将触摸监听添加到eventDispacher中去
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
-}
-
-void GameScene::armyBuildCallBack(Action* BuildingAction,const std::string& FileName)
-{
-    auto BuildingSprite = BuildingsClass::createWithSpriteFileName(FileName);
-    BuildingSprite->setPosition(MyData.LastTouchPosition);
-    this->addChild(BuildingSprite);
-    BuildingSprite->runAction(BuildingAction);
-    MyData.IsTouchPositionAvailable = 0;
-    MyData.MyBuildings.push_back(BuildingSprite);
-    //*****************以下为修改***********
-    auto BuildingHPBar = LoadingBar::create("GamePicture/HPBar.png");
-    BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
-    BuildingHPBar->setScale(0.08f);
-    BuildingHPBar->setPercent(100);
-    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+100));
-    this->addChild(BuildingHPBar,2);
-    auto HPBarDelay = DelayTime::create(21.0f);
-    auto HPBarFadeIn = FadeIn::create(0.0f);
-    auto HPBarFadeOut = FadeOut::create(0.0f);
-    auto HPBarSequence = Sequence::create(HPBarFadeOut,HPBarDelay,HPBarFadeIn,NULL);
-    BuildingHPBar->runAction(HPBarSequence);
-    BuildingSprite->setHP(BuildingHPBar);
-    BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
-}
-
-
-
-//&%&%&%&%&%&%&%&%&%&%&%努力修改%&%&%&%&%&%&%&%&%&
-void GameScene::armyMoveOnce(Sprite* ArmyName,Action* ArmyAction)
-{
-    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
-    ArmyListener->setSwallowTouches(true);
-    ArmyListener->onTouchBegan = [](Touch* touch, Event* event)
-    {
-        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
-        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
-        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
-        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
-            return true;
-        else
-            return false;
-    };
-    ArmyListener->onTouchMoved = [](Touch* touch, Event* event)
-    {
-        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());
-        ArmyTarget->setPosition(ArmyTarget->getPosition() + touch->getDelta());
-    };
-    
-    ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
-    {
-        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
-        Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
-        Size ArmySize = ArmyTarget->getContentSize();
-        int x = LocationInWorld.x - LocationInNode.x;
-        int y = LocationInWorld.y - LocationInNode.y;
-        for (int i = 0; i <= ArmySize.width; i++)
-        {
-            for (int j = 0; j <= ArmySize.height; j++)
-            {
-                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
-                {
-                    this->removeChild(ArmyName);
-                    _eventDispatcher->removeEventListener(ArmyListener);
-                    return false;
-                }
-            }
-        }
-        for (int i = 0; i <= ArmySize.width; i++)
-        {
-            for (int j = 0; j <= ArmySize.height; j++)
-            {
-                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
-                {
-                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
-                }
-            }
-        }
-        _eventDispatcher->removeEventListener(ArmyListener);
-        MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
-        MyData.IsTouchPositionAvailable = 1;
-        this->removeChild(ArmyName);
-        
-        if (MyData.IsTouchPositionAvailable)
-        {
-            armyBuildCallBack(ArmyAction,"CommonElectricPowerPlant_action/CommonElectricPowerPlant_action_15.png");
-        }
-    };
-    //将触摸监听添加到eventDispacher中去
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(ArmyListener, ArmyName);
-}
-
 
 
 

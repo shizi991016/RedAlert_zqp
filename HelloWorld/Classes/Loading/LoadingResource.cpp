@@ -34,13 +34,7 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                  {
                      case Widget::TouchEventType::ENDED:
                      {
-                         auto ElectricPowerPlantPicture = Sprite::create
-                         ("ArmyAction/CommonCannon_action/CommonCannon_action_16.png");
-                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                         //ElectricPowerPlantPicture->setScale(0.25f);
-                         this->addChild(ElectricPowerPlantPicture,1);
-                         ElectricPowerPlantPicture->setOpacity(140);
-                         armyMoveOnce(ElectricPowerPlantPicture);
+                         battlePlaneBuildCallBack();
                          std::string value = StringUtils::format("战斗机\n造价60$");
                          RightMenuText->setString(value);
                          break;
@@ -63,13 +57,7 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                  {
                      case Widget::TouchEventType::ENDED:
                      {
-                         auto ElectricPowerPlantPicture = Sprite::create
-                         ("ArmyAction/CommonCannon_action/CommonCannon_action_16.png");
-                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                         ElectricPowerPlantPicture->setScale(0.25f);
-                         this->addChild(ElectricPowerPlantPicture,1);
-                         ElectricPowerPlantPicture->setOpacity(140);
-                         armyMoveOnce(ElectricPowerPlantPicture);
+                         jetBuildCallBack();
                          std::string value = StringUtils::format("喷气机\n造价40$");
                          RightMenuText->setString(value);
                          break;
@@ -97,13 +85,7 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                  {
                      case Widget::TouchEventType::ENDED:
                      {
-                         auto ElectricPowerPlantPicture = Sprite::create
-                         ("ArmyAction/CommonCannon_action/CommonCannon_action_16.png");
-                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                         ElectricPowerPlantPicture->setScale(0.25f);
-                         this->addChild(ElectricPowerPlantPicture,1);
-                         ElectricPowerPlantPicture->setOpacity(140);
-                         armyMoveOnce(ElectricPowerPlantPicture);
+                         rTankBuildCallBack();
                          std::string value = StringUtils::format("R型坦克\n造价60$");
                          RightMenuText->setString(value);
                          break;
@@ -126,13 +108,7 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                  {
                      case Widget::TouchEventType::ENDED:
                      {
-                         auto ElectricPowerPlantPicture = Sprite::create
-                         ("ArmyAction/CommonCannon_action/CommonCannon_action_16.png");
-                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                         ElectricPowerPlantPicture->setScale(0.25f);
-                         this->addChild(ElectricPowerPlantPicture,1);
-                         ElectricPowerPlantPicture->setOpacity(140);
-                         armyMoveOnce(ElectricPowerPlantPicture);
+                         tTankBuildCallBack();
                          std::string value = StringUtils::format("T型坦克\n造价60$");
                          RightMenuText->setString(value);
                          break;
@@ -162,13 +138,7 @@ void GameScene::countryChoiceSwitch(int CountryChoice)
                  {
                      case Widget::TouchEventType::ENDED:
                      {
-                         auto ElectricPowerPlantPicture = Sprite::create
-                         ("ArmyAction/CommonCannon_action/CommonCannon_action_16.png");
-                         ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                         ElectricPowerPlantPicture->setScale(0.25f);
-                         this->addChild(ElectricPowerPlantPicture,1);
-                         ElectricPowerPlantPicture->setOpacity(140);
-                         armyMoveOnce(ElectricPowerPlantPicture);
+                         soldierXBuildCallBack();
                          std::string value = StringUtils::format("特种兵\n造价30$");
                          RightMenuText->setString(value);
                          break;
@@ -334,13 +304,7 @@ void GameScene::commonGamePictureLoading()
          {
              case Widget::TouchEventType::ENDED:
              {
-                 auto ElectricPowerPlantPicture = Sprite::create
-                 ("ArmyAction/CommonCannon_action/CommonCannon_action_16.png");
-                 ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                 ElectricPowerPlantPicture->setScale(0.25f);
-                 this->addChild(ElectricPowerPlantPicture,1);
-                 ElectricPowerPlantPicture->setOpacity(140);
-                 armyMoveOnce(ElectricPowerPlantPicture);
+                 soldierBuildCallBack();
                  std::string value = StringUtils::format("大兵\n造价20$");
                  RightMenuText->setString(value);
                  break;
@@ -380,13 +344,12 @@ void GameScene::commonGamePictureLoading()
          {
              case Widget::TouchEventType::ENDED:
              {
-                 auto ElectricPowerPlantPicture = Sprite::create
-                 ("ArmyAction/CommonCannon_action/CommonCannon_action_16.png");
-                 ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                 ElectricPowerPlantPicture->setScale(0.25f);
-                 this->addChild(ElectricPowerPlantPicture,1);
-                 ElectricPowerPlantPicture->setOpacity(140);
-                 armyMoveOnce(ElectricPowerPlantPicture);
+                 auto CannonPicture = Sprite::create
+                 ("ArmyAction/CommonCannon_action/CommonCannon_action_8.png");
+                 CannonPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                 this->addChild(CannonPicture,1);
+                 CannonPicture->setOpacity(140);
+                 cannonMoveOnce(CannonPicture);
                  std::string value = StringUtils::format("加农炮\n造价40$");
                  RightMenuText->setString(value);
                  break;
@@ -406,13 +369,12 @@ void GameScene::commonGamePictureLoading()
          {
              case Widget::TouchEventType::ENDED:
              {
-                 auto ElectricPowerPlantPicture = Sprite::create
-                 ("ArmyAction/CommonCannon_action/CommonCannon_action_16.png");
-                 ElectricPowerPlantPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
-                 ElectricPowerPlantPicture->setScale(0.25f);
-                 this->addChild(ElectricPowerPlantPicture,1);
-                 ElectricPowerPlantPicture->setOpacity(140);
-                 barracksMoveOnce(ElectricPowerPlantPicture);
+                 auto BarracksPicture = Sprite::create
+                 ("ArmyAction/CommonBarracks_action/CommonBarracks_action_10.png");
+                 BarracksPicture->setPosition(Vec2(Camera->getPosition().x,Camera->getPosition().y));
+                 this->addChild(BarracksPicture,1);
+                 BarracksPicture->setOpacity(140);
+                 barracksMoveOnce(BarracksPicture);
                  std::string value = StringUtils::format("兵营\n造价100$");
                  RightMenuText->setString(value);
                  break;

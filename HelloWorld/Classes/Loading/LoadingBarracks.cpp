@@ -31,16 +31,15 @@ void GameScene::barracksMoveOnce(Sprite* ArmyName)
     ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
     {
         auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
         Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
         Size ArmySize = ArmyTarget->getContentSize();
-        int x = LocationInWorld.x - LocationInNode.x;
-        int y = LocationInWorld.y - LocationInNode.y;
+        int x = LocationInWorld.x - ArmySize.width/2;
+        int y = LocationInWorld.y - ArmySize.height/2;
         for (int i = 0; i <= ArmySize.width; i++)
         {
             for (int j = 0; j <= ArmySize.height; j++)
             {
-                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
                 {
                     this->removeChild(ArmyName);
                     _eventDispatcher->removeEventListener(ArmyListener);
@@ -48,13 +47,15 @@ void GameScene::barracksMoveOnce(Sprite* ArmyName)
                 }
             }
         }
+        MyData.TagNumber += 2;
         for (int i = 0; i <= ArmySize.width; i++)
         {
             for (int j = 0; j <= ArmySize.height; j++)
             {
-                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                if (x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
                 {
                     MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                    MyData.PositionTag[x+i][y+j] = MyData.TagNumber-1;
                 }
             }
         }
@@ -62,12 +63,8 @@ void GameScene::barracksMoveOnce(Sprite* ArmyName)
         MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
         MyData.IsTouchPositionAvailable = 1;
         this->removeChild(ArmyName);
-        
-        if (MyData.IsTouchPositionAvailable)
-        {
-            barracksBuildCallBack();
-            MyData.TheLastBarracksPosition = MyData.LastTouchPosition;
-        }
+        barracksBuildCallBack();
+        MyData.TheLastBarracksPosition = MyData.LastTouchPosition;
         MyData.MyMoney -= 100;
     };
     //将触摸监听添加到eventDispacher中去
@@ -78,7 +75,7 @@ void GameScene::barracksMoveOnce(Sprite* ArmyName)
 
 void GameScene::barracksBuildCallBack()
 {
-    auto BuildingSprite = BarracksClass::createWithSpriteFileName("Common/camera.png");
+    auto BuildingSprite = BuildingsClass::createWithSpriteFileName("ArmyAction/CommonBarracks_action/CommonBarracks_action_10.png");
     BuildingSprite->setPosition(MyData.LastTouchPosition);
     this->addChild(BuildingSprite,1);
     BuildingSprite->runAction(loadingBarracksAction());
@@ -88,15 +85,18 @@ void GameScene::barracksBuildCallBack()
     BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
     BuildingHPBar->setScale(0.07f);
     BuildingHPBar->setPercent(100);
-    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+50));
+    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+40));
     this->addChild(BuildingHPBar,2);
-    auto HPBarDelay = DelayTime::create(21.0f);
+    auto HPBarDelay = DelayTime::create(15.0f);
     auto HPBarFadeIn = FadeIn::create(0.0f);
     auto HPBarFadeOut = FadeOut::create(0.0f);
     auto HPBarSequence = Sequence::create(HPBarFadeOut,HPBarDelay,HPBarFadeIn,NULL);
     BuildingHPBar->runAction(HPBarSequence);
     BuildingSprite->setHP(BuildingHPBar);
     BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
+    BuildingSprite->setTag(MyData.TagNumber-1);
+    BuildingHPBar->setTag(MyData.TagNumber);
+    
 }
 
 
@@ -104,7 +104,7 @@ void GameScene::barracksBuildCallBack()
 Action* GameScene::loadingBarracksAction()                                                                  //Not OK
 {
     auto BuildingAnimation = Animation::create();
-    for (int i = 1; i < 16; i++)
+    for (int i = 1; i < 11; i++)
     {
         BuildingAnimation->addSpriteFrameWithFile
         (StringUtils::format("ArmyAction/CommonBarracks_action/CommonBarracks_action_%d.png",i));
@@ -113,7 +113,8 @@ Action* GameScene::loadingBarracksAction()                                      
     auto BuildingAction = Animate::create(BuildingAnimation);
     
     auto NormalAnimation = Animation::create();
-    NormalAnimation->addSpriteFrameWithFile("ArmyAction/CommonBarracks_action/CommonBarracks_action_11.png");
+    NormalAnimation->addSpriteFrameWithFile("ArmyAction/CommonBarracks_action/CommonBarracks_action_9.png");
+    NormalAnimation->addSpriteFrameWithFile("ArmyAction/CommonBarracks_action/CommonBarracks_action_10.png");
     NormalAnimation->setDelayPerUnit(3.0f/3.0f);
     NormalAnimation->setLoops(-1);
     auto NormalAction = Animate::create(NormalAnimation);

@@ -6,8 +6,8 @@
 class BaseAndFlags
 {
 public:
-    int IsPositionHaveBuildings[3201][3201] = {0};
-    int IsPositionHaveMiningYard[3201][3201] = {0};
+    char IsPositionHaveBuildings[1601][1601] = {0};
+    char IsPositionHaveMiningYard[1601][1601] = {0};
     
     int MyEdgeSelection;
     
@@ -27,17 +27,29 @@ public:
     bool IsTouchPositionAvailable = 0;
     
     std::vector<BuildingsClass*> MyBuildings;//用于在update函数中遍历数组，HP<=0删除
-    std::vector<ElectricPowerPlantClass*> MyElectricPowerPlant;
-    std::vector<RefineryClass*> MyRefinery;
-    std::vector<BarracksClass*> MyBarracks;
-    std::vector<WarFactoryClass*> MyWarFactory;
-    std::vector<MissileWellClass*> MyMissileWell;
+    std::vector<BuildingsClass*> MyElectricPowerPlant;
+    std::vector<BuildingsClass*> MyRefinery;
+    std::vector<BuildingsClass*> MyBarracks;
+    std::vector<BuildingsClass*> MyWarFactory;
+    std::vector<BuildingsClass*> MyMissileWell;
+    
+    std::vector<BuildingsClass*> MyTank;
+    std::vector<BuildingsClass*> MyBattlePlane;
+    std::vector<BuildingsClass*> MySoldier;
+    std::vector<BuildingsClass*> MyJet;
+    std::vector<BuildingsClass*> MyTTank;
+    std::vector<BuildingsClass*> MyRTank;
+    std::vector<BuildingsClass*> MySoldierX;
+    std::vector<BuildingsClass*> MyCannon;
     
     Point ArmyFirstTouchPosition;
     Point ArmyLastTouchPosition;
     
+    int TagNumber = 0;
+    int PositionTag[1601][1601] ={0};
+    int IsPositionHaveArmyAndTag[1601][1601] = {0};
     
-private:
+    BuildingsClass* MyBase;
     
 };
 

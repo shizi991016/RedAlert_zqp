@@ -31,16 +31,15 @@ void GameScene::electricPowerPlantMoveOnce(Sprite* ArmyName)
     ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
     {
         auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
-        Point LocationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸对象的坐标
         Point LocationInWorld = this->convertToNodeSpace(touch->getLocation());//获得触摸点相对于世界地图的坐标
         Size ArmySize = ArmyTarget->getContentSize();
-        int x = LocationInWorld.x - LocationInNode.x;
-        int y = LocationInWorld.y - LocationInNode.y;
+        int x = LocationInWorld.x - ArmySize.width/2;
+        int y = LocationInWorld.y - ArmySize.height/2;
         for (int i = 0; i <= ArmySize.width; i++)
         {
             for (int j = 0; j <= ArmySize.height; j++)
             {
-                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
                 {
                     this->removeChild(ArmyName);
                     _eventDispatcher->removeEventListener(ArmyListener);
@@ -48,13 +47,15 @@ void GameScene::electricPowerPlantMoveOnce(Sprite* ArmyName)
                 }
             }
         }
+        MyData.TagNumber += 2;
         for (int i = 0; i <= ArmySize.width; i++)
         {
             for (int j = 0; j <= ArmySize.height; j++)
             {
-                if (x+i >= 0 && y+j >= 0 && x+i <= 3200 && y+j <= 3200)
+                if (x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
                 {
                     MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
+                    MyData.PositionTag[x+i][y+j] = MyData.TagNumber-1;
                 }
             }
         }
@@ -62,11 +63,7 @@ void GameScene::electricPowerPlantMoveOnce(Sprite* ArmyName)
         MyData.LastTouchPosition = this->convertToNodeSpace(touch->getLocation());
         MyData.IsTouchPositionAvailable = 1;
         this->removeChild(ArmyName);
-        
-        if (MyData.IsTouchPositionAvailable)
-        {
-            electricPowerPlantBuildCallBack();
-        }
+        electricPowerPlantBuildCallBack();
         MyData.MyMoney -= 50;
     };
     //将触摸监听添加到eventDispacher中去
@@ -77,7 +74,7 @@ void GameScene::electricPowerPlantMoveOnce(Sprite* ArmyName)
 
 void GameScene::electricPowerPlantBuildCallBack()
 {
-    auto BuildingSprite = ElectricPowerPlantClass::createWithSpriteFileName("Common/camera.png");
+    auto BuildingSprite = BuildingsClass::createWithSpriteFileName("Common/camera.png");
     BuildingSprite->setPosition(MyData.LastTouchPosition);
     this->addChild(BuildingSprite,1);
     BuildingSprite->runAction(loadingElectricPowerPlantAction());
@@ -87,7 +84,7 @@ void GameScene::electricPowerPlantBuildCallBack()
     BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
     BuildingHPBar->setScale(0.07f);
     BuildingHPBar->setPercent(100);
-    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+50));
+    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+40));
     this->addChild(BuildingHPBar,2);
     auto HPBarDelay = DelayTime::create(21.0f);
     auto HPBarFadeIn = FadeIn::create(0.0f);
@@ -96,6 +93,8 @@ void GameScene::electricPowerPlantBuildCallBack()
     BuildingHPBar->runAction(HPBarSequence);
     BuildingSprite->setHP(BuildingHPBar);
     BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
+    BuildingSprite->setTag(MyData.TagNumber-1);
+    BuildingHPBar->setTag(MyData.TagNumber);
 }
 
 
