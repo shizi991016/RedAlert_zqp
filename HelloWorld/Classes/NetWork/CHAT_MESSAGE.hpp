@@ -1,15 +1,12 @@
 #ifndef CHAT_MESSAGE_hpp
 #define CHAT_MESSAGE_hpp
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
 
 class chat_massage
 {
 public:
     enum { header_length = 4};
-    enum { max_body_length = 512};
+    enum { max_body_length = 20};
     
     chat_massage()
     : body_length_(0)
