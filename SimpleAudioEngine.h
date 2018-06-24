@@ -53,6 +53,25 @@ namespace CocosDenshion {
  * @js cc.audioEngine
  */
 
+	class TypeInfo
+	{
+		public:
+	    virtual long getClassTypeInfo() = 0;
+	};
+	static inline unsigned int getHashCodeByString(const char *key)
+		{
+		    unsigned int len = strlen(key);
+		    const char *end = key + len;
+		    unsigned int hash;
+		
+			for (hash = 0; key < end; key++)
+			   {
+			        hash *= 16777619;
+			        hash ^= (unsigned int)(unsigned char)toupper(*key);
+			   }
+		    return (hash);
+		}
+
 class EXPORT_DLL SimpleAudioEngine
 {
 public:
@@ -104,6 +123,10 @@ public:
      * @lua stopMusic
      */
     virtual void stopBackgroundMusic(bool releaseData = false);
+	void stopBackgroundMusic() 
+	{
+		 this->stopBackgroundMusic(false);
+	}
 
     /**
      * Pause playing background music.
@@ -176,7 +199,14 @@ public:
      */
     virtual void setEffectsVolume(float volume);
 
-    // 
+	unsigned int playEffect(const char* pszFilePath, bool bLoop);
+	unsigned int playEffect(const char* pszFilePath) 
+	{
+	     return this->playEffect(pszFilePath, false);
+	}
+
+
+	// 
     // for sound effects
 
     /**
