@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="16">
+ <tileset firstgid="1" name="ç±»ä¼¼çº¢è²è­¦æçæäºå³æ¶ç­ç¥æ¸¸ææºç -10_ç±ç»ç½_aigei_com" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="picture/ç±»ä¼¼çº¢è²è­¦æçæäºå³æ¶ç­ç¥æ¸¸ææºç -10_ç±ç»ç½_aigei_com.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="5a87cfda6cef494da22274ce8b270b8a" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="picture/5a87cfda6cef494da22274ce8b270b8a.png" width="128" height="128"/>
+ </tileset>
+ <layer name="BackGround" width="50" height="50" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztk7cNwFAQhb5zDvtP6yd5CU6ioKCHrrXWhyGMoSvqU5jDEtbCvoU9HOEs7Fe4wxPewk7p2z/8g+iUvv3DP4hO6ds//IPolL79wz+ITunbP/yD6JS+/cM/iE7p2z/8g+iUvv3DP4hO6ds//IPolL79wz+ITunbP/yD6JS+/eP3D5QQUQ8=
+  </data>
+ </layer>
+ <objectgroup name="MiningYard" locked="1">
+  <object id="3" name="MiningYard" x="223" y="480" width="128" height="128"/>
+  <object id="4" name="MiningYard" x="383.311" y="896.007" width="128" height="128"/>
+  <object id="5" name="MiningYard" x="737" y="894" width="128" height="128"/>
+  <object id="6" name="MiningYard" x="736" y="447" width="128" height="128"/>
+  <object id="7" name="MiningYard" x="417" y="224" width="128" height="128"/>
+  <object id="8" name="MiningYard" x="65" y="62" width="128" height="128"/>
+  <object id="9" name="MiningYard" x="928" y="63" width="128" height="128"/>
+  <object id="10" name="MiningYard" x="1375" y="384" width="128" height="128"/>
+  <object id="11" name="MiningYard" x="1152" y="767" width="128" height="128"/>
+  <object id="12" name="MiningYard" x="994" y="1184" width="128" height="128"/>
+  <object id="13" name="MiningYard" x="1311" y="1441" width="128" height="128"/>
+  <object id="14" name="MiningYard" x="577" y="1439" width="128" height="128"/>
+  <object id="15" name="MiningYard" x="95" y="1248" width="128" height="128"/>
+ </objectgroup>
+ <layer name="MiningYard" width="50" height="50" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztltkNwzAMQ7NC77vp/lOWHUGRybINH8BfyzDkJ01TcGSDbJEdsv/hWgfkiJyQ8+CzlbUuyBW5IffBZytrPZAnMiOvwWd/s9YaUDqBidIJTJROYJJ/Gj7ELz1Gv99Sv3TvMfr9lvqlew8XP3fv4eJnl3uEEIIj2aG8cNkBuqhmb6V/nXu90r/OvV7pX+der/Rv9swQwr/gPCcrsOak+n1Yc1K9R7DmpPMeUSF7RHCD6TqlR5muU3qU6TqlR5muW5NH36C9E+k=
+  </data>
+ </layer>
+</map>
