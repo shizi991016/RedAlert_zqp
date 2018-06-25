@@ -418,6 +418,8 @@ void GameScene::rightMenuMoveBy(MoveBy* SpriteMoveBy)
     RightMenuText                       ->runAction(SpriteMoveBy->clone());
     PromptText                          ->runAction(SpriteMoveBy->clone());
     MoneyText                           ->runAction(SpriteMoveBy->clone());
+    ChatRoom                            ->runAction(SpriteMoveBy->clone());
+    IpEditBox                           ->runAction(SpriteMoveBy->clone());
     
     switch (MyData.MyCountryChoice)
     {
