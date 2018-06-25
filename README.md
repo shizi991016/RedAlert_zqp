@@ -12,3 +12,6 @@ Resouce文件在HelloWorld文件夹下的Resource里
 服务器启动文件为 NetText！
 游戏启动文件为 RedAlert_desktop
 
+6月25日上午更新：
+将ChatServer放入程序中
+具体打开方式见pdf
