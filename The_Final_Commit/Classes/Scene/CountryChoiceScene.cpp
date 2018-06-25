@@ -13,6 +13,7 @@ char IsPositionHaveBuildings[1601][1601] = {0};
 char IsPositionHaveMiningYard[1601][1601] = {0};
 int PositionTag[1601][1601] ={0};
 int IsPositionHaveArmyAndTag[1601][1601] = {0};
+std::vector<std::string> MessageCode;
 
 USING_NS_CC;
 

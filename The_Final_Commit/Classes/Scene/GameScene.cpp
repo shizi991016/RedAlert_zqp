@@ -4,12 +4,14 @@
 #include "LoseScene.h"
 #include "WinScene.h"
 #include "../NetWork/CHAT_CLIENT.cpp"
+#include "../NetWork/CHAT_SERVER.cpp"
 
 int CountryChoice;
 extern int ClientChoice;
 extern std::string IpAddress;
 
 void writeMsg();
+void serverWork();
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -35,6 +37,11 @@ bool GameScene::init()
     std::thread trdRecv(writeMsg);
     trdRecv.detach();
     
+    if (ClientChoice == 1)
+    {
+        std::thread trdRec(serverWork);
+        trdRec.detach();
+    }
     
     VisibleSize = Director::getInstance()->getVisibleSize();
     Vec2 Origin = Director::getInstance()->getVisibleOrigin();
@@ -1440,7 +1447,26 @@ void writeMsg()
 }
 
 
-
+void serverWork()
+{
+    try
+    {
+        
+        boost::asio::io_service io_service;
+        
+        std::list<chat_server> servers;
+        
+        tcp::endpoint endpoint(tcp::v4(), 1024);//listen 1024 port
+        servers.emplace_back(io_service, endpoint);//constructor
+        
+        io_service.run();
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << "Exception: " << e.what() << "\n";
+    }
+    
+}
 
 
 

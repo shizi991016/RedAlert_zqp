@@ -67,8 +67,8 @@ private:
     Text* RightMenuText;
     Text* PromptText;
     Text* MoneyText;
-    Text* ChatRoom;
     
+    Text* ChatRoom;
     EditBox* IpEditBox;
     
     int TimeCount = 0;
