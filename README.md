@@ -15,3 +15,9 @@ Resouce文件在HelloWorld文件夹下的Resource里
 6月25日上午更新：
 将ChatServer放入程序中
 具体打开方式见pdf
+
+6月26日晚上更新
+提供网络联机 client 1 启动 ip输入127.0.0.1
+client 2 启动 ip输入在client 1 电脑cmd由ipconfig
+（mac为 ifconfig）获得的ip地址
+可进行网络联机
