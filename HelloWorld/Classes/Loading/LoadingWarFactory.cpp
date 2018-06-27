@@ -39,7 +39,7 @@ void GameScene::warFactoryMoveOnce(Sprite* ArmyName)
         {
             for (int j = 0; j <= ArmySize.height; j++)
             {
-                if (MyData.IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
+                if (IsPositionHaveBuildings[x+i][y+j] == 1 && x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
                 {
                     this->removeChild(ArmyName);
                     _eventDispatcher->removeEventListener(ArmyListener);
@@ -47,15 +47,29 @@ void GameScene::warFactoryMoveOnce(Sprite* ArmyName)
                 }
             }
         }
+        
         MyData.TagNumber += 2;
+        
+        std::stringstream stream1;
+        stream1 << MyData.MyClientChoice;
+        std::string MyOrder;
+        stream1 >> MyOrder;
+        MyOrder += "bc ";
+        std::stringstream stream;
+        stream << MyData.TagNumber << " " << "*" << x << "*" << "/" << y << "/";
+        std::string order = stream.str();
+        //std::string MyOrder = "1bd ";
+        MyOrder += order;
+        MyOrderList.push_back(MyOrder);
+        
         for (int i = 0; i <= ArmySize.width; i++)
         {
             for (int j = 0; j <= ArmySize.height; j++)
             {
                 if (x+i >= 0 && y+j >= 0 && x+i <= 1600 && y+j <= 1600)
                 {
-                    MyData.IsPositionHaveBuildings[x+i][y+j] = 1;
-                    MyData.PositionTag[x+i][y+j] = MyData.TagNumber-1;
+                    IsPositionHaveBuildings[x+i][y+j] = 1;
+                    PositionTag[x+i][y+j] = MyData.TagNumber-1;
                 }
             }
         }
@@ -124,6 +138,45 @@ Action* GameScene::loadingWarFactoryAction()
 
 
 
+void GameScene::emenyWarFactoryBuildCallBack(int Tag)
+{
+    auto BuildingSprite = BuildingsClass::createWithSpriteFileName("ArmyAction/CommonWarFactory_action/CommonWarFactory_action_12.png");
+    BuildingSprite->setPosition(MyData.LastTouchPosition);
+    this->addChild(BuildingSprite,1);
+    BuildingSprite->runAction(loadingWarFactoryAction());
+    
+    int width = BuildingSprite->getContentSize().width;
+    int height = BuildingSprite->getContentSize().height;
+    int x = MyData.LastTouchPosition.x - width/2;
+    int y = MyData.LastTouchPosition.y - height/2;
+    for (int i = 0; i <= width; i++)
+    {
+        for (int j = 0; j <= height; j++)
+        {
+            IsPositionHaveBuildings[x+i][y+j] = 1;
+            PositionTag[x+i][y+j] = Tag-1;
+        }
+    }
+    
+    
+    MyData.IsTouchPositionAvailable = 0;
+    MyData.MyWarFactory.push_back(BuildingSprite);
+    auto BuildingHPBar = LoadingBar::create("GamePicture/HPBar.png");
+    BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
+    BuildingHPBar->setScale(0.07f);
+    BuildingHPBar->setPercent(100);
+    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+40));
+    this->addChild(BuildingHPBar,2);
+    auto HPBarDelay = DelayTime::create(18.0f);
+    auto HPBarFadeIn = FadeIn::create(0.0f);
+    auto HPBarFadeOut = FadeOut::create(0.0f);
+    auto HPBarSequence = Sequence::create(HPBarFadeOut,HPBarDelay,HPBarFadeIn,NULL);
+    BuildingHPBar->runAction(HPBarSequence);
+    BuildingSprite->setHP(BuildingHPBar);
+    BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
+    BuildingSprite->setTag(Tag-1);
+    BuildingHPBar->setTag(Tag);
+}
 
 
 

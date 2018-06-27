@@ -38,6 +38,18 @@ void GameScene::tankBuildCallBack()
     
     MyData.MyMoney -= 40;
     
+    std::stringstream stream1;
+    stream1 << MyData.MyClientChoice;
+    std::string MyOrder;
+    stream1 >> MyOrder;
+    MyOrder += "bf ";
+    std::stringstream stream;
+    stream << MyData.TagNumber << " " << "*" << (int)MyData.TheLastWarFactoryPosition.x << "*" << "/" << (int)MyData.TheLastWarFactoryPosition.y+100 << "/";
+    std::string order = stream.str();
+    //std::string MyOrder = "1bf ";
+    MyOrder += order;
+    MyOrderList.push_back(MyOrder);
+    
     auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
     ArmyListener->setSwallowTouches(true);
     ArmyListener->onTouchBegan = [=](Touch* touch, Event* event)
@@ -56,7 +68,7 @@ void GameScene::tankBuildCallBack()
     ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
     {
         MyData.ArmyLastTouchPosition = this->convertToNodeSpace(touch->getLocation());
-        if (MyData.IsPositionHaveArmyAndTag
+        if (IsPositionHaveArmyAndTag
             [(int)MyData.ArmyLastTouchPosition.x][(int)MyData.ArmyLastTouchPosition.y])
         {
             if ((MyData.ArmyLastTouchPosition.x-MyData.ArmyFirstTouchPosition.x) *
@@ -65,16 +77,28 @@ void GameScene::tankBuildCallBack()
                 (MyData.ArmyLastTouchPosition.y-MyData.ArmyFirstTouchPosition.y) <= 150*150)
             {
                 BuildingsClass* BuildingSprite = (BuildingsClass*)this->getChildByTag
-                (MyData.IsPositionHaveArmyAndTag
+                (IsPositionHaveArmyAndTag
                  [(int)MyData.ArmyLastTouchPosition.x][(int)MyData.ArmyLastTouchPosition.y]);
                 BuildingSprite->setLifeValue(BuildingSprite->getLifeValue()-20);
                 LoadingBar* HPBar = (LoadingBar*)this->getChildByTag(BuildingSprite->getTag()+1);
                 HPBar->setPercent(HPBar->getPercent()-20);
+                
+                int Tag = HPBar->getTag();
+                std::stringstream stream1;
+                stream1 << MyData.MyClientChoice;
+                std::string MyOrder;
+                std::stringstream stream;
+                stream << Tag << " " << "*" << 20 << "*";
+                std::string order = stream.str();
+                stream1 >> MyOrder;
+                MyOrder += "a ";
+                MyOrder += order;
+                MyOrderList.push_back(MyOrder);
             }
         }
         else
         {
-            if (MyData.IsPositionHaveBuildings
+            if (IsPositionHaveBuildings
                 [(int)MyData.ArmyLastTouchPosition.x][(int)MyData.ArmyLastTouchPosition.y] == 1)
             {
                 if ((MyData.ArmyLastTouchPosition.x-MyData.ArmyFirstTouchPosition.x) *
@@ -83,28 +107,54 @@ void GameScene::tankBuildCallBack()
                     (MyData.ArmyLastTouchPosition.y-MyData.ArmyFirstTouchPosition.y) <= 150*150)
                 {
                     BuildingsClass* BuildingSprite = (BuildingsClass*)this->getChildByTag
-                    (MyData.PositionTag[(int)MyData.ArmyLastTouchPosition.x][(int)MyData.ArmyLastTouchPosition.y]);
+                    (PositionTag[(int)MyData.ArmyLastTouchPosition.x][(int)MyData.ArmyLastTouchPosition.y]);
                     BuildingSprite->setLifeValue(BuildingSprite->getLifeValue()-20);
                     LoadingBar* HPBar = (LoadingBar*)this->getChildByTag(BuildingSprite->getTag()+1);
                     HPBar->setPercent(HPBar->getPercent()-20);
+                    
+                    int Tag = HPBar->getTag();
+                    std::stringstream stream1;
+                    stream1 << MyData.MyClientChoice;
+                    std::string MyOrder;
+                    std::stringstream stream;
+                    stream << Tag << " " << "*" << 20 << "*";
+                    std::string order = stream.str();
+                    stream1 >> MyOrder;
+                    MyOrder += "a ";
+                    MyOrder += order;
+                    MyOrderList.push_back(MyOrder);
                 }
             }
             else
             {
                 BuildingSprite->stopAllActions();
                 BuildingHPBar->stopAllActions();
+                int Tag = BuildingHPBar->getTag();
+                auto Position = BuildingSprite->getPosition();
                 MyData.ArmyLastTouchPosition = this->convertToNodeSpace(touch->getLocation());
-                double DistanceX2 = (MyData.ArmyLastTouchPosition.x - MyData.ArmyFirstTouchPosition.x)
-                * (MyData.ArmyLastTouchPosition.x - MyData.ArmyFirstTouchPosition.x);
-                double DistanceY2 = (MyData.ArmyLastTouchPosition.y - MyData.ArmyFirstTouchPosition.y)
-                * (MyData.ArmyLastTouchPosition.y - MyData.ArmyFirstTouchPosition.y);
+                double DistanceX2 = (MyData.ArmyLastTouchPosition.x - Position.x)
+                * (MyData.ArmyLastTouchPosition.x - Position.x);
+                double DistanceY2 = (MyData.ArmyLastTouchPosition.y - Position.y)
+                * (MyData.ArmyLastTouchPosition.y - Position.y);
                 double AbsoluteDistanceX = sqrt(DistanceX2);
                 double AbsoluteDistanceY = sqrt(DistanceY2);
-                double DistanceX = MyData.ArmyLastTouchPosition.x - MyData.ArmyFirstTouchPosition.x;
-                double DistanceY = MyData.ArmyLastTouchPosition.y - MyData.ArmyFirstTouchPosition.y;
+                double DistanceX = MyData.ArmyLastTouchPosition.x - Position.x;
+                double DistanceY = MyData.ArmyLastTouchPosition.y - Position.y;
                 auto MoveActionX = MoveBy::create(AbsoluteDistanceX/60, Vec2(DistanceX, 0));
                 auto MoveActionY = MoveBy::create(AbsoluteDistanceY/60, Vec2(0, DistanceY));
                 
+                
+                std::stringstream stream1;
+                stream1 << MyData.MyClientChoice;
+                std::string MyOrder;
+                stream1 >> MyOrder;
+                MyOrder += "mf ";
+                std::stringstream stream;
+                stream << Tag << " " << "*" << (int)MyData.ArmyLastTouchPosition.x << "*" << "/" << (int)MyData.ArmyLastTouchPosition.y+100 << "/";
+                std::string order = stream.str();
+                //std::string MyOrder = "1af ";
+                MyOrder += order;
+                MyOrderList.push_back(MyOrder);
                 
                 if (DistanceX <= 0)
                 {
@@ -201,6 +251,24 @@ Action* GameScene::TankMoveDown(int ActionTime)
     return action;
 }
 
+
+void GameScene::emenyTankBuildCallBack(int Tag)
+{
+    auto BuildingSprite = BuildingsClass::createWithSpriteFileName("ArmyAction/CommonTank_action/CommonTank_action_up_1.png");
+    BuildingSprite->setPosition(MyData.LastTouchPosition);
+    this->addChild(BuildingSprite,2);
+    MyData.MyRTank.push_back(BuildingSprite);
+    auto BuildingHPBar = LoadingBar::create("GamePicture/HPBar.png");
+    BuildingHPBar->setDirection(LoadingBar::Direction::LEFT);
+    BuildingHPBar->setScale(0.07f);
+    BuildingHPBar->setPercent(100);
+    BuildingHPBar->setPosition(Vec2(MyData.LastTouchPosition.x,MyData.LastTouchPosition.y+30));
+    this->addChild(BuildingHPBar,2);
+    BuildingSprite->setHP(BuildingHPBar);
+    BuildingSprite->setHPInterval(100.0f/BuildingSprite->getLifeValue());
+    BuildingSprite->setTag(Tag-1);
+    BuildingHPBar->setTag(Tag);
+}
 
 
 
