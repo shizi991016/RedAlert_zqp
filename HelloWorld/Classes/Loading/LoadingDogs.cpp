@@ -56,7 +56,20 @@ void GameScene::soldierBuildCallBack()
     MyOrder += order;
     MyOrderList.push_back(MyOrder);
     
-    
+    auto ArmyListener = EventListenerTouchOneByOne::create();//创建一个触摸监听
+    ArmyListener->setSwallowTouches(true);
+    ArmyListener->onTouchBegan = [=](Touch* touch, Event* event)
+    {
+        MyData.ArmyFirstTouchPosition = this->convertToNodeSpace(touch->getLocation());
+        auto ArmyTarget = static_cast<Sprite*>(event->getCurrentTarget());//获取的当前触摸的目标
+        Point locationInNode = ArmyTarget->convertToNodeSpace(touch->getLocation());//获得触摸点相对于触摸目标的坐标
+        Size ArmySize = ArmyTarget->getContentSize();//获得触摸目标的大小
+        Rect ArmyRect = Rect(0, 0, ArmySize.width, ArmySize.height);//创建一个坐标在左下角的相对于触摸目标的坐标系
+        if (ArmyRect.containsPoint(locationInNode))//判断触摸点是否在目标的范围内
+            return true;
+        else
+            return false;
+    };
     
     ArmyListener->onTouchEnded = [=](Touch* touch, Event* event)
     {
@@ -192,7 +205,19 @@ void GameScene::soldierBuildCallBack()
 }
 
 
-
+Action* GameScene::DogMoveUp(int ActionTime)
+{
+    auto animation = Animation::create();
+    animation->addSpriteFrameWithFile
+    ("ArmyAction/CommonDog_action/CommonDog_action_up_1.png");
+    animation->addSpriteFrameWithFile
+    ("ArmyAction/CommonDog_action/CommonDog_action_up_2.png");
+    animation->setLoops(ActionTime);
+    animation->setDelayPerUnit(1.0f/4.0f);
+    animation->setRestoreOriginalFrame(false);
+    auto action = Animate::create(animation);
+    return action;
+}
 
 
 Action* GameScene::DogMoveLeft(int ActionTime)
