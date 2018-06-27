@@ -21,3 +21,7 @@ Resouce文件在HelloWorld文件夹下的Resource里
 client 2 启动 ip输入在client 1 电脑cmd由ipconfig
 （mac为 ifconfig）获得的ip地址
 可进行网络联机
+
+分值分配：
+1753390 130%
+其余 90%
