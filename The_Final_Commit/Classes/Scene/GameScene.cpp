@@ -34,6 +34,7 @@ bool GameScene::init()
         return false;
     }
     
+    
     std::thread trdRecv(writeMsg);
     trdRecv.detach();
     
@@ -42,6 +43,7 @@ bool GameScene::init()
         std::thread trdRec(serverWork);
         trdRec.detach();
     }
+    
     
     VisibleSize = Director::getInstance()->getVisibleSize();
     Vec2 Origin = Director::getInstance()->getVisibleOrigin();
@@ -755,10 +757,14 @@ void GameScene::update(float delta)
                         stream >> AllChat;
                         std::string Chat =
                         EnemyOrderList[i].
-                        substr(EnemyOrderList[i].find_first_of("*")+1,
-                               EnemyOrderList[i].find_last_of("*")-
-                               EnemyOrderList[i].find_first_of("*")-1);
+                        substr(EnemyOrderList[i].find_first_of("%")+1,
+                               EnemyOrderList[i].find_last_of("%")-
+                               EnemyOrderList[i].find_first_of("%")-1);
                         AllChat += Chat;
+                        if (Chat == "money")
+                        {
+                            MyData.MyMoney += 500;
+                        }
                         ChatRoom->setString(AllChat);
                     }
                 }

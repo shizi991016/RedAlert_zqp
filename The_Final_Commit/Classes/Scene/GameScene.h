@@ -212,7 +212,6 @@ public:
         stream2 >> MyOrder;
         MySide += MyOrder;
         MyOrderList.push_back(MySide);
-        
     }
     
     

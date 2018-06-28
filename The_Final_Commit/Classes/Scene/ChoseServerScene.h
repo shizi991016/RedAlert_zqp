@@ -29,7 +29,6 @@ public:
     virtual void editBoxReturn(EditBox* editBox)
     {
         IpAddress = editBox->getText();
-        //CCLOG("return");
     }
     
     
