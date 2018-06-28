@@ -22,6 +22,11 @@ client 2 启动 ip输入在client 1 电脑cmd由ipconfig
 （mac为 ifconfig）获得的ip地址
 可进行网络联机
 
+6􏰀月28日更新􏰁􏰂􏰃
+win􏰄􏰅􏰆􏰇􏰈􏰉􏰊􏰋􏰌􏰍􏰎􏰏􏰐系统􏰆􏰇􏰈􏰉􏰊􏰋􏰌􏰍􏰎􏰏􏰐增加背景音乐调节函数
+SimpleAudioEngine.cpp，􏰑MciPlayer.h ，􏰑MciPlayer.cpp 􏰒􏰓 位于 cocos2d\cocos\audio\win32 􏰔
+SimpleAudioEngine.h 􏰒􏰓 位于 cocos2d\cocos\audio\include 􏰔
+
 分值分配：
 1753390 130%
 其余 90%
