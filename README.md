@@ -26,6 +26,7 @@ client 2 启动 ip输入在client 1 电脑cmd由ipconfig
 win系统增加背景音乐调节函数
 SimpleAudioEngine.cpp，MciPlayer.h ，MciPlayer.cpp  位于 cocos2d\cocos\audio\win32 
 SimpleAudioEngine.h  位于 cocos2d\cocos\audio\include 
+
 增加作弊代码，在聊天框中输入money增加500$ 
 
 分值分配：
